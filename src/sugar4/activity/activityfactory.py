@@ -27,10 +27,10 @@ import dbus
 from gi.repository import GObject
 from gi.repository import GLib
 
-from sugar3.activity.activityhandle import ActivityHandle
-from sugar3 import util
-from sugar3 import env
-from sugar3.datastore import datastore
+from sugar4.activity.activityhandle import ActivityHandle
+from sugar4 import util
+from sugar4 import env
+from sugar4.datastore import datastore
 
 from errno import EEXIST, ENOSPC
 
@@ -168,7 +168,7 @@ class ActivityCreationHandler(GObject.GObject):
             the activity to be created and the sharing
             service that may or may not be connected with it
 
-            sugar3.activity.activityhandle.ActivityHandle instance
+            sugar4.activity.activityhandle.ActivityHandle instance
 
         calls the "create" method on the service for this
         particular activity type and registers the

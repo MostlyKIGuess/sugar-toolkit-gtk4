@@ -19,8 +19,8 @@ import os
 
 from gi.repository import Gio
 
-from sugar3.bundle.activitybundle import ActivityBundle
-from sugar3.bundle.contentbundle import ContentBundle
+from sugar4.bundle.activitybundle import ActivityBundle
+from sugar4.bundle.contentbundle import ContentBundle
 
 
 def bundle_from_archive(path, mime_type=None):

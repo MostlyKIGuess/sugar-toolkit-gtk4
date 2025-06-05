@@ -1,8 +1,8 @@
 from gi.repository import Gtk
 
-from sugar3.graphics.radiopalette import RadioPalette, RadioMenuButton, \
+from sugar4.graphics.radiopalette import RadioPalette, RadioMenuButton, \
     RadioToolsButton
-from sugar3.graphics.radiotoolbutton import RadioToolButton
+from sugar4.graphics.radiotoolbutton import RadioToolButton
 from common import set_theme
 set_theme()
 

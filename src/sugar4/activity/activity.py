@@ -33,7 +33,7 @@ activities.  This is where your activity starts.
 
     .. code-block:: python
 
-        from sugar3.activity.activity import Activity
+        from sugar4.activity.activity import Activity
 
         class MyActivity(Activity):
             def __init__(self, handle):
@@ -44,23 +44,23 @@ activities.  This is where your activity starts.
 
     Name the new class `MyActivity`, where `My` is the name of your
     activity.  Use bundle metadata to tell Sugar to instantiate this
-    class.  See :class:`~sugar3.bundle` for bundle metadata.
+    class.  See :class:`~sugar4.bundle` for bundle metadata.
 
 **Create a ToolbarBox**
 
     In your :func:`__init__` method create a
-    :class:`~sugar3.graphics.toolbarbox.ToolbarBox`, with an
-    :class:`~sugar3.activity.widgets.ActivityToolbarButton`, a
-    :class:`~sugar3.activity.widgets.StopButton`, and then call
-    :func:`~sugar3.graphics.window.Window.set_toolbar_box`.
+    :class:`~sugar4.graphics.toolbarbox.ToolbarBox`, with an
+    :class:`~sugar4.activity.widgets.ActivityToolbarButton`, a
+    :class:`~sugar4.activity.widgets.StopButton`, and then call
+    :func:`~sugar4.graphics.window.Window.set_toolbar_box`.
 
     .. code-block:: python
         :emphasize-lines: 2-4,10-
 
-        from sugar3.activity.activity import Activity
-        from sugar3.graphics.toolbarbox import ToolbarBox
-        from sugar3.activity.widgets import ActivityToolbarButton
-        from sugar3.activity.widgets import StopButton
+        from sugar4.activity.activity import Activity
+        from sugar4.graphics.toolbarbox import ToolbarBox
+        from sugar4.activity.widgets import ActivityToolbarButton
+        from sugar4.activity.widgets import StopButton
 
         class MyActivity(Activity):
             def __init__(self, handle):
@@ -86,40 +86,40 @@ activities.  This is where your activity starts.
 **Journal methods**
 
     In your activity class, code
-    :func:`~sugar3.activity.activity.Activity.read_file()` and
-    :func:`~sugar3.activity.activity.Activity.write_file()` methods.
+    :func:`~sugar4.activity.activity.Activity.read_file()` and
+    :func:`~sugar4.activity.activity.Activity.write_file()` methods.
 
     Most activities create and resume journal objects.  For example,
     the Write activity saves the document as a journal object, and
     reads it from the journal object when resumed.
 
-    :func:`~sugar3.activity.activity.Activity.read_file()` and
-    :func:`~sugar3.activity.activity.Activity.write_file()` will be
+    :func:`~sugar4.activity.activity.Activity.read_file()` and
+    :func:`~sugar4.activity.activity.Activity.write_file()` will be
     called by the toolkit to tell your activity that it must load or
     save the data the user is working on.
 
 **Activity toolbars**
 
     Add any activity toolbars before the last separator in the
-    :class:`~sugar3.graphics.toolbarbox.ToolbarBox`, so that the
-    :class:`~sugar3.activity.widgets.StopButton` is aligned to the
+    :class:`~sugar4.graphics.toolbarbox.ToolbarBox`, so that the
+    :class:`~sugar4.activity.widgets.StopButton` is aligned to the
     right.
 
     There are a number of standard Toolbars.
 
-    You may need the :class:`~sugar3.activity.widgets.EditToolbar`.
+    You may need the :class:`~sugar4.activity.widgets.EditToolbar`.
     This has copy and paste buttons.  You may derive your own
     class from
-    :class:`~sugar3.activity.widgets.EditToolbar`:
+    :class:`~sugar4.activity.widgets.EditToolbar`:
 
     .. code-block:: python
 
-        from sugar3.activity.widgets import EditToolbar
+        from sugar4.activity.widgets import EditToolbar
 
         class MyEditToolbar(EditToolbar):
             ...
 
-    See :class:`~sugar3.activity.widgets.EditToolbar` for the
+    See :class:`~sugar4.activity.widgets.EditToolbar` for the
     methods you should implement in your class.
 
     You may need some activity specific buttons and options which
@@ -184,19 +184,19 @@ import dbus
 import dbus.service
 from dbus import PROPERTIES_IFACE
 
-from sugar3 import util
-from sugar3 import power
-from sugar3.profile import get_color, get_save_as
-from sugar3.presence import presenceservice
-from sugar3.activity.activityservice import ActivityService
-from sugar3.graphics import style
-from sugar3.graphics.window import Window
-from sugar3.graphics.alert import Alert
-from sugar3.graphics.icon import Icon
-from sugar3.datastore import datastore
-from sugar3.bundle.activitybundle import get_bundle_instance
-from sugar3.bundle.helpers import bundle_from_dir
-from sugar3 import env
+from sugar4 import util
+from sugar4 import power
+from sugar4.profile import get_color, get_save_as
+from sugar4.presence import presenceservice
+from sugar4.activity.activityservice import ActivityService
+from sugar4.graphics import style
+from sugar4.graphics.window import Window
+from sugar4.graphics.alert import Alert
+from sugar4.graphics.icon import Icon
+from sugar4.datastore import datastore
+from sugar4.bundle.activitybundle import get_bundle_instance
+from sugar4.bundle.helpers import bundle_from_dir
+from sugar4 import env
 from errno import EEXIST
 
 from gi.repository import SugarExt
@@ -289,7 +289,7 @@ class Activity(Window, Gtk.Container):
     Initialise an Activity.
 
     Args:
-        handle (:class:`~sugar3.activity.activityhandle.ActivityHandle`):
+        handle (:class:`~sugar4.activity.activityhandle.ActivityHandle`):
             instance providing the activity id and access to the presence
             service which *may* provide sharing for this application
 
@@ -627,8 +627,8 @@ class Activity(Window, Gtk.Container):
             int: the maximum number of participants
 
         See also
-        :func:`~sugar3.bundle.activitybundle.ActivityBundle.get_max_participants`
-        in :class:`~sugar3.bundle.activitybundle.ActivityBundle`.
+        :func:`~sugar4.bundle.activitybundle.ActivityBundle.get_max_participants`
+        in :class:`~sugar4.bundle.activitybundle.ActivityBundle`.
         '''
         # If max_participants has not been set in the activity, get it
         # from the bundle.
@@ -666,8 +666,8 @@ class Activity(Window, Gtk.Container):
             str: the activity id
 
         See also
-        :meth:`~sugar3.activity.activityfactory.create_activity_id`
-        and :meth:`~sugar3.util.unique_id`.
+        :meth:`~sugar4.activity.activityfactory.create_activity_id`
+        and :meth:`~sugar4.util.unique_id`.
         '''
         return self._activity_id
 
@@ -858,7 +858,7 @@ class Activity(Window, Gtk.Container):
 
         Activities may override this method, and return a string with
         image data in PNG format with a width and height of
-        :attr:`~sugar3.activity.activity.PREVIEW_SIZE` pixels.
+        :attr:`~sugar4.activity.activity.PREVIEW_SIZE` pixels.
 
         The method creates a Cairo surface similar to that of the
         :ref:`Gdk.Window` of the :meth:`canvas` widget, draws on it,
@@ -1038,11 +1038,11 @@ class Activity(Window, Gtk.Container):
     def get_shared_activity(self):
         '''
         Get the shared activity of type
-        :class:`sugar3.presence.activity.Activity`, or None if the
+        :class:`sugar4.presence.activity.Activity`, or None if the
         activity is not shared, or is shared and not yet joined.
 
         Returns:
-            :class:`sugar3.presence.activity.Activity`: instance of
+            :class:`sugar4.presence.activity.Activity`: instance of
                 the shared activity or None
         '''
         return self.shared_activity
@@ -1127,7 +1127,7 @@ class Activity(Window, Gtk.Container):
 
         Once the activity is shared, its privacy can be changed by
         setting the :attr:`private` property of the
-        :attr:`sugar3.presence.activity.Activity` class.
+        :attr:`sugar4.presence.activity.Activity` class.
         '''
         if self.shared_activity and self.shared_activity.props.joined:
             raise RuntimeError('Activity %s already shared.' %

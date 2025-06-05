@@ -27,11 +27,11 @@ from six.moves.configparser import ConfigParser
 import tempfile
 import os
 
-from sugar3 import env
-from sugar3.bundle.bundle import Bundle, MalformedBundleException
+from sugar4 import env
+from sugar4.bundle.bundle import Bundle, MalformedBundleException
 
-from sugar3.bundle.bundleversion import NormalizedVersion
-from sugar3.bundle.bundleversion import InvalidVersionError
+from sugar4.bundle.bundleversion import NormalizedVersion
+from sugar4.bundle.bundleversion import InvalidVersionError
 
 
 class ContentBundle(Bundle):

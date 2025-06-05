@@ -40,7 +40,7 @@ def get_power_manager():
     will always be returned.
 
     Returns:
-        an instance of :class:`sugar3.power.PowerManager`.
+        an instance of :class:`sugar4.power.PowerManager`.
     """
     global _power_manager
     if _power_manager is None:
@@ -52,7 +52,7 @@ class PowerManager():
     """
     Control of automatic idle suspend, with reference counting.
 
-    :class:`sugar3.activity.activity.Activity` calls
+    :class:`sugar4.activity.activity.Activity` calls
     :py:meth:`inhibit_suspend` before speaking text, or when an
     activity collaboration begins.
 
@@ -64,7 +64,7 @@ class PowerManager():
     while it is active, so that the displayed clock-face continues to
     change.  Otherwise it would freeze.
 
-    :class:`sugar3.activity.activity.Activity` calls
+    :class:`sugar4.activity.activity.Activity` calls
     :py:meth:`shutdown` as an activity terminates, in case the
     activity has failed to call :py:meth:`restore_suspend`.
 

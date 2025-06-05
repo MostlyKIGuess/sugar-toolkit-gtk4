@@ -30,10 +30,10 @@ from gi.repository import GObject
 from gi.repository import Gio
 import dbus
 
-from sugar3 import env
-from sugar3 import mime
-from sugar3 import dispatch
-from sugar3.profile import get_color
+from sugar4 import env
+from sugar4 import mime
+from sugar4 import dispatch
+from sugar4.profile import get_color
 
 DS_DBUS_SERVICE = 'org.laptop.sugar.DataStore'
 DS_DBUS_INTERFACE = 'org.laptop.sugar.DataStore'

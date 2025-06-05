@@ -20,11 +20,11 @@ import math
 from gi.repository import Gtk
 from gi.repository import GObject
 
-from sugar3.graphics import style
-from sugar3.graphics.palettewindow import PaletteWindow, ToolInvoker, \
+from sugar4.graphics import style
+from sugar4.graphics.palettewindow import PaletteWindow, ToolInvoker, \
     _PaletteWindowWidget
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics import palettegroup
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics import palettegroup
 
 
 class ToolbarButton(ToolButton):

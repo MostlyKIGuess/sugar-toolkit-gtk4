@@ -22,7 +22,7 @@ Example:
     Animate the size of a window::
 
         from gi.repository import Gtk
-        from sugar3.graphics.animator import Animator, Animation
+        from sugar4.graphics.animator import Animator, Animation
 
         # Construct a window to animate
         w = Gtk.Window()
@@ -112,7 +112,7 @@ class Animator(GObject.GObject):
         Add an animation to this animator
 
         Args:
-            animation (:class:`sugar3.graphics.animator.Animation`):
+            animation (:class:`sugar4.graphics.animator.Animation`):
                 the animation instance to add
         '''
         self._animations.append(animation)

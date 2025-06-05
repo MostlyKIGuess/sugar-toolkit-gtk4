@@ -7,5 +7,5 @@ See license.txt for original license.
 Heavily modified for Django's purposes.
 """
 
-from sugar3.dispatch.dispatcher import Signal
+from sugar4.dispatch.dispatcher import Signal
 assert Signal

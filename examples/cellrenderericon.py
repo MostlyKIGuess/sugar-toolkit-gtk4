@@ -1,7 +1,7 @@
 from gi.repository import Gtk
 
-from sugar3.graphics import style
-from sugar3.graphics.icon import CellRendererIcon
+from sugar4.graphics import style
+from sugar4.graphics.icon import CellRendererIcon
 
 import common
 

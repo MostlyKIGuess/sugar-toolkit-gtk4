@@ -28,8 +28,8 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 import dbus
 
-from sugar3.datastore import datastore
-from sugar3.activity.activity import PREVIEW_SIZE
+from sugar4.datastore import datastore
+from sugar4.activity.activity import PREVIEW_SIZE
 
 
 J_DBUS_SERVICE = 'org.laptop.Journal'
@@ -48,7 +48,7 @@ def get_preview_pixbuf(preview_data, width=-1, height=-1):
     Args:
         metadata (dictionary): preview data from the metadata dictionary. Can't
             be None. Returned from the
-            sugar3.datastore.datastore.DSObject.get_metadata() method.
+            sugar4.datastore.datastore.DSObject.get_metadata() method.
 
     Keyword Args:
         width (int): the pixbuf width, if is not set,
@@ -127,7 +127,7 @@ class ObjectChooser(object):
         parent (:class:`Gtk.Widget`): the widget calling ObjectChooser
 
         what_filter (str): an activity bundle_id or a generic mime type as
-            defined in :mod:`sugar3.mime` used to determine which objects
+            defined in :mod:`sugar4.mime` used to determine which objects
             will be presented in the object chooser
 
         filter_type (str): should be one of [None, FILTER_TYPE_GENERIC_MIME,

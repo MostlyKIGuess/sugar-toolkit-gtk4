@@ -20,7 +20,7 @@
 import os
 import unittest
 
-from sugar3 import mime
+from sugar4 import mime
 
 tests_dir = os.path.dirname(__file__)
 data_dir = os.path.join(tests_dir, "data")

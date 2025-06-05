@@ -16,14 +16,14 @@
 # Boston, MA 02111-1307, USA.
 
 """
-Test the sugar3.graphics.icon.* cache.
+Test the sugar4.graphics.icon.* cache.
 """
 
 from gi.repository import Gtk
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.xocolor import XoColor
-from sugar3.graphics import style
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.xocolor import XoColor
+from sugar4.graphics import style
 
 import common
 

@@ -25,8 +25,8 @@ import logging
 from gi.repository import GObject
 from gi.repository import Gtk
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.palette import Palette, ToolInvoker
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.palette import Palette, ToolInvoker
 
 
 def _add_accelerator(tool_button):

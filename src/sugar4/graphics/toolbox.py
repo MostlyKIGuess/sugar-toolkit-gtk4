@@ -24,7 +24,7 @@ Indices are generated in the order the toolbars are added.
 from gi.repository import Gtk
 from gi.repository import GObject
 
-from sugar3.graphics import style
+from sugar4.graphics import style
 
 
 class Toolbox(Gtk.VBox):

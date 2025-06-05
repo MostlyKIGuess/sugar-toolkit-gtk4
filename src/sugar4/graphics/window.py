@@ -29,9 +29,9 @@ from gi.repository import Gdk
 from gi.repository import GdkX11
 from gi.repository import Gtk
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics import palettegroup
-from sugar3.graphics import style
+from sugar4.graphics.icon import Icon
+from sugar4.graphics import palettegroup
+from sugar4.graphics import style
 
 
 _UNFULLSCREEN_BUTTON_VISIBILITY_TIMEOUT = 2
@@ -41,7 +41,7 @@ class UnfullscreenButton(Gtk.Window):
     """
     A ready-made "Unfullscreen" button.
 
-    Used by :class:`~sugar3.graphics.window.Window` to exit fullscreen
+    Used by :class:`~sugar4.graphics.window.Window` to exit fullscreen
     mode.
     """
 
@@ -268,20 +268,20 @@ class Window(Gtk.Window):
 
     def get_toolbar_box(self):
         """
-        Get :class:`~sugar3.graphics.toolbarbox.ToolbarBox` widget.
+        Get :class:`~sugar4.graphics.toolbarbox.ToolbarBox` widget.
 
         Returns:
-            :class:`~sugar3.graphics.toolbarbox.ToolbarBox`: the
+            :class:`~sugar4.graphics.toolbarbox.ToolbarBox`: the
                 current toolbar box of the window
         """
         return self._toolbar_box
 
     def set_toolbar_box(self, toolbar_box):
         """
-        Set :class:`~sugar3.graphics.toolbarbox.ToolbarBox` widget.
+        Set :class:`~sugar4.graphics.toolbarbox.ToolbarBox` widget.
 
         Args:
-            toolbar_box (:class:`~sugar3.graphics.toolbarbox.ToolbarBox`):
+            toolbar_box (:class:`~sugar4.graphics.toolbarbox.ToolbarBox`):
                 the toolbar box to set as current
         """
         if self._toolbar_box:
@@ -295,7 +295,7 @@ class Window(Gtk.Window):
 
     toolbar_box = property(get_toolbar_box, set_toolbar_box)
     """
-    Property: the :class:`~sugar3.graphics.toolbarbox.ToolbarBox` to
+    Property: the :class:`~sugar4.graphics.toolbarbox.ToolbarBox` to
     be shown above the alerts and canvas.
     """
 
@@ -304,8 +304,8 @@ class Window(Gtk.Window):
         Set the tray.
 
         Args:
-            tray (:class:`~sugar3.graphics.tray.HTray` \
-                or :class:`~sugar3.graphics.tray.VTray`): the tray to set
+            tray (:class:`~sugar4.graphics.tray.HTray` \
+                or :class:`~sugar4.graphics.tray.VTray`): the tray to set
             position (:class:`Gtk.PositionType`): the edge to set the tray at
         """
         if self.tray:
@@ -329,7 +329,7 @@ class Window(Gtk.Window):
         to make it visible.
 
         Args:
-            alert (:class:`~sugar3.graphics.alert.Alert`): the alert
+            alert (:class:`~sugar4.graphics.alert.Alert`): the alert
                 to add
         """
         self._alerts.append(alert)
@@ -345,7 +345,7 @@ class Window(Gtk.Window):
         Remove an alert message from the window.
 
         Args:
-            alert (:class:`~sugar3.graphics.alert.Alert`): the alert
+            alert (:class:`~sugar4.graphics.alert.Alert`): the alert
                 to remove
         """
         if alert in self._alerts:

@@ -17,8 +17,8 @@
 
 from gi.repository import Gtk
 
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.palette import Palette
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.palette import Palette
 
 
 class RadioMenuButton(ToolButton):

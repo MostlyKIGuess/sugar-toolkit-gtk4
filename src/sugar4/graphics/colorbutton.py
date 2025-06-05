@@ -24,9 +24,9 @@ from gi.repository import GObject
 import struct
 import logging
 
-from sugar3.graphics import style
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.palette import Palette, ToolInvoker, WidgetInvoker
+from sugar4.graphics import style
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.palette import Palette, ToolInvoker, WidgetInvoker
 
 
 def _(msg):
@@ -49,7 +49,7 @@ class _ColorButton(Gtk.Button):
     but does not have any alpha support.
     Instead of a color selector dialog it will pop up a Sugar palette.
 
-    As a preview an sugar3.graphics.Icon is used. The fill color will be set to
+    As a preview an sugar4.graphics.Icon is used. The fill color will be set to
     the current color, and the stroke color is set to the font color.
     """
 
@@ -262,7 +262,7 @@ class _ColorButton(Gtk.Button):
 
 class _ColorPalette(Palette):
     """This is a color picker palette. It will usually be used indirectly
-    trough a sugar3.graphics.ColorButton.
+    trough a sugar4.graphics.ColorButton.
     """
     _RED = 0
     _GREEN = 1
@@ -537,7 +537,7 @@ class ColorToolButton(Gtk.ToolItem):
 
         Returns:
 
-            sugar3.graphics.palette.Palette, or None to indicate that you
+            sugar4.graphics.palette.Palette, or None to indicate that you
             do not want a palette shown
 
         The default implementation returns None, to indicate no palette should

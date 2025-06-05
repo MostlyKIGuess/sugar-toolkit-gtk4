@@ -23,9 +23,9 @@ controls. Ticket #2855.
 
 from gi.repository import Gtk
 
-from sugar3.graphics.palette import Palette
-from sugar3.graphics.icon import Icon
-from sugar3.graphics import style
+from sugar4.graphics.palette import Palette
+from sugar4.graphics.icon import Icon
+from sugar4.graphics import style
 
 import common
 

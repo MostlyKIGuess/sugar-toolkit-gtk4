@@ -24,7 +24,7 @@ Example:
     Add a tool button to a window
 
         from gi.repository import Gtk
-        from sugar3.graphics.toolbutton import ToolButton
+        from sugar4.graphics.toolbutton import ToolButton
 
         def __clicked_cb(button):
             print("tool button was clicked")
@@ -46,8 +46,8 @@ import logging
 from gi.repository import Gtk
 from gi.repository import GObject
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.palette import Palette, ToolInvoker
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.palette import Palette, ToolInvoker
 
 
 def _add_accelerator(tool_button):

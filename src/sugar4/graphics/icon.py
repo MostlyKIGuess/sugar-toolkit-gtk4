@@ -106,9 +106,9 @@ from gi.repository import GdkPixbuf
 from gi.repository import Rsvg
 import cairo
 
-from sugar3.graphics import style
-from sugar3.graphics.xocolor import XoColor
-from sugar3.util import LRU
+from sugar4.graphics import style
+from sugar4.graphics.xocolor import XoColor
+from sugar4.util import LRU
 
 _BADGE_SIZE = 0.45
 
@@ -442,7 +442,7 @@ class Icon(Gtk.Image):
     otherwise, no icon will be visible.
 
     You should set the `pixel_size`, using constants the `*_ICON_SIZE`
-    constants from :any:`sugar3.graphics.style`.
+    constants from :any:`sugar4.graphics.style`.
 
     You should set the color (either via `xo_color` or `fill_color` and
     `stroke_color`), otherwise the default black and white fill and stroke
@@ -451,14 +451,14 @@ class Icon(Gtk.Image):
     Keyword Args:
         file_name (str): a path to the SVG icon file
         file (object): same behaviour as file_name, but for
-            :class:`sugar3.util.TempFilePath` type objects
+            :class:`sugar4.util.TempFilePath` type objects
         icon_name (str): a name of an icon in the theme to display.  The
             icons in the theme include those in the sugar-artwork project
             and icons in the activity's '/icons' directory
         pixel_size (int): size of the icon, in pixels.  Best to use the
-            constants from :class:`sugar3.graphics.style`, as those constants
+            constants from :class:`sugar4.graphics.style`, as those constants
             are scaled based on the user's preferences
-        xo_color (sugar3.graphics.xocolor.XoColor): color to display icon,
+        xo_color (sugar4.graphics.xocolor.XoColor): color to display icon,
             a shortcut that just sets the fill_color and stroke_color
         fill_color (str): a string, like '#FFFFFF', that will serve as the
             fill color for the icon
@@ -478,7 +478,7 @@ class Icon(Gtk.Image):
     def __init__(self, **kwargs):
         self._buffer = _IconBuffer()
         # HACK: need to keep a reference to the path so it doesn't get garbage
-        # collected while it's still used if it's a sugar3.util.TempFilePath.
+        # collected while it's still used if it's a sugar4.util.TempFilePath.
         # See #1175
         self._file = None
         self._alpha = 1.0
@@ -621,7 +621,7 @@ class Icon(Gtk.Image):
         Set the colors used to display the icon
 
         Args:
-            value (sugar3.graphics.xocolor.XoColor): new XoColor to use
+            value (sugar4.graphics.xocolor.XoColor): new XoColor to use
         '''
         if self._buffer.xo_color != value:
             self._buffer.xo_color = value
@@ -781,7 +781,7 @@ class EventIcon(Gtk.EventBox):
             (transparent).  The alpha channel of the Gdk.Color is disregarded.
         cache (bool): if True, the icon file contents will be cached to
             reduce disk usage
-        palette (sugar3.graphics.palette.Palette): a palette to connect
+        palette (sugar4.graphics.palette.Palette): a palette to connect
     '''
 
     __gsignals__ = {
@@ -807,7 +807,7 @@ class EventIcon(Gtk.EventBox):
         for key, value in six.iteritems(kwargs):
             self.set_property(key, value)
 
-        from sugar3.graphics.palette import CursorInvoker
+        from sugar4.graphics.palette import CursorInvoker
         self._palette_invoker = CursorInvoker()
         self._palette_invoker.attach(self)
         self.connect('destroy', self.__destroy_cb)
@@ -1010,7 +1010,7 @@ class EventIcon(Gtk.EventBox):
         the menu items, etc that you place in the palette.
 
         Returns:
-            sugar3.graphics.palette.Palette, or None to indicate that you
+            sugar4.graphics.palette.Palette, or None to indicate that you
             do not want a palette shown
 
         The default implementation returns None, to indicate no palette should
@@ -1031,7 +1031,7 @@ class EventIcon(Gtk.EventBox):
         override the palette set by create_palette.
 
         Args:
-            palette (sugar3.graphics.palette.Palette): palette or None
+            palette (sugar4.graphics.palette.Palette): palette or None
         '''
         self._palette_invoker.palette = palette
 
@@ -1060,7 +1060,7 @@ class EventIcon(Gtk.EventBox):
         Args:
             text (str): tooltip text
         '''
-        from sugar3.graphics.palette import Palette
+        from sugar4.graphics.palette import Palette
 
         self.set_palette(Palette(text))
 
@@ -1108,7 +1108,7 @@ class CanvasIcon(EventIcon):
                 return palette
 
         Args:
-            palette (sugar3.graphics.palette.Palette): palette to connect
+            palette (sugar4.graphics.palette.Palette): palette to connect
         '''
         palette.connect('popup', self.__palette_popup_cb)
         palette.connect('popdown', self.__palette_popdown_cb)

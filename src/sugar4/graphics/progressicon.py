@@ -19,14 +19,14 @@ A progress icon is a progress indicator in the form of an icon.
 '''
 
 from gi.repository import Gtk
-from sugar3.graphics.icon import get_surface
-from sugar3.graphics import style
+from sugar4.graphics.icon import get_surface
+from sugar4.graphics import style
 
 
 class ProgressIcon(Gtk.DrawingArea):
     '''
     Display the progress filling the icon.
-    This class is compatible with the sugar3.graphics.icon.Icon class.
+    This class is compatible with the sugar4.graphics.icon.Icon class.
     Call update(progress) with the new progress to update the icon.
     The direction defaults to 'vertical', in which case the icon is
     filled from bottom to top.  If direction is set to 'horizontal',

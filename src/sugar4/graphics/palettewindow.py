@@ -35,10 +35,10 @@ from gi.repository import GObject
 from gi.repository import GLib
 
 from gi.repository import SugarGestures
-from sugar3.graphics import palettegroup
-from sugar3.graphics import animator
-from sugar3.graphics import style
-from sugar3.graphics.icon import CellRendererIcon
+from sugar4.graphics import palettegroup
+from sugar4.graphics import animator
+from sugar4.graphics import style
+from sugar4.graphics.icon import CellRendererIcon
 
 
 _pointer = None
@@ -1394,7 +1394,7 @@ class ToolInvoker(WidgetInvoker):
     (a horizontal toolbar will spawn a palette going downwards).  It also
     draws the highlights specific to a toolitem.
 
-    For :class:`sugar3.graphics.toolbutton.ToolButton` and subclasses, you
+    For :class:`sugar4.graphics.toolbutton.ToolButton` and subclasses, you
     should not use the toolinvoker directly.  Instead, just subclass the
     tool button and override the `create_palette` function.
 

@@ -29,8 +29,8 @@ gi.require_version('TelepathyGLib', '0.12')
 from gi.repository import GObject
 import dbus
 
-from sugar3.presence.connectionmanager import get_connection_manager
-from sugar3.profile import get_color, get_nick_name
+from sugar4.presence.connectionmanager import get_connection_manager
+from sugar4.profile import get_color, get_nick_name
 
 from gi.repository import TelepathyGLib
 
@@ -44,7 +44,7 @@ HANDLE_TYPE_CONTACT = TelepathyGLib.HandleType.CONTACT
 
 CONN_INTERFACE_BUDDY_INFO = 'org.laptop.Telepathy.BuddyInfo'
 
-_logger = logging.getLogger('sugar3.presence.buddy')
+_logger = logging.getLogger('sugar4.presence.buddy')
 
 
 class BaseBuddy(GObject.GObject):

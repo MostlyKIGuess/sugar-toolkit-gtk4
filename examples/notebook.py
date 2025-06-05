@@ -1,6 +1,6 @@
 from gi.repository import Gtk
 
-from sugar3.graphics.notebook import Notebook
+from sugar4.graphics.notebook import Notebook
 from common import set_theme
 set_theme()
 

@@ -22,8 +22,8 @@ STABLE.
 from gi.repository import Gtk
 from gi.repository import GObject
 
-from sugar3.graphics.combobox import ComboBox
-from sugar3.graphics import style
+from sugar4.graphics.combobox import ComboBox
+from sugar4.graphics import style
 
 
 class ToolComboBox(Gtk.ToolItem):

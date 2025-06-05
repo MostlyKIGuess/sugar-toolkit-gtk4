@@ -30,13 +30,13 @@ from gi.repository import Gdk
 from gi.repository import GObject
 from gi.repository import Pango
 
-from sugar3.graphics import style
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.palettewindow import PaletteWindow, \
+from sugar4.graphics import style
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.palettewindow import PaletteWindow, \
     _PaletteWindowWidget, _PaletteMenuWidget
-from sugar3.graphics.palettemenu import PaletteMenuItem
+from sugar4.graphics.palettemenu import PaletteMenuItem
 
-from sugar3.graphics.palettewindow import MouseSpeedDetector, Invoker, \
+from sugar4.graphics.palettewindow import MouseSpeedDetector, Invoker, \
     WidgetInvoker, CursorInvoker, ToolInvoker, TreeViewInvoker
 
 assert MouseSpeedDetector

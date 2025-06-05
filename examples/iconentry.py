@@ -1,6 +1,6 @@
 from gi.repository import Gtk
 
-from sugar3.graphics import iconentry
+from sugar4.graphics import iconentry
 from common import set_theme
 set_theme()
 

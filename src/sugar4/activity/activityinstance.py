@@ -33,12 +33,12 @@ import dbus.service
 from dbus.mainloop.glib import DBusGMainLoop
 DBusGMainLoop(set_as_default=True)
 
-from sugar3.activity import activityhandle
-from sugar3 import config
-from sugar3.bundle.activitybundle import ActivityBundle
-from sugar3 import logger
+from sugar4.activity import activityhandle
+from sugar4 import config
+from sugar4.bundle.activitybundle import ActivityBundle
+from sugar4 import logger
 
-from sugar3.bundle.bundle import MalformedBundleException
+from sugar4.bundle.bundle import MalformedBundleException
 
 from errno import EEXIST
 

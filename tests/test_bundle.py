@@ -18,9 +18,9 @@ import os
 import unittest
 import subprocess
 
-from sugar3.bundle.helpers import bundle_from_dir, bundle_from_archive
-from sugar3.bundle.activitybundle import ActivityBundle
-from sugar3.bundle.contentbundle import ContentBundle
+from sugar4.bundle.helpers import bundle_from_dir, bundle_from_archive
+from sugar4.bundle.activitybundle import ActivityBundle
+from sugar4.bundle.contentbundle import ContentBundle
 
 tests_dir = os.path.dirname(__file__)
 data_dir = os.path.join(tests_dir, "data")

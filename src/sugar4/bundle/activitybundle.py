@@ -28,11 +28,11 @@ import shutil
 import tempfile
 import logging
 
-from sugar3 import env
-from sugar3.bundle.bundle import Bundle, \
+from sugar4 import env
+from sugar4.bundle.bundle import Bundle, \
     MalformedBundleException, NotInstalledException
-from sugar3.bundle.bundleversion import NormalizedVersion
-from sugar3.bundle.bundleversion import InvalidVersionError
+from sugar4.bundle.bundleversion import NormalizedVersion
+from sugar4.bundle.bundleversion import InvalidVersionError
 
 
 _bundle_instances = {}

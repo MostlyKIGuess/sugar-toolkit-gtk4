@@ -21,7 +21,7 @@ Validation and normalization of bundle versions.
 
 Instances of :class:`NormalizedVersion` can be directly compared;
 
-    >>> from sugar3.bundle.bundleversion import NormalizedVersion
+    >>> from sugar4.bundle.bundleversion import NormalizedVersion
     >>> a = NormalizedVersion('157.3')
     >>> b = NormalizedVersion('201.2')
     >>> a > b

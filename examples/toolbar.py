@@ -1,7 +1,7 @@
 from gi.repository import Gtk
 
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toolbarbox import ToolbarBox, ToolbarButton
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.toolbarbox import ToolbarBox, ToolbarButton
 from common import set_theme
 set_theme()
 

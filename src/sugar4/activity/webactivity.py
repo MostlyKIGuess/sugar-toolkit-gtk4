@@ -31,9 +31,9 @@ from gi.repository import Gtk
 from gi.repository import GdkX11
 assert GdkX11
 
-from sugar3.graphics.objectchooser import ObjectChooser
+from sugar4.graphics.objectchooser import ObjectChooser
 from gi.repository import SugarExt
-from sugar3.activity import activity
+from sugar4.activity import activity
 
 
 class FilePicker(ObjectChooser):

@@ -1,5 +1,5 @@
 from gi.repository import Gtk
-from sugar3.graphics.alert import TimeoutAlert
+from sugar4.graphics.alert import TimeoutAlert
 from common import set_theme
 
 

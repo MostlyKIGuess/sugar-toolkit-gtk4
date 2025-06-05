@@ -24,7 +24,7 @@ import unittest
 import subprocess
 from contextlib import contextmanager
 
-from sugar3.test import uitree
+from sugar4.test import uitree
 
 import dbus
 from dbus.mainloop.glib import DBusGMainLoop

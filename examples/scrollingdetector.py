@@ -3,11 +3,11 @@ import time
 
 from gi.repository import Gtk
 
-from sugar3.graphics import style
-from sugar3.graphics.icon import CellRendererIcon
-from sugar3.graphics.xocolor import XoColor
-from sugar3.graphics.scrollingdetector import ScrollingDetector
-from sugar3.graphics.palettewindow import TreeViewInvoker
+from sugar4.graphics import style
+from sugar4.graphics.icon import CellRendererIcon
+from sugar4.graphics.xocolor import XoColor
+from sugar4.graphics.scrollingdetector import ScrollingDetector
+from sugar4.graphics.palettewindow import TreeViewInvoker
 import common
 
 

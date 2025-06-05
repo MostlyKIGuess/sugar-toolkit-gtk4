@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 from gi.repository import Gtk
 
-from sugar3.graphics.icon import Icon
+from sugar4.graphics.icon import Icon
 
 import common
 test = common.Test()

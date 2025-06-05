@@ -16,14 +16,14 @@
 # Boston, MA 02111-1307, USA.
 
 """
-Test the sugar3.graphics.progressicon.ProgressIcon widget.
+Test the sugar4.graphics.progressicon.ProgressIcon widget.
 """
 
 
 from gi.repository import GLib
 
-from sugar3.graphics.progressicon import ProgressIcon
-from sugar3.graphics import style
+from sugar4.graphics.progressicon import ProgressIcon
+from sugar4.graphics import style
 
 import common
 

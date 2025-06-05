@@ -6,7 +6,7 @@ http://developer.gnome.org/gtk3/stable/GtkCellRendererProgress.html
 
 from gi.repository import Gtk
 
-from sugar3.graphics import style
+from sugar4.graphics import style
 
 import common
 

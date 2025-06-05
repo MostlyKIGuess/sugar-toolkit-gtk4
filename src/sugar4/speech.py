@@ -37,7 +37,7 @@ except BaseException:
     logging.error('Gst or the espeak plugin is not installed in the system.')
     _HAS_GST = False
 
-from sugar3 import power
+from sugar4 import power
 
 DEFAULT_PITCH = 0
 

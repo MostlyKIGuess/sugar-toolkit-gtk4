@@ -1,7 +1,7 @@
 import weakref
 import six
 
-from sugar3.dispatch import saferef
+from sugar4.dispatch import saferef
 
 WEAKREF_TYPES = (weakref.ReferenceType, saferef.BoundMethodWeakref)
 

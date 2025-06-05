@@ -18,7 +18,7 @@ import sys
 import subprocess
 import unittest
 
-from sugar3.test import uitree
+from sugar4.test import uitree
 
 
 class TestUITree(unittest.TestCase):

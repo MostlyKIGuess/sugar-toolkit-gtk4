@@ -1,6 +1,6 @@
 from gettext import gettext as _
 
-from sugar3.activity import activity
+from sugar4.activity import activity
 
 
 class SampleActivity(activity.Activity):

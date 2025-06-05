@@ -22,16 +22,16 @@ from gi.repository import Gtk
 from gi.repository import GObject
 import gettext
 
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.toolbarbox import ToolbarButton
-from sugar3.graphics.radiopalette import RadioPalette, RadioMenuButton
-from sugar3.graphics.radiotoolbutton import RadioToolButton
-from sugar3.graphics.xocolor import XoColor
-from sugar3.graphics.icon import Icon
-from sugar3.bundle.activitybundle import get_bundle_instance
-from sugar3.graphics import style
-from sugar3.graphics.palettemenu import PaletteMenuBox
-from sugar3 import profile
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.toolbarbox import ToolbarButton
+from sugar4.graphics.radiopalette import RadioPalette, RadioMenuButton
+from sugar4.graphics.radiotoolbutton import RadioToolButton
+from sugar4.graphics.xocolor import XoColor
+from sugar4.graphics.icon import Icon
+from sugar4.bundle.activitybundle import get_bundle_instance
+from sugar4.graphics import style
+from sugar4.graphics.palettemenu import PaletteMenuBox
+from sugar4 import profile
 
 
 def _(msg):
@@ -44,7 +44,7 @@ def _create_activity_icon(metadata):
     else:
         color = profile.get_color()
 
-    from sugar3.activity.activity import get_bundle_path
+    from sugar4.activity.activity import get_bundle_path
     bundle = get_bundle_instance(get_bundle_path())
     icon = Icon(file=bundle.get_icon(), xo_color=color)
 

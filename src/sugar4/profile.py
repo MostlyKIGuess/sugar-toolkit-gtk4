@@ -24,9 +24,9 @@ import logging
 
 from six.moves.configparser import ConfigParser
 
-from sugar3 import env
-from sugar3 import util
-from sugar3.graphics.xocolor import XoColor
+from sugar4 import env
+from sugar4 import util
+from sugar4.graphics.xocolor import XoColor
 
 import getpass
 

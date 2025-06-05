@@ -25,14 +25,14 @@ import dbus
 import dbus.exceptions
 from dbus import PROPERTIES_IFACE
 
-from sugar3.presence.buddy import Buddy, Owner
-from sugar3.presence.activity import Activity
-from sugar3.presence.connectionmanager import get_connection_manager
+from sugar4.presence.buddy import Buddy, Owner
+from sugar4.presence.activity import Activity
+from sugar4.presence.connectionmanager import get_connection_manager
 
 from gi.repository import GObject
 from gi.repository import TelepathyGLib
 
-_logger = logging.getLogger('sugar3.presence.presenceservice')
+_logger = logging.getLogger('sugar4.presence.presenceservice')
 
 ACCOUNT_MANAGER_SERVICE = TelepathyGLib.ACCOUNT_MANAGER_BUS_NAME
 ACCOUNT_MANAGER_PATH = TelepathyGLib.ACCOUNT_MANAGER_OBJECT_PATH

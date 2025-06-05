@@ -23,10 +23,10 @@ from gi.repository import GObject
 from gi.repository import Gtk
 from gi.repository import Gdk
 
-from sugar3.graphics import style
-from sugar3.graphics.palette import ToolInvoker
-from sugar3.graphics.toolbutton import ToolButton
-from sugar3.graphics.icon import Icon
+from sugar4.graphics import style
+from sugar4.graphics.palette import ToolInvoker
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.icon import Icon
 
 
 _PREVIOUS_PAGE = 0

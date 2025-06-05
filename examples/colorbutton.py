@@ -1,7 +1,7 @@
 from gi.repository import Gtk
 
-from sugar3.graphics.toolbarbox import ToolbarBox
-from sugar3.graphics.colorbutton import ColorToolButton
+from sugar4.graphics.toolbarbox import ToolbarBox
+from sugar4.graphics.colorbutton import ColorToolButton
 
 
 import common

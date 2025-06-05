@@ -22,7 +22,7 @@ is setup by creating a `setup.py` file in the project with the following::
 
     #!/usr/bin/env python
 
-    from sugar3.activity import bundlebuilder
+    from sugar4.activity import bundlebuilder
     bundlebuilder.start()
 '''
 
@@ -45,8 +45,8 @@ from six.moves.configparser import ConfigParser
 import xml.etree.ElementTree as ET
 from six.moves.html_parser import HTMLParser
 
-from sugar3 import env
-from sugar3.bundle.activitybundle import ActivityBundle
+from sugar4 import env
+from sugar4.bundle.activitybundle import ActivityBundle
 from six.moves import reduce
 
 
@@ -382,7 +382,7 @@ class Installer(Packager):
         for name in required_fields:
             if not info.has_option('Activity', name):
                 print('[WARNING] missing AppStream metadata, '
-                      'see `pydoc sugar3.bundle`')
+                      'see `pydoc sugar4.bundle`')
                 return
 
         # See https://www.freedesktop.org/software/appstream/docs/

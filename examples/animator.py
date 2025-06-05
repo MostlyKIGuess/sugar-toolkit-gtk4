@@ -1,8 +1,8 @@
 from gi.repository import Gtk
 
-from sugar3.graphics import animator
-from sugar3.graphics.icon import Icon
-from sugar3.graphics import style
+from sugar4.graphics import animator
+from sugar4.graphics.icon import Icon
+from sugar4.graphics import style
 
 from common import set_theme
 set_theme()

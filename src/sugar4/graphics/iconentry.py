@@ -22,8 +22,8 @@ from gi.repository import Gtk
 from gi.repository import Gdk
 from gi.repository import GdkPixbuf
 
-from sugar3.graphics import style
-from sugar3.graphics.icon import _SVGLoader
+from sugar4.graphics import style
+from sugar4.graphics.icon import _SVGLoader
 
 ICON_ENTRY_PRIMARY = Gtk.EntryIconPosition.PRIMARY
 ICON_ENTRY_SECONDARY = Gtk.EntryIconPosition.SECONDARY

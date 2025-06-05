@@ -1,6 +1,6 @@
 from gi.repository import Gtk
 
-from sugar3.graphics.combobox import ComboBox
+from sugar4.graphics.combobox import ComboBox
 from common import set_theme
 set_theme()
 

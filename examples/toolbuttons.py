@@ -1,9 +1,9 @@
 from gi.repository import Gtk
 
-from sugar3.graphics.toolbarbox import ToolbarBox
-from sugar3.graphics.colorbutton import ColorToolButton
-from sugar3.graphics.radiotoolbutton import RadioToolButton
-from sugar3.graphics.toggletoolbutton import ToggleToolButton
+from sugar4.graphics.toolbarbox import ToolbarBox
+from sugar4.graphics.colorbutton import ColorToolButton
+from sugar4.graphics.radiotoolbutton import RadioToolButton
+from sugar4.graphics.toggletoolbutton import ToggleToolButton
 
 import common
 

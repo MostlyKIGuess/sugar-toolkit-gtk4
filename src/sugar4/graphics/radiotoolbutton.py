@@ -33,9 +33,9 @@ Example:
 from gi.repository import Gtk
 from gi.repository import GObject
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics.palette import Palette, ToolInvoker
-from sugar3.graphics import toolbutton
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.palette import Palette, ToolInvoker
+from sugar4.graphics import toolbutton
 
 
 class RadioToolButton(Gtk.RadioToolButton):
@@ -54,7 +54,7 @@ class RadioToolButton(Gtk.RadioToolButton):
         tooltip (string): tooltip to be displayed when user hovers
             over button.
 
-        xo_color (sugar3.graphics.xocolor.XoColor): XoColor of button.
+        xo_color (sugar4.graphics.xocolor.XoColor): XoColor of button.
 
         hide_tooltip_on_click (bool): Whether or not the tooltip
             is hidden when user clicks on button.
@@ -163,7 +163,7 @@ class RadioToolButton(Gtk.RadioToolButton):
         Set XoColor of button icon.
 
         Args:
-            xo_color (sugar3.graphics.xocolor.XoColor): xocolor to be set.
+            xo_color (sugar4.graphics.xocolor.XoColor): xocolor to be set.
         '''
         if self._xo_color != xo_color:
             self._xo_color = xo_color

@@ -16,13 +16,13 @@
 # Boston, MA 02111-1307, USA.
 
 """
-Test the sugar3.graphics.icon.Icon widget.
+Test the sugar4.graphics.icon.Icon widget.
 """
 
 from gi.repository import Gtk
 
-from sugar3.graphics.tray import HTray, VTray
-from sugar3.graphics.tray import TrayButton, TrayIcon
+from sugar4.graphics.tray import HTray, VTray
+from sugar4.graphics.tray import TrayButton, TrayIcon
 
 import common
 

@@ -32,7 +32,7 @@ from dbus import PROPERTIES_IFACE
 from gi.repository import GObject
 from gi.repository import TelepathyGLib
 
-from sugar3.presence.buddy import Buddy
+from sugar4.presence.buddy import Buddy
 
 CHANNEL = TelepathyGLib.IFACE_CHANNEL
 CHANNEL_INTERFACE_GROUP = TelepathyGLib.IFACE_CHANNEL_INTERFACE_GROUP
@@ -52,7 +52,7 @@ PROPERTY_FLAG_WRITE = TelepathyGLib.PropertyFlags.WRITE
 CONN_INTERFACE_ACTIVITY_PROPERTIES = 'org.laptop.Telepathy.ActivityProperties'
 CONN_INTERFACE_BUDDY_INFO = 'org.laptop.Telepathy.BuddyInfo'
 
-_logger = logging.getLogger('sugar3.presence.activity')
+_logger = logging.getLogger('sugar4.presence.activity')
 
 
 if not hasattr(GObject.ParamFlags, 'READWRITE'):

@@ -17,7 +17,7 @@ Example:
 
     .. code-block:: python
 
-        from sugar3.graphics.alert import Alert
+        from sugar4.graphics.alert import Alert
 
         # Create a new simple alert
         alert = Alert()
@@ -57,8 +57,8 @@ from gi.repository import GObject
 from gi.repository import GLib
 import math
 
-from sugar3.graphics import style
-from sugar3.graphics.icon import Icon
+from sugar4.graphics import style
+from sugar4.graphics.icon import Icon
 
 
 def _(msg):
@@ -75,11 +75,11 @@ class Alert(Gtk.EventBox):
     Alerts are inside the activity window instead of being a
     separate popup window. They do not hide the canvas.
 
-    Use :func:`~sugar3.graphics.window.Window.add_alert` and
-    :func:`~sugar3.graphics.window.Window.remove_alert` to add and
+    Use :func:`~sugar4.graphics.window.Window.add_alert` and
+    :func:`~sugar4.graphics.window.Window.remove_alert` to add and
     remove an alert.  These methods are inherited by an
-    :class:`~sugar3.activity.activity.Activity` via superclass
-    :class:`~sugar3.graphics.window.Window`.
+    :class:`~sugar4.activity.activity.Activity` via superclass
+    :class:`~sugar4.graphics.window.Window`.
 
     The alert is placed between the canvas and the toolbox, or above
     the canvas in fullscreen mode.
@@ -209,7 +209,7 @@ class Alert(Gtk.EventBox):
                 :class:`Gtk.ResponseType` constant or any positive
                 integer,
             label (str): a label for the button
-            icon (:class:`~sugar3.graphics.icon.Icon` or \
+            icon (:class:`~sugar4.graphics.icon.Icon` or \
                 :class:`Gtk.Image`, optional):
                 an icon for the button
             position (int, optional): the position of the button in
@@ -276,11 +276,11 @@ class ConfirmationAlert(Alert):
     :class:`Gtk.ResponseType.CANCEL`.
 
     Args:
-        **kwargs: parameters for :class:`~sugar3.graphics.alert.Alert`
+        **kwargs: parameters for :class:`~sugar4.graphics.alert.Alert`
 
     .. code-block:: python
 
-        from sugar3.graphics.alert import ConfirmationAlert
+        from sugar4.graphics.alert import ConfirmationAlert
 
         # Create a Confirmation alert and add it to the UI.
         def _alert_confirmation(self):
@@ -323,11 +323,11 @@ class ErrorAlert(Alert):
     :class:`Gtk.ResponseType.OK`.
 
     Args:
-        **kwargs: parameters for :class:`~sugar3.graphics.alert.Alert`
+        **kwargs: parameters for :class:`~sugar4.graphics.alert.Alert`
 
     .. code-block:: python
 
-        from sugar3.graphics.alert import ErrorAlert
+        from sugar4.graphics.alert import ErrorAlert
 
         # Create a Error alert and add it to the UI.
         def _alert_error(self):
@@ -442,11 +442,11 @@ class TimeoutAlert(_TimeoutAlert):
 
     Args:
         timeout (int, optional): time in seconds, default 5
-        **kwargs: parameters for :class:`~sugar3.graphics.alert.Alert`
+        **kwargs: parameters for :class:`~sugar4.graphics.alert.Alert`
 
     .. code-block:: python
 
-        from sugar3.graphics.alert import TimeoutAlert
+        from sugar4.graphics.alert import TimeoutAlert
 
         # Create a Timeout alert and add it to the UI
         def _alert_timeout(self):
@@ -493,11 +493,11 @@ class NotifyAlert(_TimeoutAlert):
 
     Args:
         timeout (int, optional): time in seconds, default 5
-        **kwargs: parameters for :class:`~sugar3.graphics.alert.Alert`
+        **kwargs: parameters for :class:`~sugar4.graphics.alert.Alert`
 
     .. code-block:: python
 
-        from sugar3.graphics.alert import NotifyAlert
+        from sugar4.graphics.alert import NotifyAlert
 
         # create a Notify alert then show it
         def _alert_notify(self):

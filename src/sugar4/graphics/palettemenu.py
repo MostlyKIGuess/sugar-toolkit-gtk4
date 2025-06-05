@@ -26,10 +26,10 @@ Example:
         from gi.repository import Gtk
         from gettext import gettext as _
 
-        from sugar3.graphics.palette import Palette
-        from sugar3.graphics.palettemenu import PaletteMenuBox
-        from sugar3.graphics.palettemenu import PaletteMenuItem
-        from sugar3.graphics.palettemenu import PaletteMenuItemSeparator
+        from sugar4.graphics.palette import Palette
+        from sugar4.graphics.palettemenu import PaletteMenuBox
+        from sugar4.graphics.palettemenu import PaletteMenuItem
+        from sugar4.graphics.palettemenu import PaletteMenuItemSeparator
 
 
         class ItemPalette(Palette):
@@ -86,15 +86,15 @@ Example:
 from gi.repository import GObject
 from gi.repository import Gtk
 
-from sugar3.graphics.icon import Icon
-from sugar3.graphics import style
+from sugar4.graphics.icon import Icon
+from sugar4.graphics import style
 
 
 class PaletteMenuBox(Gtk.VBox):
     '''
     The PaletteMenuBox is a box that is useful for making palettes.  It
-    supports adding :class:`sugar3.graphics.palettemenu.PaletteMenuItem`,
-    :class:`sugar3.graphics.palettemenu.PaletteMenuItemSeparator` and
+    supports adding :class:`sugar4.graphics.palettemenu.PaletteMenuItem`,
+    :class:`sugar4.graphics.palettemenu.PaletteMenuItemSeparator` and
     it automatically adds padding to other widgets.
     '''
 
@@ -108,8 +108,8 @@ class PaletteMenuBox(Gtk.VBox):
         (simmilar to `Gtk.Box.pack_start`).
 
         If an item is appended
-        (a :class:`sugar3.graphics.palettemenu.PaletteMenuItem` or a
-        :class:`sugar3.graphics.palettemenu.PaletteMenuItemSeparator`) no
+        (a :class:`sugar4.graphics.palettemenu.PaletteMenuItem` or a
+        :class:`sugar4.graphics.palettemenu.PaletteMenuItemSeparator`) no
         padding will be added, as that is handled by the item.  If a widget is
         appended (:class:`Gtk.Widget` subclass) padding will be added.
 
@@ -117,9 +117,9 @@ class PaletteMenuBox(Gtk.VBox):
             item_or_widget (:class:`Gtk.Widget` or menu item or seperator):
                 item or widget to add the the palette
             horizontal_padding (int):  by default,
-                :class:`sugar3.graphics.style.DEFAULT_SPACING` is applied
+                :class:`sugar4.graphics.style.DEFAULT_SPACING` is applied
             vertical_padding (int):  by default,
-                :class:`sugar3.graphics.style.DEFAULT_SPACING` is applied
+                :class:`sugar4.graphics.style.DEFAULT_SPACING` is applied
 
         Returns:
             None
@@ -283,7 +283,7 @@ class PaletteMenuItem(Gtk.EventBox):
     def set_image(self, icon):
         '''
         Sets the icon widget.  Usually this will be a
-        :class:`sugar3.graphics.icon.Icon`.
+        :class:`sugar4.graphics.icon.Icon`.
 
         Args:
             icon (:class:`Gtk.Widget`):  icon widget

@@ -1,7 +1,7 @@
 from gi.repository import Gtk
-from sugar3.graphics.radiotoolbutton import RadioToolButton
-from sugar3.graphics.radiopalette import RadioPalette, RadioMenuButton
-from sugar3.graphics.xocolor import XoColor
+from sugar4.graphics.radiotoolbutton import RadioToolButton
+from sugar4.graphics.radiopalette import RadioPalette, RadioMenuButton
+from sugar4.graphics.xocolor import XoColor
 
 
 from common import set_theme
