@@ -1,4 +1,4 @@
-AC_INIT([sugar-toolkit-gtk3],[0.121],[],[sugar-toolkit-gtk3])
+AC_INIT([sugar-toolkit-gtk4],[1.0],[],[sugar-toolkit-gtk4])
 
 AC_PREREQ([2.71])
 
@@ -44,16 +44,16 @@ AC_CONFIG_FILES([
 Makefile
 bin/Makefile
 src/Makefile
-src/sugar3/Makefile
-src/sugar3/activity/Makefile
-src/sugar3/bundle/Makefile
-src/sugar3/graphics/Makefile
-src/sugar3/event-controller/Makefile
-src/sugar3/presence/Makefile
-src/sugar3/datastore/Makefile
-src/sugar3/dispatch/Makefile
-src/sugar3/test/Makefile
-src/sugar3/config.py
+src/sugar4/Makefile
+src/sugar4/activity/Makefile
+src/sugar4/bundle/Makefile
+src/sugar4/graphics/Makefile
+src/sugar4/event-controller/Makefile
+src/sugar4/presence/Makefile
+src/sugar4/datastore/Makefile
+src/sugar4/dispatch/Makefile
+src/sugar4/test/Makefile
+src/sugar4/config.py
 po/Makefile.in
 ])
 AC_OUTPUT
