@@ -10,8 +10,8 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.xocolor import XoColor
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.xocolor import XoColor
 
 
 class BasicExampleActivity(SimpleActivity):

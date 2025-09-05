@@ -17,9 +17,9 @@ except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
 if GTK_AVAILABLE:
-    from sugar.graphics.toggletoolbutton import ToggleToolButton
-    from sugar.graphics.palette import Palette
-    from sugar.graphics.icon import Icon
+    from sugar4.graphics.toggletoolbutton import ToggleToolButton
+    from sugar4.graphics.palette import Palette
+    from sugar4.graphics.icon import Icon
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -284,7 +284,7 @@ class TestToggleToolButtonAccelerator(unittest.TestCase):
 
     def test_accelerator_with_app(self):
         """Test accelerator with application context."""
-        app = Gtk.Application(application_id="org.sugar.test")
+        app = Gtk.Application(application_id="org.sugar4.test")
         button = ToggleToolButton()
 
         # Set accelerator

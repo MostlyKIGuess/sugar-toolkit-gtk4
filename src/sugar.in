@@ -1,6 +1,6 @@
 #!@PYTHON@
 
-# sugar.in
+# sugar4.in
 #
 # Copyright 2025 MostlyK
 #
@@ -26,5 +26,5 @@ pkgdatadir = '@pkgdatadir@'
 sys.path.insert(1, pkgdatadir)
 
 if __name__ == '__main__':
-    from sugar import main
+    from sugar4 import main
     sys.exit(main.main(sys.argv))

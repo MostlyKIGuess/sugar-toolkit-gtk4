@@ -17,7 +17,7 @@ except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
 if GTK_AVAILABLE:
-    from sugar.graphics.combobox import ComboBox
+    from sugar4.graphics.combobox import ComboBox
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -293,6 +293,7 @@ class TestComboBox(unittest.TestCase):
 
     def test_signal_connections(self):
         """Test that signals can be connected."""
+
         # Test that we can connect to ComboBox signals
         def on_changed(combo):
             pass
@@ -327,14 +328,7 @@ class TestComboBoxEdgeCases(unittest.TestCase):
         combo = ComboBox()
 
         # Test with different types of values
-        values = [
-            {"key": "value"},
-            ["list", "item"],
-            ("tuple", "item"),
-            42,
-            3.14,
-            True
-        ]
+        values = [{"key": "value"}, ["list", "item"], ("tuple", "item"), 42, 3.14, True]
 
         for i, value in enumerate(values):
             combo.append_item(value, f"Item {i}")
@@ -369,7 +363,7 @@ class TestComboBoxEdgeCases(unittest.TestCase):
             "Café ñoño",
             "🌟 Star ⭐",
             "اللغة العربية",
-            "Русский язык"
+            "Русский язык",
         ]
 
         for i, text in enumerate(unicode_texts):

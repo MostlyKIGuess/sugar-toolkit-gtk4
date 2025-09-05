@@ -7,60 +7,60 @@ Subpackages
 .. toctree::
    :maxdepth: 4
 
-   sugar.activity
-   sugar.bundle
-   sugar.datastore
-   sugar.dispatch
-   sugar.graphics
-   sugar.presence
+   sugar4.activity
+   sugar4.bundle
+   sugar4.datastore
+   sugar4.dispatch
+   sugar4.graphics
+   sugar4.presence
 
 Submodules
 ----------
 
-sugar.env module
+sugar4.env module
 ----------------
 
-.. automodule:: sugar.env
+.. automodule:: sugar4.env
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.logger module
+sugar4.logger module
 -------------------
 
-.. automodule:: sugar.logger
+.. automodule:: sugar4.logger
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.mime module
+sugar4.mime module
 -----------------
 
-.. automodule:: sugar.mime
+.. automodule:: sugar4.mime
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.network module
+sugar4.network module
 --------------------
 
-.. automodule:: sugar.network
+.. automodule:: sugar4.network
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.profile module
+sugar4.profile module
 --------------------
 
-.. automodule:: sugar.profile
+.. automodule:: sugar4.profile
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.util module
+sugar4.util module
 -----------------
 
-.. automodule:: sugar.util
+.. automodule:: sugar4.util
    :members:
    :show-inheritance:
    :undoc-members:

@@ -11,7 +11,7 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
+from sugar4.activity import SimpleActivity
 
 
 class BundleTestActivity(SimpleActivity):

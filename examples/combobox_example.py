@@ -9,13 +9,14 @@ and using separators.
 import sys
 import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
-gi.require_version('Gtk', '4.0')
+
+gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, GObject
 
-from sugar.graphics.combobox import ComboBox
+from sugar4.graphics.combobox import ComboBox
 
 
 class ComboBoxExample(Gtk.ApplicationWindow):
@@ -97,8 +98,12 @@ class ComboBoxExample(Gtk.ApplicationWindow):
         self.icon_combo = ComboBox()
         try:
             self.icon_combo.append_item("new", "New Document", icon_name="document-new")
-            self.icon_combo.append_item("open", "Open Document", icon_name="document-open")
-            self.icon_combo.append_item("save", "Save Document", icon_name="document-save")
+            self.icon_combo.append_item(
+                "open", "Open Document", icon_name="document-open"
+            )
+            self.icon_combo.append_item(
+                "save", "Save Document", icon_name="document-save"
+            )
             self.icon_combo.append_item("copy", "Copy", icon_name="edit-copy")
             self.icon_combo.append_item("paste", "Paste", icon_name="edit-paste")
         except (ValueError, AttributeError):
@@ -162,7 +167,9 @@ class ComboBoxExample(Gtk.ApplicationWindow):
         vbox_inner.set_margin_end(10)
         frame.set_child(vbox_inner)
 
-        description = Gtk.Label(label="Each item stores a dictionary with multiple properties:")
+        description = Gtk.Label(
+            label="Each item stores a dictionary with multiple properties:"
+        )
         description.set_wrap(True)
         vbox_inner.append(description)
 
@@ -178,7 +185,7 @@ class ComboBoxExample(Gtk.ApplicationWindow):
             {"name": "Alice", "age": 30, "role": "Developer"},
             {"name": "Bob", "age": 25, "role": "Designer"},
             {"name": "Charlie", "age": 35, "role": "Manager"},
-            {"name": "Diana", "age": 28, "role": "Tester"}
+            {"name": "Diana", "age": 28, "role": "Tester"},
         ]
 
         for person in people:
@@ -225,7 +232,9 @@ class ComboBoxExample(Gtk.ApplicationWindow):
         """Handle complex combo selection change."""
         value = combo.get_value()
         if value and isinstance(value, dict):
-            status_text = f"Person: {value['name']}, Age: {value['age']}, Role: {value['role']}"
+            status_text = (
+                f"Person: {value['name']}, Age: {value['age']}, Role: {value['role']}"
+            )
             self.status_label.set_text(status_text)
 
     def on_clear_clicked(self, button):
@@ -243,7 +252,7 @@ class ComboBoxExample(Gtk.ApplicationWindow):
         person = {
             "name": random.choice(names),
             "age": random.randint(22, 40),
-            "role": random.choice(roles)
+            "role": random.choice(roles),
         }
 
         display_text = f"{person['name']} ({person['role']})"

@@ -10,14 +10,16 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.toolbarbox import ToolbarBox, ToolbarButton
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.icon import Icon
-from sugar.graphics import style
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.toolbarbox import ToolbarBox, ToolbarButton
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.icon import Icon
+from sugar4.graphics import style
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
-SUGAR_ICONS_PATH = os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "actions")
+SUGAR_ICONS_PATH = os.path.join(
+    PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "actions"
+)
 SUGAR_ICONS_PATH = os.path.abspath(SUGAR_ICONS_PATH)
 
 
@@ -27,8 +29,7 @@ class ToolbarBoxExampleActivity(SimpleActivity):
     def __init__(self):
         super().__init__()
         self.set_title("Sugar GTK4 ToolbarBox Example")
-        
-        
+
         self._create_content()
 
     def _create_content(self):
@@ -62,7 +63,16 @@ class ToolbarBoxExampleActivity(SimpleActivity):
         toolbar = self._toolbarbox.get_toolbar()
 
         # Activity button (non-expandable)
-        activity_button = ToolButton(icon_name=os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "apps", "activity-journal.svg"))
+        activity_button = ToolButton(
+            icon_name=os.path.join(
+                PROJECT_ROOT,
+                "sugar-artwork",
+                "icons",
+                "scalable",
+                "apps",
+                "activity-journal.svg",
+            )
+        )
         activity_button.set_tooltip("My Activity")
         toolbar.append(activity_button)
 
@@ -74,24 +84,31 @@ class ToolbarBoxExampleActivity(SimpleActivity):
 
         # Edit tools (expandable)
         edit_button = ToolbarButton(
-            page=self._create_edit_toolbar(), 
-            icon_name=os.path.join(SUGAR_ICONS_PATH, "toolbar-edit.svg")
+            page=self._create_edit_toolbar(),
+            icon_name=os.path.join(SUGAR_ICONS_PATH, "toolbar-edit.svg"),
         )
         edit_button.set_tooltip("Edit Tools")
         toolbar.append(edit_button)
 
         # View tools (expandable)
         view_button = ToolbarButton(
-            page=self._create_view_toolbar(), 
-            icon_name=os.path.join(SUGAR_ICONS_PATH, "toolbar-view.svg")
+            page=self._create_view_toolbar(),
+            icon_name=os.path.join(SUGAR_ICONS_PATH, "toolbar-view.svg"),
         )
         view_button.set_tooltip("View Tools")
         toolbar.append(view_button)
 
         # Tools section (expandable)
         tools_button = ToolbarButton(
-            page=self._create_tools_toolbar(), 
-            icon_name=os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "categories", "preferences-system.svg")
+            page=self._create_tools_toolbar(),
+            icon_name=os.path.join(
+                PROJECT_ROOT,
+                "sugar-artwork",
+                "icons",
+                "scalable",
+                "categories",
+                "preferences-system.svg",
+            ),
         )
         tools_button.set_tooltip("Tools")
         toolbar.append(tools_button)
@@ -102,7 +119,9 @@ class ToolbarBoxExampleActivity(SimpleActivity):
         toolbar.append(spacer)
 
         # Stop button (non-expandable)
-        stop_button = ToolButton(icon_name=os.path.join(SUGAR_ICONS_PATH, "activity-stop.svg"))
+        stop_button = ToolButton(
+            icon_name=os.path.join(SUGAR_ICONS_PATH, "activity-stop.svg")
+        )
         stop_button.set_tooltip("Stop Activity")
         stop_button.connect("clicked", lambda w: self.close())
         toolbar.append(stop_button)
@@ -168,7 +187,10 @@ class ToolbarBoxExampleActivity(SimpleActivity):
 
         list_view = Gtk.ToggleButton()
         list_view.set_child(
-            Icon(file_name=os.path.join(SUGAR_ICONS_PATH, "view-list.svg"), pixel_size=style.STANDARD_ICON_SIZE)
+            Icon(
+                file_name=os.path.join(SUGAR_ICONS_PATH, "view-list.svg"),
+                pixel_size=style.STANDARD_ICON_SIZE,
+            )
         )
         list_view.set_tooltip_text("List View")
         list_view.set_active(True)
@@ -176,7 +198,10 @@ class ToolbarBoxExampleActivity(SimpleActivity):
 
         grid_view = Gtk.ToggleButton()
         grid_view.set_child(
-            Icon(file_name=os.path.join(SUGAR_ICONS_PATH, "view-details.svg"), pixel_size=style.STANDARD_ICON_SIZE)
+            Icon(
+                file_name=os.path.join(SUGAR_ICONS_PATH, "view-details.svg"),
+                pixel_size=style.STANDARD_ICON_SIZE,
+            )
         )
         grid_view.set_tooltip_text("Details View")
         view_modes.append(grid_view)
@@ -191,8 +216,10 @@ class ToolbarBoxExampleActivity(SimpleActivity):
         toolbar.set_margin_top(style.DEFAULT_PADDING)
         toolbar.set_margin_bottom(style.DEFAULT_PADDING)
 
-        # Tool selection  
-        cursor_path = os.path.join(PROJECT_ROOT, "sugar-artwork", "cursor", "sugar", "pngs")
+        # Tool selection
+        cursor_path = os.path.join(
+            PROJECT_ROOT, "sugar-artwork", "cursor", "sugar", "pngs"
+        )
         tools = [
             ("Brush", os.path.join(cursor_path, "paintbrush.png")),
             ("Text", os.path.join(SUGAR_ICONS_PATH, "format-text-bold.svg")),
@@ -215,7 +242,16 @@ class ToolbarBoxExampleActivity(SimpleActivity):
         color_button.set_tooltip_text("Choose Color")
         toolbar.append(color_button)
 
-        properties_button = ToolButton(icon_name=os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "categories", "preferences-system.svg"))
+        properties_button = ToolButton(
+            icon_name=os.path.join(
+                PROJECT_ROOT,
+                "sugar-artwork",
+                "icons",
+                "scalable",
+                "categories",
+                "preferences-system.svg",
+            )
+        )
         properties_button.set_tooltip("Properties")
         properties_button.connect(
             "clicked", self._on_toolbar_action, "Tool: Properties"
@@ -241,7 +277,8 @@ class ToolbarBoxExampleActivity(SimpleActivity):
         content_box.set_margin_bottom(style.DEFAULT_PADDING)
 
         description = Gtk.Label()
-        description.set_markup("""
+        description.set_markup(
+            """
 <b>Sugar GTK4 ToolbarBox Example</b>
 
 This example demonstrates the expandable toolbar functionality:
@@ -251,7 +288,8 @@ This example demonstrates the expandable toolbar functionality:
 - <b>Palette Fallback:</b> On smaller screens, content may appear in palettes
 
 <i>Click the toolbar buttons above to see the expansion behavior.</i>
-        """)
+        """
+        )
         description.set_halign(Gtk.Align.START)
         content_box.append(description)
 
@@ -308,4 +346,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

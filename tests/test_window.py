@@ -3,6 +3,7 @@ Tests for Window (GTK4)
 """
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 import sys
@@ -12,7 +13,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import pytest
 
-from sugar.graphics.window import Window
+from sugar4.graphics.window import Window
+
 
 @pytest.fixture
 def gtk_app():
@@ -20,12 +22,14 @@ def gtk_app():
     yield app
     app.quit()
 
+
 def test_window_creation(gtk_app):
     """Test that a Window can be created and basic properties work."""
     win = Window(application=gtk_app)
     assert isinstance(win, Window)
     assert win.get_enable_fullscreen_mode() is True
     assert win.is_fullscreen() is False
+
 
 def test_window_canvas_set_get(gtk_app):
     """Test setting and getting the canvas widget."""
@@ -37,6 +41,7 @@ def test_window_canvas_set_get(gtk_app):
     win.canvas = canvas
     assert win.canvas is canvas
 
+
 def test_window_toolbar_set_get(gtk_app):
     """Test setting and getting the toolbar box."""
     win = Window(application=gtk_app)
@@ -47,6 +52,7 @@ def test_window_toolbar_set_get(gtk_app):
     win.toolbar_box = toolbar
     assert win.toolbar_box is toolbar
 
+
 def test_window_fullscreen_toggle(gtk_app):
     """Test fullscreen and unfullscreen logic."""
     win = Window(application=gtk_app)
@@ -54,6 +60,7 @@ def test_window_fullscreen_toggle(gtk_app):
     assert win.is_fullscreen() is True
     win.unfullscreen()
     assert win.is_fullscreen() is False
+
 
 def test_window_alert_add_remove(gtk_app):
     """Test adding and removing alerts."""
@@ -63,6 +70,7 @@ def test_window_alert_add_remove(gtk_app):
     assert alert in win._alerts
     win.remove_alert(alert)
     assert alert not in win._alerts
+
 
 def test_window_enable_fullscreen_mode_property(gtk_app):
     """Test enable_fullscreen_mode property getter/setter."""

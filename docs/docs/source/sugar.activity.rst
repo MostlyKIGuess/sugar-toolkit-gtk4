@@ -1,29 +1,29 @@
-sugar.activity package
+sugar4.activity package
 ======================
 
 Submodules
 ----------
 
-sugar.activity.activity module
+sugar4.activity.activity module
 ------------------------------
 
-.. automodule:: sugar.activity.activity
+.. automodule:: sugar4.activity.activity
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.activity.activityhandle module
+sugar4.activity.activityhandle module
 ------------------------------------
 
-.. automodule:: sugar.activity.activityhandle
+.. automodule:: sugar4.activity.activityhandle
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.activity.widgets module
+sugar4.activity.widgets module
 -----------------------------
 
-.. automodule:: sugar.activity.widgets
+.. automodule:: sugar4.activity.widgets
    :members:
    :show-inheritance:
    :undoc-members:
@@ -31,7 +31,7 @@ sugar.activity.widgets module
 Module contents
 ---------------
 
-.. automodule:: sugar.activity
+.. automodule:: sugar4.activity
    :members:
    :show-inheritance:
    :undoc-members:

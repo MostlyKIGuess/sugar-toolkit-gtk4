@@ -1,16 +1,23 @@
 import unittest
 from unittest.mock import Mock, patch
 import gi
-gi.require_version('Gtk', '4.0')
+
+gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, GObject
 
 import os
 import sys
+
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
-from sugar.graphics.alert import (
-    Alert, ConfirmationAlert, ErrorAlert, 
-    TimeoutAlert, NotifyAlert, _TimeoutAlert
+from sugar4.graphics.alert import (
+    Alert,
+    ConfirmationAlert,
+    ErrorAlert,
+    TimeoutAlert,
+    NotifyAlert,
+    _TimeoutAlert,
 )
+
 
 class TestAlert(unittest.TestCase):
     def setUp(self):
@@ -53,13 +60,14 @@ class TestAlert(unittest.TestCase):
     def test_response_signal(self):
         """Test response signal emission"""
         response_received = []
-        
+
         def on_response(alert, response_id):
             response_received.append(response_id)
-        
+
         self.alert.connect("response", on_response)
         self.alert._response(123)
         self.assertEqual(response_received, [123])
+
 
 class TestConfirmationAlert(unittest.TestCase):
     def setUp(self):
@@ -71,6 +79,7 @@ class TestConfirmationAlert(unittest.TestCase):
         self.assertIn(Gtk.ResponseType.OK, self.alert._buttons)
         self.assertIn(Gtk.ResponseType.CANCEL, self.alert._buttons)
 
+
 class TestErrorAlert(unittest.TestCase):
     def setUp(self):
         self.alert = ErrorAlert()
@@ -79,6 +88,7 @@ class TestErrorAlert(unittest.TestCase):
         """Test error alert has OK button"""
         self.assertIsInstance(self.alert, ErrorAlert)
         self.assertIn(Gtk.ResponseType.OK, self.alert._buttons)
+
 
 class TestTimeoutAlert(unittest.TestCase):
     def setUp(self):
@@ -91,9 +101,11 @@ class TestTimeoutAlert(unittest.TestCase):
         self.assertIn(Gtk.ResponseType.CANCEL, self.alert._buttons)
 
     def tearDown(self):
-        if hasattr(self.alert, '_timeout_sid'):
+        if hasattr(self.alert, "_timeout_sid"):
             from gi.repository import GLib
+
             GLib.source_remove(self.alert._timeout_sid)
+
 
 class TestNotifyAlert(unittest.TestCase):
     def setUp(self):
@@ -105,9 +117,11 @@ class TestNotifyAlert(unittest.TestCase):
         self.assertIn(Gtk.ResponseType.OK, self.alert._buttons)
 
     def tearDown(self):
-        if hasattr(self.alert, '_timeout_sid'):
+        if hasattr(self.alert, "_timeout_sid"):
             from gi.repository import GLib
+
             GLib.source_remove(self.alert._timeout_sid)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     unittest.main()

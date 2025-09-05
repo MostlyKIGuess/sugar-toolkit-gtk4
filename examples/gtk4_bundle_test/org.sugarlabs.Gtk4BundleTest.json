@@ -21,13 +21,17 @@
       "sources": []
     },
     {
-      "name": "sugar-toolkit-gtk4-py",
+      "name": "sugar-toolkit-gtk4",
       "buildsystem": "simple",
       "build-commands": [
         "pip3 install --prefix=/app --no-build-isolation ."
       ],
       "sources": [
-        { "type": "dir", "path": "../../", "dest": "." }
+        {
+          "type": "dir",
+          "path": "../../",
+          "dest": "."
+        }
       ]
     },
     {
@@ -37,7 +41,10 @@
         "install -Dm755 main.py /app/bin/org.sugarlabs.Gtk4BundleTest"
       ],
       "sources": [
-        { "type": "file", "path": "main.py" }
+        {
+          "type": "file",
+          "path": "main.py"
+        }
       ]
     }
   ]

@@ -8,14 +8,16 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 try:
     import gi
+
     gi.require_version("Gtk", "4.0")
     from gi.repository import Gtk
+
     GTK_AVAILABLE = True
 except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
-from sugar.graphics.menuitem import MenuItem, MenuSeparator
-from sugar.graphics.xocolor import XoColor
+from sugar4.graphics.menuitem import MenuItem, MenuSeparator
+from sugar4.graphics.xocolor import XoColor
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -46,9 +48,7 @@ class TestMenuItem(unittest.TestCase):
         """Test creating menu item with XO color."""
         xo_color = XoColor("#FF0000,#00FF00")
         item = MenuItem(
-            text_label="Colored Item",
-            icon_name="emblem-favorite",
-            xo_color=xo_color
+            text_label="Colored Item", icon_name="emblem-favorite", xo_color=xo_color
         )
         self.assertEqual(item.get_text(), "Colored Item")
 
@@ -141,9 +141,10 @@ class TestMenuItemWithoutGTK(unittest.TestCase):
 
     def test_menuitem_import(self):
         """Test that MenuItem can be imported."""
-        from sugar.graphics.menuitem import MenuItem, MenuSeparator
-        self.assertTrue(hasattr(MenuItem, '__init__'))
-        self.assertTrue(hasattr(MenuSeparator, '__init__'))
+        from sugar4.graphics.menuitem import MenuItem, MenuSeparator
+
+        self.assertTrue(hasattr(MenuItem, "__init__"))
+        self.assertTrue(hasattr(MenuSeparator, "__init__"))
 
 
 if __name__ == "__main__":

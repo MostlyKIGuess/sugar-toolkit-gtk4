@@ -1,165 +1,165 @@
-sugar.graphics package
+sugar4.graphics package
 ======================
 
 Submodules
 ----------
 
-sugar.graphics.alert module
+sugar4.graphics.alert module
 ---------------------------
 
-.. automodule:: sugar.graphics.alert
+.. automodule:: sugar4.graphics.alert
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.animator module
+sugar4.graphics.animator module
 ------------------------------
 
-.. automodule:: sugar.graphics.animator
+.. automodule:: sugar4.graphics.animator
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.icon module
+sugar4.graphics.icon module
 --------------------------
 
-.. automodule:: sugar.graphics.icon
+.. automodule:: sugar4.graphics.icon
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.menuitem module
+sugar4.graphics.menuitem module
 ------------------------------
 
-.. automodule:: sugar.graphics.menuitem
+.. automodule:: sugar4.graphics.menuitem
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.objectchooser module
+sugar4.graphics.objectchooser module
 -----------------------------------
 
-.. automodule:: sugar.graphics.objectchooser
+.. automodule:: sugar4.graphics.objectchooser
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.palette module
+sugar4.graphics.palette module
 -----------------------------
 
-.. automodule:: sugar.graphics.palette
+.. automodule:: sugar4.graphics.palette
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.palettegroup module
+sugar4.graphics.palettegroup module
 ----------------------------------
 
-.. automodule:: sugar.graphics.palettegroup
+.. automodule:: sugar4.graphics.palettegroup
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.palettemenu module
+sugar4.graphics.palettemenu module
 ---------------------------------
 
-.. automodule:: sugar.graphics.palettemenu
+.. automodule:: sugar4.graphics.palettemenu
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.palettewindow module
+sugar4.graphics.palettewindow module
 -----------------------------------
 
-.. automodule:: sugar.graphics.palettewindow
+.. automodule:: sugar4.graphics.palettewindow
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.radiopalette module
+sugar4.graphics.radiopalette module
 ----------------------------------
 
-.. automodule:: sugar.graphics.radiopalette
+.. automodule:: sugar4.graphics.radiopalette
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.radiotoolbutton module
+sugar4.graphics.radiotoolbutton module
 -------------------------------------
 
-.. automodule:: sugar.graphics.radiotoolbutton
+.. automodule:: sugar4.graphics.radiotoolbutton
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.style module
+sugar4.graphics.style module
 ---------------------------
 
-.. automodule:: sugar.graphics.style
+.. automodule:: sugar4.graphics.style
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.toolbarbox module
+sugar4.graphics.toolbarbox module
 --------------------------------
 
-.. automodule:: sugar.graphics.toolbarbox
+.. automodule:: sugar4.graphics.toolbarbox
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.toolbox module
+sugar4.graphics.toolbox module
 -----------------------------
 
-.. automodule:: sugar.graphics.toolbox
+.. automodule:: sugar4.graphics.toolbox
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.combobox module
+sugar4.graphics.combobox module
 -----------------------------
 
-.. automodule:: sugar.graphics.combobox
+.. automodule:: sugar4.graphics.combobox
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.toolcombobox module
+sugar4.graphics.toolcombobox module
 -----------------------------
 
-.. automodule:: sugar.graphics.toolcombobox
+.. automodule:: sugar4.graphics.toolcombobox
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.toggletoolbutton module
+sugar4.graphics.toggletoolbutton module
 -----------------------------
 
-.. automodule:: sugar.graphics.toggletoolbutton
+.. automodule:: sugar4.graphics.toggletoolbutton
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.toolbutton module
+sugar4.graphics.toolbutton module
 --------------------------------
 
-.. automodule:: sugar.graphics.toolbutton
+.. automodule:: sugar4.graphics.toolbutton
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.window module
+sugar4.graphics.window module
 ----------------------------
 
-.. automodule:: sugar.graphics.window
+.. automodule:: sugar4.graphics.window
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.graphics.xocolor module
+sugar4.graphics.xocolor module
 -----------------------------
 
-.. automodule:: sugar.graphics.xocolor
+.. automodule:: sugar4.graphics.xocolor
    :members:
    :show-inheritance:
    :undoc-members:
@@ -167,7 +167,7 @@ sugar.graphics.xocolor module
 Module contents
 ---------------
 
-.. automodule:: sugar.graphics
+.. automodule:: sugar4.graphics
    :members:
    :show-inheritance:
    :undoc-members:

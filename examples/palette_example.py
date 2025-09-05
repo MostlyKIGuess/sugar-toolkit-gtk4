@@ -3,22 +3,25 @@ Complete Palette Demo
 """
 
 import gi
-gi.require_version('Gtk', '4.0')
-gi.require_version('Gdk', '4.0')
+
+gi.require_version("Gtk", "4.0")
+gi.require_version("Gdk", "4.0")
 
 import sys
 import os
 from gi.repository import Gtk
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
-from sugar.graphics.palette import Palette
-from sugar.graphics.palettewindow import (
-    PaletteWindow, WidgetInvoker,  CursorInvoker,
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+from sugar4.graphics.palette import Palette
+from sugar4.graphics.palettewindow import (
+    PaletteWindow,
+    WidgetInvoker,
+    CursorInvoker,
 )
-from sugar.graphics.palettemenu import PaletteMenuItem, PaletteMenuItemSeparator
-from sugar.graphics.palettegroup import get_group
-from sugar.graphics.icon import Icon
-from sugar.graphics import style
+from sugar4.graphics.palettemenu import PaletteMenuItem, PaletteMenuItemSeparator
+from sugar4.graphics.palettegroup import get_group
+from sugar4.graphics.icon import Icon
+from sugar4.graphics import style
 
 
 class PaletteDemo(Gtk.ApplicationWindow):
@@ -67,7 +70,7 @@ class PaletteDemo(Gtk.ApplicationWindow):
         desc_label = Gtk.Label(label=description)
         desc_label.set_halign(Gtk.Align.START)
         desc_label.set_wrap(True)
-        desc_label.add_css_class('dim-label')
+        desc_label.add_css_class("dim-label")
         header_box.append(desc_label)
 
         sep = Gtk.Separator(orientation=Gtk.Orientation.HORIZONTAL)
@@ -81,7 +84,7 @@ class PaletteDemo(Gtk.ApplicationWindow):
         section = self._create_section_header(
             parent,
             "Basic Palettes",
-            "Basic palette widgets with text, icons, and content"
+            "Basic palette widgets with text, icons, and content",
         )
 
         demo_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -92,27 +95,35 @@ class PaletteDemo(Gtk.ApplicationWindow):
         demo_box.append(simple_btn)
 
         simple_palette = Palette(label="Simple Palette")
-        simple_palette.props.secondary_text = "This is a simple palette with primary and secondary text."
+        simple_palette.props.secondary_text = (
+            "This is a simple palette with primary and secondary text."
+        )
 
         close_btn1 = Gtk.Button(label="Close")
-        close_btn1.connect('clicked', lambda btn: simple_palette.popdown(immediate=True))
+        close_btn1.connect(
+            "clicked", lambda btn: simple_palette.popdown(immediate=True)
+        )
         simple_palette.set_content(close_btn1)
 
         simple_invoker = WidgetInvoker()
         simple_invoker.attach(simple_btn)
         simple_invoker.set_lock_palette(True)
         simple_palette.set_invoker(simple_invoker)
-        simple_btn.connect('clicked', lambda btn: simple_palette.popup(immediate=True))
+        simple_btn.connect("clicked", lambda btn: simple_palette.popup(immediate=True))
 
         icon_btn = Gtk.Button(label="With Icon")
         demo_box.append(icon_btn)
 
         icon_palette = Palette(label="Palette with Icon")
-        icon_palette.props.secondary_text = "This palette includes an icon and action buttons."
-        icon_palette.set_icon(Icon(icon_name='dialog-information', pixel_size=style.STANDARD_ICON_SIZE))
+        icon_palette.props.secondary_text = (
+            "This palette includes an icon and action buttons."
+        )
+        icon_palette.set_icon(
+            Icon(icon_name="dialog-information", pixel_size=style.STANDARD_ICON_SIZE)
+        )
 
         close_btn2 = Gtk.Button(label="Close")
-        close_btn2.connect('clicked', lambda btn: icon_palette.popdown(immediate=True))
+        close_btn2.connect("clicked", lambda btn: icon_palette.popdown(immediate=True))
         icon_palette.set_content(close_btn2)
 
         icon_palette.action_bar.add_action("Action 1", "document-save")
@@ -122,7 +133,7 @@ class PaletteDemo(Gtk.ApplicationWindow):
         icon_invoker.attach(icon_btn)
         icon_invoker.set_lock_palette(True)
         icon_palette.set_invoker(icon_invoker)
-        icon_btn.connect('clicked', lambda btn: icon_palette.popup(immediate=True))
+        icon_btn.connect("clicked", lambda btn: icon_palette.popup(immediate=True))
 
         # custom content
         content_btn = Gtk.Button(label="Custom Content")
@@ -149,7 +160,9 @@ class PaletteDemo(Gtk.ApplicationWindow):
         custom_content.append(check)
 
         close_btn3 = Gtk.Button(label="Close")
-        close_btn3.connect('clicked', lambda btn: content_palette.popdown(immediate=True))
+        close_btn3.connect(
+            "clicked", lambda btn: content_palette.popdown(immediate=True)
+        )
         custom_content.append(close_btn3)
 
         content_palette.set_content(custom_content)
@@ -158,14 +171,16 @@ class PaletteDemo(Gtk.ApplicationWindow):
         content_invoker.attach(content_btn)
         content_invoker.set_lock_palette(True)
         content_palette.set_invoker(content_invoker)
-        content_btn.connect('clicked', lambda btn: content_palette.popup(immediate=True))
+        content_btn.connect(
+            "clicked", lambda btn: content_palette.popup(immediate=True)
+        )
 
     def _create_menu_palette_section(self, parent):
         """Create menu palette examples."""
         section = self._create_section_header(
             parent,
             "Menu Palettes",
-            "Palettes that act as context menus with menu items"
+            "Palettes that act as context menus with menu items",
         )
 
         demo_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -179,37 +194,37 @@ class PaletteDemo(Gtk.ApplicationWindow):
         demo_box.append(self.menu_feedback_label)
 
         menu_palette = Palette(label="Menu Options")
-        menu_palette.props.secondary_text = "Right-click or use menu property for options"
+        menu_palette.props.secondary_text = (
+            "Right-click or use menu property for options"
+        )
         menu = menu_palette.menu
 
         def feedback(msg):
             self.menu_feedback_label.set_text(msg)
 
         item1 = PaletteMenuItem("Open File", "document-open")
-        item1.connect('activate', lambda x: feedback("Open File clicked"))
+        item1.connect("activate", lambda x: feedback("Open File clicked"))
         menu.append(item1)
 
         item2 = PaletteMenuItem("Save File", "document-save")
-        item2.connect('activate', lambda x: feedback("Save File clicked"))
+        item2.connect("activate", lambda x: feedback("Save File clicked"))
         menu.append(item2)
 
         menu.append(PaletteMenuItemSeparator())
 
         item3 = PaletteMenuItem("Settings", "preferences-system")
-        item3.connect('activate', lambda x: feedback("Settings clicked"))
+        item3.connect("activate", lambda x: feedback("Settings clicked"))
         menu.append(item3)
 
         menu_invoker = WidgetInvoker()
         menu_invoker.attach_widget(menu_btn)
         menu_palette.set_invoker(menu_invoker)
-        menu_btn.connect('clicked', lambda btn: menu_palette.popup(immediate=True))
+        menu_btn.connect("clicked", lambda btn: menu_palette.popup(immediate=True))
 
     def _create_palette_window_section(self, parent):
         """Create palette window examples."""
         section = self._create_section_header(
-            parent,
-            "Palette Windows",
-            "Low-level palette window implementation"
+            parent, "Palette Windows", "Low-level palette window implementation"
         )
 
         demo_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
@@ -228,7 +243,7 @@ class PaletteDemo(Gtk.ApplicationWindow):
         custom_widget.set_margin_bottom(10)
 
         label = Gtk.Label(label="Custom Palette Window")
-        label.add_css_class('heading')
+        label.add_css_class("heading")
         custom_widget.append(label)
 
         progress = Gtk.ProgressBar()
@@ -250,17 +265,17 @@ class PaletteDemo(Gtk.ApplicationWindow):
         window_invoker = WidgetInvoker()
         window_invoker.attach(window_btn)
         palette_window.set_invoker(window_invoker)
-        window_btn.connect('clicked', lambda btn: palette_window.popup(immediate=True))
+        window_btn.connect("clicked", lambda btn: palette_window.popup(immediate=True))
 
-        ok_btn.connect('clicked', lambda btn: palette_window.popdown(immediate=True))
-        cancel_btn.connect('clicked', lambda btn: palette_window.popdown(immediate=True))
+        ok_btn.connect("clicked", lambda btn: palette_window.popdown(immediate=True))
+        cancel_btn.connect(
+            "clicked", lambda btn: palette_window.popdown(immediate=True)
+        )
 
     def _create_invoker_section(self, parent):
         """Create different invoker type examples."""
         section = self._create_section_header(
-            parent,
-            "Invoker Types",
-            "Different ways to trigger palette display"
+            parent, "Invoker Types", "Different ways to trigger palette display"
         )
 
         demo_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -277,7 +292,7 @@ class PaletteDemo(Gtk.ApplicationWindow):
         hover_box.set_margin_bottom(4)
         hover_box.set_margin_start(4)
         hover_box.set_margin_end(4)
-        hover_box.add_css_class('suggested-action')
+        hover_box.add_css_class("suggested-action")
         hover_label = Gtk.Label(label="Hover Me (Box)")
         hover_box.append(hover_label)
         widget_row.append(hover_box)
@@ -289,12 +304,13 @@ class PaletteDemo(Gtk.ApplicationWindow):
         widget_invoker = WidgetInvoker()
         widget_invoker.attach_widget(hover_box)
         widget_palette.set_invoker(widget_invoker)
+
         def on_motion_enter(controller, x, y):
             widget_palette.popup(immediate=True)
-        motion_controller = Gtk.EventControllerMotion()
-        motion_controller.connect('enter', on_motion_enter)
-        hover_box.add_controller(motion_controller)
 
+        motion_controller = Gtk.EventControllerMotion()
+        motion_controller.connect("enter", on_motion_enter)
+        hover_box.add_controller(motion_controller)
 
         cursor_row = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         cursor_btn = Gtk.Button(label="Cursor Invoker")
@@ -311,20 +327,22 @@ class PaletteDemo(Gtk.ApplicationWindow):
         def update_pointer_position(motion_controller, x, y):
             cursor_invoker._cursor_x = int(x)
             cursor_invoker._cursor_y = int(y)
+
         motion_controller = Gtk.EventControllerMotion()
-        motion_controller.connect('motion', update_pointer_position)
+        motion_controller.connect("motion", update_pointer_position)
         cursor_btn.add_controller(motion_controller)
 
         def show_cursor_palette(btn):
             cursor_palette.popup(immediate=True)
-        cursor_btn.connect('clicked', show_cursor_palette)
+
+        cursor_btn.connect("clicked", show_cursor_palette)
 
     def _create_treeview_section(self, parent):
         """Create TreeView invoker examples."""
         section = self._create_section_header(
             parent,
             "TreeView Integration",
-            "Double-click a row to show a palette for that item."
+            "Double-click a row to show a palette for that item.",
         )
 
         demo_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=10)
@@ -357,30 +375,30 @@ class PaletteDemo(Gtk.ApplicationWindow):
             palette = Palette(label=f"Row: {row}")
             palette.props.secondary_text = f"Palette for {row}"
             close_btn = Gtk.Button(label="Close")
-            close_btn.connect('clicked', lambda btn: palette.popdown(immediate=True))
+            close_btn.connect("clicked", lambda btn: palette.popdown(immediate=True))
             palette.set_content(close_btn)
             invoker = WidgetInvoker()
             invoker.attach(tree_view)
             invoker.set_lock_palette(True)
             palette.set_invoker(invoker)
             palette.popup(immediate=True)
+
         def on_row_activated(treeview, path, column):
             show_row_palette(treeview, path, column)
-        tree_view.connect('row-activated', on_row_activated)
+
+        tree_view.connect("row-activated", on_row_activated)
 
     def _create_palette_group_section(self, parent):
         """Create palette group examples."""
         section = self._create_section_header(
-            parent,
-            "Palette Groups",
-            "Coordinated palettes - only one shows at a time"
+            parent, "Palette Groups", "Coordinated palettes - only one shows at a time"
         )
 
         demo_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         demo_box.set_margin_top(10)
         parent.append(demo_box)
 
-        group = get_group('demo_group')
+        group = get_group("demo_group")
 
         for i in range(3):
             btn = Gtk.Button(label=f"Group Palette {i+1}")
@@ -394,19 +412,20 @@ class PaletteDemo(Gtk.ApplicationWindow):
             invoker = WidgetInvoker()
             invoker.attach(btn)
             palette.set_invoker(invoker)
-            btn.connect('clicked', lambda btn, p=palette: p.popup(immediate=True))
+            btn.connect("clicked", lambda btn, p=palette: p.popup(immediate=True))
 
         control_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
         control_box.set_margin_top(10)
         parent.append(control_box)
 
         popdown_btn = Gtk.Button(label="Pop Down All Groups")
-        popdown_btn.connect('clicked', lambda btn: self._popdown_all_groups())
+        popdown_btn.connect("clicked", lambda btn: self._popdown_all_groups())
         control_box.append(popdown_btn)
 
     def _popdown_all_groups(self):
         """Pop down all palette groups."""
-        from sugar.graphics.palettegroup import popdown_all
+        from sugar4.graphics.palettegroup import popdown_all
+
         popdown_all()
         print("All palette groups popped down")
 
@@ -414,7 +433,7 @@ class PaletteDemo(Gtk.ApplicationWindow):
 class PaletteDemoApp(Gtk.Application):
 
     def __init__(self):
-        super().__init__(application_id='org.sugarlabs.PaletteDemo')
+        super().__init__(application_id="org.sugarlabs.PaletteDemo")
 
     def do_activate(self):
         window = PaletteDemo(self)
@@ -426,5 +445,5 @@ def main():
     return app.run([])
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     sys.exit(main())

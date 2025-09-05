@@ -17,7 +17,7 @@ except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
 if GTK_AVAILABLE:
-    from sugar.graphics.icon import (
+    from sugar4.graphics.icon import (
         Icon,
         EventIcon,
         CanvasIcon,
@@ -26,7 +26,7 @@ if GTK_AVAILABLE:
         get_surface,
         get_icon_state,
     )
-    from sugar.graphics.xocolor import XoColor
+    from sugar4.graphics.xocolor import XoColor
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -308,4 +308,3 @@ class TestUtilityFunctions(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-

@@ -6,17 +6,22 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.radiopalette import RadioMenuButton, RadioPalette
-from sugar.graphics.palette import Palette
-from sugar.graphics.toolbutton import ToolButton
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.radiopalette import RadioMenuButton, RadioPalette
+from sugar4.graphics.palette import Palette
+from sugar4.graphics.toolbutton import ToolButton
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
-SUGAR_ICONS_PATH = os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "actions")
-CURSOR_ICONS_PATH = os.path.join(PROJECT_ROOT, "sugar-artwork", "cursor", "sugar", "pngs")
+SUGAR_ICONS_PATH = os.path.join(
+    PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "actions"
+)
+CURSOR_ICONS_PATH = os.path.join(
+    PROJECT_ROOT, "sugar-artwork", "cursor", "sugar", "pngs"
+)
 
 
 def get_valid_icon(icon_path, fallback="document-generic.svg"):
@@ -24,7 +29,9 @@ def get_valid_icon(icon_path, fallback="document-generic.svg"):
         return icon_path
     else:
         # Try fallback in mimetypes directory
-        fallback_path = os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "mimetypes", fallback)
+        fallback_path = os.path.join(
+            PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "mimetypes", fallback
+        )
         if os.path.exists(fallback_path):
             return fallback_path
         # Fallback to actions directory if mimetypes fallback missing
@@ -49,7 +56,9 @@ class RadioPaletteExampleActivity(SimpleActivity):
 
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(b".background { background-color: #e0e0e0; }")
-        main_box.get_style_context().add_provider(css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        main_box.get_style_context().add_provider(
+            css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
         main_box.get_style_context().add_class("background")
 
         # Title
@@ -68,14 +77,16 @@ class RadioPaletteExampleActivity(SimpleActivity):
 
         tools_button = RadioMenuButton(
             icon_name=os.path.join(CURSOR_ICONS_PATH, "paintbrush.png"),
-            tooltip="Drawing Tools"
+            tooltip="Drawing Tools",
         )
-        
+
         # Create the RadioPalette for drawing tools
         tools_palette = RadioPalette(primary_text="Drawing Tools")
         tools_palette.set_secondary_text("Choose your drawing tool")
-        
-        brush_btn = ToolButton(icon_name=os.path.join(CURSOR_ICONS_PATH, "paintbrush.png"))
+
+        brush_btn = ToolButton(
+            icon_name=os.path.join(CURSOR_ICONS_PATH, "paintbrush.png")
+        )
         tools_palette.append(brush_btn, "Brush")
 
         pen_btn = ToolButton(icon_name=os.path.join(CURSOR_ICONS_PATH, "pencil.png"))
@@ -89,26 +100,36 @@ class RadioPaletteExampleActivity(SimpleActivity):
 
         shapes_button = RadioMenuButton(
             icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-box.svg")),
-            tooltip="Shapes"
+            tooltip="Shapes",
         )
         shapes_palette = RadioPalette(primary_text="Shape Tools")
         shapes_palette.set_secondary_text("Select a shape to draw")
 
-        rect_btn = ToolButton(icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-box.svg")))
+        rect_btn = ToolButton(
+            icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-box.svg"))
+        )
         shapes_palette.append(rect_btn, "Rectangle")
 
-        circle_btn = ToolButton(icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-radial.svg")))
+        circle_btn = ToolButton(
+            icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-radial.svg"))
+        )
         shapes_palette.append(circle_btn, "Circle")
 
-        triangle_btn = ToolButton(icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-triangle.svg")))
+        triangle_btn = ToolButton(
+            icon_name=get_valid_icon(
+                os.path.join(SUGAR_ICONS_PATH, "view-triangle.svg")
+            )
+        )
         shapes_palette.append(triangle_btn, "Triangle")
 
         shapes_button.set_palette(shapes_palette)
         toolbar.append(shapes_button)
 
         regular_button = ToolButton(
-            icon_name=get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "document-save.svg")),
-            tooltip="Save (Regular Button)"
+            icon_name=get_valid_icon(
+                os.path.join(SUGAR_ICONS_PATH, "document-save.svg")
+            ),
+            tooltip="Save (Regular Button)",
         )
         regular_palette = Palette()
         regular_palette.set_primary_text("Regular Palette")
@@ -129,14 +150,14 @@ class RadioPaletteExampleActivity(SimpleActivity):
 
 def main():
     """Run the example."""
-    app = Gtk.Application(application_id='org.sugarlabs.RadioPaletteExample')
+    app = Gtk.Application(application_id="org.sugarlabs.RadioPaletteExample")
 
     def on_activate(app):
         activity = RadioPaletteExampleActivity()
         app.add_window(activity)
         activity.present()
 
-    app.connect('activate', on_activate)
+    app.connect("activate", on_activate)
     return app.run(sys.argv)
 
 

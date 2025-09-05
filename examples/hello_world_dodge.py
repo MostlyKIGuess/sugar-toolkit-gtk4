@@ -16,16 +16,17 @@ import math
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.toolbox import Toolbox
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics.icon import Icon
-from sugar.graphics.xocolor import XoColor
-from sugar.graphics import style
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.toolbox import Toolbox
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.xocolor import XoColor
+from sugar4.graphics import style
 
 BALL_RADIUS = 28
 GOAL_RADIUS = 20
@@ -34,6 +35,7 @@ BALL_INIT_SPEED = 3.0
 BALL_MAX_SPEED = 50.0
 BALL_SPEED_INC = 0.7
 OBSTACLE_COUNT = 3
+
 
 class HelloWorldDodgeActivity(SimpleActivity):
     """Animated Hello World Dodge Game."""
@@ -45,7 +47,8 @@ class HelloWorldDodgeActivity(SimpleActivity):
 
     def _create_content(self):
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(b"""
+        css_provider.load_from_data(
+            b"""
             * { color: #000000; }
             .game-btn {
                 background: #e0e0e0;
@@ -75,15 +78,18 @@ class HelloWorldDodgeActivity(SimpleActivity):
                 margin-left: auto;
                 margin-right: auto;
             }
-        """)
+        """
+        )
         Gtk.StyleContext.add_provider_for_display(
-            Gdk.Display.get_default(), # type: ignore
+            Gdk.Display.get_default(),  # type: ignore
             css_provider,
             Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION,
         )
 
         # Main vertical box
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        main_box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         main_box.set_margin_top(style.DEFAULT_SPACING)
         main_box.set_margin_bottom(style.DEFAULT_SPACING)
         main_box.set_margin_start(style.DEFAULT_SPACING)
@@ -105,7 +111,9 @@ class HelloWorldDodgeActivity(SimpleActivity):
 
         # Welcome and Score
         self.header_label = Gtk.Label()
-        self.header_label.set_markup("<span size='xx-large' weight='bold'>Sugar Ball Dodge!</span>")
+        self.header_label.set_markup(
+            "<span size='xx-large' weight='bold'>Sugar Ball Dodge!</span>"
+        )
         self.header_label.set_margin_bottom(style.DEFAULT_SPACING // 2)
         self.header_label.get_style_context().add_class("header-label")
         main_box.append(self.header_label)
@@ -115,7 +123,6 @@ class HelloWorldDodgeActivity(SimpleActivity):
         self.score_label.set_margin_bottom(style.DEFAULT_SPACING)
         self.score_label.get_style_context().add_class("score-label")
         main_box.append(self.score_label)
-
 
         # Ball Name ( Default to Hello World Lol)
         name_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=8)
@@ -130,15 +137,15 @@ class HelloWorldDodgeActivity(SimpleActivity):
         name_box.append(self.name_entry)
         main_box.append(name_box)
 
-
-
         # Toolbar with movement buttons, pause, and reset, centered
         toolbox = Toolbox()
         toolbar_outer = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL)
         toolbar_outer.set_halign(Gtk.Align.CENTER)
         toolbar_outer.set_hexpand(True)
 
-        toolbar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING)
+        toolbar = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING
+        )
         toolbar.set_halign(Gtk.Align.CENTER)
         toolbar.set_hexpand(False)
 
@@ -161,7 +168,9 @@ class HelloWorldDodgeActivity(SimpleActivity):
 
         # Pause
         self.btn_pause = ToolButton(tooltip="Pause/Resume")
-        self.btn_pause.set_icon_widget(Icon(icon_name="media-playback-pause", pixel_size=36))
+        self.btn_pause.set_icon_widget(
+            Icon(icon_name="media-playback-pause", pixel_size=36)
+        )
         self.btn_pause.get_style_context().add_class("game-btn")
         self.btn_pause.connect("clicked", self._toggle_pause)
         toolbar.append(self.btn_pause)
@@ -210,7 +219,9 @@ class HelloWorldDodgeActivity(SimpleActivity):
         main_box.append(area_box)
 
         # Status ( Instructions )
-        self.status_label = Gtk.Label(label="Use arrow keys, WASD, or buttons to move the ball! Get the green goal, avoid red obstacles.")
+        self.status_label = Gtk.Label(
+            label="Use arrow keys, WASD, or buttons to move the ball! Get the green goal, avoid red obstacles."
+        )
         self.status_label.set_margin_top(style.DEFAULT_SPACING)
         main_box.append(self.status_label)
 
@@ -225,10 +236,11 @@ class HelloWorldDodgeActivity(SimpleActivity):
         self.ball_velocity = [BALL_INIT_SPEED, 0.0]
         self.ball_speed = BALL_INIT_SPEED
 
-
         # Goal and obstacles
         self.goal_pos = self._random_pos(GOAL_RADIUS)
-        self.obstacles = [self._random_pos(OBSTACLE_RADIUS) for _ in range(OBSTACLE_COUNT)]
+        self.obstacles = [
+            self._random_pos(OBSTACLE_RADIUS) for _ in range(OBSTACLE_COUNT)
+        ]
 
         self.animating = False
         self.running = True
@@ -245,16 +257,14 @@ class HelloWorldDodgeActivity(SimpleActivity):
         btn_down.connect("clicked", lambda b: self._set_direction(0, 1))
         btn_reset.connect("clicked", lambda b: self._reset_game())
 
-
         # Start game loop
         GLib.timeout_add(16, self._game_tick)  # 60 FPS
-
 
     def _draw_area(self, area, cr, width, height):
         # Draw goal
         cr.save()
         cr.set_source_rgb(0.2, 0.8, 0.2)
-        cr.arc(self.goal_pos[0], self.goal_pos[1], GOAL_RADIUS, 0, 2*math.pi)
+        cr.arc(self.goal_pos[0], self.goal_pos[1], GOAL_RADIUS, 0, 2 * math.pi)
         cr.fill()
         cr.restore()
 
@@ -262,7 +272,7 @@ class HelloWorldDodgeActivity(SimpleActivity):
         for ox, oy in self.obstacles:
             cr.save()
             cr.set_source_rgb(0.85, 0.1, 0.1)
-            cr.arc(ox, oy, OBSTACLE_RADIUS, 0, 2*math.pi)
+            cr.arc(ox, oy, OBSTACLE_RADIUS, 0, 2 * math.pi)
             cr.fill()
             cr.restore()
 
@@ -270,7 +280,7 @@ class HelloWorldDodgeActivity(SimpleActivity):
         r, g, b = self._hex_to_rgb(self.ball_color.get_fill_color())
         cr.save()
         cr.set_source_rgb(r, g, b)
-        cr.arc(self.ball_pos[0], self.ball_pos[1], self.ball_radius, 0, 2*math.pi)
+        cr.arc(self.ball_pos[0], self.ball_pos[1], self.ball_radius, 0, 2 * math.pi)
         cr.fill()
         cr.restore()
 
@@ -281,7 +291,7 @@ class HelloWorldDodgeActivity(SimpleActivity):
         cr.set_font_size(16)
         text = self.ball_text
         xbearing, ybearing, tw, th, xadv, yadv = cr.text_extents(text)
-        cr.move_to(self.ball_pos[0] - tw/2, self.ball_pos[1] + th/2)
+        cr.move_to(self.ball_pos[0] - tw / 2, self.ball_pos[1] + th / 2)
         cr.show_text(text)
         cr.restore()
 
@@ -293,10 +303,9 @@ class HelloWorldDodgeActivity(SimpleActivity):
         cr.stroke()
         cr.restore()
 
-
     def _hex_to_rgb(self, hex_color):
         hex_color = hex_color.lstrip("#")
-        return tuple(int(hex_color[i:i+2], 16)/255.0 for i in (0, 2, 4))
+        return tuple(int(hex_color[i : i + 2], 16) / 255.0 for i in (0, 2, 4))
 
     def _set_direction(self, dx, dy):
         if not self.running:
@@ -312,8 +321,12 @@ class HelloWorldDodgeActivity(SimpleActivity):
         # Pause the game when editing the name
         if self.running:
             self.running = False
-            self.btn_pause.set_icon_widget(Icon(icon_name="media-playback-start", pixel_size=36))
-            self.status_label.set_text("Paused for name entry. Click on Pause/Resume Button. Press Enter to Finish Typing!")
+            self.btn_pause.set_icon_widget(
+                Icon(icon_name="media-playback-start", pixel_size=36)
+            )
+            self.status_label.set_text(
+                "Paused for name entry. Click on Pause/Resume Button. Press Enter to Finish Typing!"
+            )
         self.area.queue_draw()
         # Connect Enter key to remove focus (finish editing)
         entry.connect("activate", self._on_entry_activate)
@@ -325,11 +338,17 @@ class HelloWorldDodgeActivity(SimpleActivity):
     def _toggle_pause(self, button):
         if self.running:
             self.running = False
-            self.btn_pause.set_icon_widget(Icon(icon_name="media-playback-start", pixel_size=36))
-            self.status_label.set_text("Paused. Click Pause/Resume or press 'p' to continue.")
+            self.btn_pause.set_icon_widget(
+                Icon(icon_name="media-playback-start", pixel_size=36)
+            )
+            self.status_label.set_text(
+                "Paused. Click Pause/Resume or press 'p' to continue."
+            )
         else:
             self.running = True
-            self.btn_pause.set_icon_widget(Icon(icon_name="media-playback-pause", pixel_size=36))
+            self.btn_pause.set_icon_widget(
+                Icon(icon_name="media-playback-pause", pixel_size=36)
+            )
             self.status_label.set_text("Game resumed!")
 
     def _on_key_pressed(self, controller, keyval, keycode, state):
@@ -365,17 +384,21 @@ class HelloWorldDodgeActivity(SimpleActivity):
     def _reset_game(self):
         # self.ball_pos = [700.0, 450.0]
         # TODO: start from width half, but this should be random?
-        self.ball_pos = [400.0,300.0]
+        self.ball_pos = [400.0, 300.0]
         self.ball_color = XoColor()
         self.ball_velocity = [BALL_INIT_SPEED, 0.0]
         self.ball_speed = BALL_INIT_SPEED
         self.goal_pos = self._random_pos(GOAL_RADIUS)
-        self.obstacles = [self._random_pos(OBSTACLE_RADIUS) for _ in range(OBSTACLE_COUNT)]
+        self.obstacles = [
+            self._random_pos(OBSTACLE_RADIUS) for _ in range(OBSTACLE_COUNT)
+        ]
         self.score = 0
         self.score_label.set_text("Score: 0")
         self.status_label.set_text("Game reset! Use arrows, WASD, or buttons.")
         self.running = True
-        self.btn_pause.set_icon_widget(Icon(icon_name="media-playback-pause", pixel_size=36))
+        self.btn_pause.set_icon_widget(
+            Icon(icon_name="media-playback-pause", pixel_size=36)
+        )
         self.area.queue_draw()
 
     def _game_tick(self):
@@ -421,20 +444,28 @@ class HelloWorldDodgeActivity(SimpleActivity):
         self.ball_velocity = [vx, vy]
 
         # Check collision with goal
-        if self._distance(self.ball_pos, self.goal_pos) < self.ball_radius + GOAL_RADIUS:
+        if (
+            self._distance(self.ball_pos, self.goal_pos)
+            < self.ball_radius + GOAL_RADIUS
+        ):
             self.score += 1
             self.score_label.set_text(f"Score: {self.score}")
             self.goal_pos = self._random_pos(GOAL_RADIUS)
             self.status_label.set_text("Goal! +1 Score")
             # Move obstacles too
-            self.obstacles = [self._random_pos(OBSTACLE_RADIUS) for _ in range(OBSTACLE_COUNT)]
+            self.obstacles = [
+                self._random_pos(OBSTACLE_RADIUS) for _ in range(OBSTACLE_COUNT)
+            ]
             self.area.queue_draw()
             # IMP: Return to fix the overlap issue
             return True
 
         # ONLY after checking goal check obstacles
         for ox, oy in self.obstacles:
-            if self._distance(self.ball_pos, [ox, oy]) < self.ball_radius + OBSTACLE_RADIUS:
+            if (
+                self._distance(self.ball_pos, [ox, oy])
+                < self.ball_radius + OBSTACLE_RADIUS
+            ):
                 self.status_label.set_text("Game Over! Hit an obstacle. Press Reset.")
                 self.running = False
                 return True
@@ -444,6 +475,7 @@ class HelloWorldDodgeActivity(SimpleActivity):
 
     def _distance(self, a, b):
         return math.hypot(a[0] - b[0], a[1] - b[1])
+
 
 def main():
     app = Gtk.Application(application_id="org.sugarlabs.HelloWorldDodge")
@@ -455,6 +487,7 @@ def main():
 
     app.connect("activate", on_activate)
     return app.run(sys.argv)
+
 
 if __name__ == "__main__":
     main()

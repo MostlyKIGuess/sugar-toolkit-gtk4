@@ -1,4 +1,4 @@
-"""Sugar GTK4 Animator Example """
+"""Sugar GTK4 Animator Example"""
 
 import sys
 import os
@@ -6,14 +6,23 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
 gi.require_version("Gsk", "4.0")
 gi.require_version("Graphene", "1.0")
 from gi.repository import Gtk, Gdk, Gsk, Graphene
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.animator import Animator, Animation, FadeAnimation, ScaleAnimation, MoveAnimation, ColorAnimation
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.animator import (
+    Animator,
+    Animation,
+    FadeAnimation,
+    ScaleAnimation,
+    MoveAnimation,
+    ColorAnimation,
+)
+
 
 class AnimatorExampleActivity(SimpleActivity):
     """Example activity demonstrating Sugar GTK4 Animator features."""
@@ -26,9 +35,11 @@ class AnimatorExampleActivity(SimpleActivity):
     def _create_content(self):
         # Apply black text CSS
         css_provider = Gtk.CssProvider()
-        css_provider.load_from_data(b"""
+        css_provider.load_from_data(
+            b"""
             * { color: #000000; }
-        """)
+        """
+        )
         Gtk.StyleContext.add_provider_for_display(
             Gdk.Display.get_default(),
             css_provider,
@@ -104,20 +115,26 @@ class AnimatorExampleActivity(SimpleActivity):
         start = self._color[3]
         end = 0.0 if start > 0.5 else 1.0
         animator = Animator(2.0, widget=self.animated_area)
+
         class Fade(Animation):
             def __init__(self, outer, start, end):
                 super().__init__(0.0, 1.0)
                 self.outer = outer
                 self.start = start
                 self.end = end
+
             def next_frame(self, frame):
                 value = self.start + (self.end - self.start) * frame
                 r, g, b, _ = self.outer._color
                 self.outer._color = (r, g, b, value)
                 self.outer.animated_area.queue_draw()
+
         fade = Fade(self, start, end)
         animator.add(fade)
-        animator.connect("completed", lambda *_: self.status_label.set_text("Fade animation completed."))
+        animator.connect(
+            "completed",
+            lambda *_: self.status_label.set_text("Fade animation completed."),
+        )
         animator.start()
         self.status_label.set_text("Fading...")
 
@@ -126,19 +143,25 @@ class AnimatorExampleActivity(SimpleActivity):
         start = self._scale
         end = 2.0 if abs(start - 1.0) < 0.1 else 1.0
         animator = Animator(1.0, widget=self.animated_area)
+
         class Scale(Animation):
             def __init__(self, outer, start, end):
                 super().__init__(0.0, 1.0)
                 self.outer = outer
                 self.start = start
                 self.end = end
+
             def next_frame(self, frame):
                 value = self.start + (self.end - self.start) * frame
                 self.outer._scale = value
                 self.outer.animated_area.queue_draw()
+
         scale = Scale(self, start, end)
         animator.add(scale)
-        animator.connect("completed", lambda *_: self.status_label.set_text("Scale animation completed."))
+        animator.connect(
+            "completed",
+            lambda *_: self.status_label.set_text("Scale animation completed."),
+        )
         animator.start()
         self.status_label.set_text("Scaling...")
 
@@ -148,19 +171,25 @@ class AnimatorExampleActivity(SimpleActivity):
         start_x = self._offset[0]
         end_x = 100 if start_x < 50 else 0
         animator = Animator(1.0, widget=self.animated_area)
+
         class Move(Animation):
             def __init__(self, outer, start_x, end_x):
                 super().__init__(0.0, 1.0)
                 self.outer = outer
                 self.start_x = start_x
                 self.end_x = end_x
+
             def next_frame(self, frame):
                 value = self.start_x + (self.end_x - self.start_x) * frame
                 self.outer._offset = (value, 0)
                 self.outer.animated_area.queue_draw()
+
         move = Move(self, start_x, end_x)
         animator.add(move)
-        animator.connect("completed", lambda *_: self.status_label.set_text("Move animation completed."))
+        animator.connect(
+            "completed",
+            lambda *_: self.status_label.set_text("Move animation completed."),
+        )
         animator.start()
         self.status_label.set_text("Moving...")
 
@@ -176,24 +205,43 @@ class AnimatorExampleActivity(SimpleActivity):
         else:
             end_color = color_a
         animator = Animator(1.0, widget=self.animated_area)
+
         class Color(Animation):
             def __init__(self, outer, start_color, end_color):
                 super().__init__(0.0, 1.0)
                 self.outer = outer
                 self.start_color = start_color
                 self.end_color = end_color
+
             def next_frame(self, frame):
-                r = self.start_color[0] + (self.end_color[0] - self.start_color[0]) * frame
-                g = self.start_color[1] + (self.end_color[1] - self.start_color[1]) * frame
-                b = self.start_color[2] + (self.end_color[2] - self.start_color[2]) * frame
-                a = self.start_color[3] + (self.end_color[3] - self.start_color[3]) * frame
+                r = (
+                    self.start_color[0]
+                    + (self.end_color[0] - self.start_color[0]) * frame
+                )
+                g = (
+                    self.start_color[1]
+                    + (self.end_color[1] - self.start_color[1]) * frame
+                )
+                b = (
+                    self.start_color[2]
+                    + (self.end_color[2] - self.start_color[2]) * frame
+                )
+                a = (
+                    self.start_color[3]
+                    + (self.end_color[3] - self.start_color[3]) * frame
+                )
                 self.outer._color = (r, g, b, a)
                 self.outer.animated_area.queue_draw()
+
         color_anim = Color(self, self._color, end_color)
         animator.add(color_anim)
-        animator.connect("completed", lambda *_: self.status_label.set_text("Color animation completed."))
+        animator.connect(
+            "completed",
+            lambda *_: self.status_label.set_text("Color animation completed."),
+        )
         animator.start()
         self.status_label.set_text("Color animating...")
+
 
 def main():
     """Run the animator example activity."""
@@ -206,6 +254,7 @@ def main():
 
     app.connect("activate", on_activate)
     return app.run(sys.argv)
+
 
 if __name__ == "__main__":
     main()

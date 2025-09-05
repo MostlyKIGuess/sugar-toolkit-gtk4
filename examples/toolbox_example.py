@@ -1,4 +1,4 @@
-"""Sugar GTK4 Toolbox Example """
+"""Sugar GTK4 Toolbox Example"""
 
 import sys
 import os
@@ -6,13 +6,14 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.toolbox import Toolbox
-from sugar.graphics import style
-from sugar.graphics.icon import Icon
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.toolbox import Toolbox
+from sugar4.graphics import style
+from sugar4.graphics.icon import Icon
 
 
 class ToolboxExampleActivity(SimpleActivity):
@@ -29,7 +30,7 @@ class ToolboxExampleActivity(SimpleActivity):
 
         # Create toolbox
         self._toolbox = Toolbox()
-        self._toolbox.connect('current-toolbar-changed', self._on_toolbar_changed)
+        self._toolbox.connect("current-toolbar-changed", self._on_toolbar_changed)
 
         # Add various toolbars
         self._create_edit_toolbar()
@@ -44,12 +45,14 @@ class ToolboxExampleActivity(SimpleActivity):
         main_box.append(content_area)
 
         # Status bar
-        self._status_bar = Gtk.Label(label="Toolbox Example - Switch between toolbars using tabs")
+        self._status_bar = Gtk.Label(
+            label="Toolbox Example - Switch between toolbars using tabs"
+        )
         self._status_bar.set_margin_start(style.DEFAULT_PADDING)
         self._status_bar.set_margin_end(style.DEFAULT_PADDING)
         self._status_bar.set_margin_top(style.DEFAULT_PADDING // 2)
         self._status_bar.set_margin_bottom(style.DEFAULT_PADDING // 2)
-        self._status_bar.add_css_class('dim-label')
+        self._status_bar.add_css_class("dim-label")
         main_box.append(self._status_bar)
 
         self.set_canvas(main_box)
@@ -84,10 +87,14 @@ class ToolboxExampleActivity(SimpleActivity):
             else:
                 button = Gtk.Button()
                 if icon_name:
-                    icon = Icon(icon_name=icon_name, pixel_size=style.STANDARD_ICON_SIZE)
+                    icon = Icon(
+                        icon_name=icon_name, pixel_size=style.STANDARD_ICON_SIZE
+                    )
                     button.set_child(icon)
                 button.set_tooltip_text(label)
-                button.connect('clicked', self._on_toolbar_button_clicked, f"Edit: {label}")
+                button.connect(
+                    "clicked", self._on_toolbar_button_clicked, f"Edit: {label}"
+                )
                 toolbar.append(button)
 
         # Add spacer
@@ -113,9 +120,11 @@ class ToolboxExampleActivity(SimpleActivity):
         zoom_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
 
         zoom_out = Gtk.Button()
-        zoom_out.set_child(Icon(icon_name="zoom-out", pixel_size=style.STANDARD_ICON_SIZE))
+        zoom_out.set_child(
+            Icon(icon_name="zoom-out", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         zoom_out.set_tooltip_text("Zoom Out")
-        zoom_out.connect('clicked', self._on_toolbar_button_clicked, "View: Zoom Out")
+        zoom_out.connect("clicked", self._on_toolbar_button_clicked, "View: Zoom Out")
         zoom_box.append(zoom_out)
 
         zoom_label = Gtk.Label(label="100%")
@@ -123,9 +132,11 @@ class ToolboxExampleActivity(SimpleActivity):
         zoom_box.append(zoom_label)
 
         zoom_in = Gtk.Button()
-        zoom_in.set_child(Icon(icon_name="zoom-in", pixel_size=style.STANDARD_ICON_SIZE))
+        zoom_in.set_child(
+            Icon(icon_name="zoom-in", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         zoom_in.set_tooltip_text("Zoom In")
-        zoom_in.connect('clicked', self._on_toolbar_button_clicked, "View: Zoom In")
+        zoom_in.connect("clicked", self._on_toolbar_button_clicked, "View: Zoom In")
         zoom_box.append(zoom_in)
 
         toolbar.append(zoom_box)
@@ -138,19 +149,23 @@ class ToolboxExampleActivity(SimpleActivity):
 
         # View mode toggle buttons
         view_modes = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
-        view_modes.add_css_class('linked')
+        view_modes.add_css_class("linked")
 
         list_view = Gtk.ToggleButton()
-        list_view.set_child(Icon(icon_name="view-list", pixel_size=style.STANDARD_ICON_SIZE))
+        list_view.set_child(
+            Icon(icon_name="view-list", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         list_view.set_tooltip_text("List View")
         list_view.set_active(True)
-        list_view.connect('toggled', self._on_view_mode_toggled, "List View")
+        list_view.connect("toggled", self._on_view_mode_toggled, "List View")
         view_modes.append(list_view)
 
         grid_view = Gtk.ToggleButton()
-        grid_view.set_child(Icon(icon_name="view-grid", pixel_size=style.STANDARD_ICON_SIZE))
+        grid_view.set_child(
+            Icon(icon_name="view-grid", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         grid_view.set_tooltip_text("Grid View")
-        grid_view.connect('toggled', self._on_view_mode_toggled, "Grid View")
+        grid_view.connect("toggled", self._on_view_mode_toggled, "Grid View")
         view_modes.append(grid_view)
 
         toolbar.append(view_modes)
@@ -162,9 +177,13 @@ class ToolboxExampleActivity(SimpleActivity):
 
         # Fullscreen button
         fullscreen = Gtk.Button()
-        fullscreen.set_child(Icon(icon_name="view-fullscreen", pixel_size=style.STANDARD_ICON_SIZE))
+        fullscreen.set_child(
+            Icon(icon_name="view-fullscreen", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         fullscreen.set_tooltip_text("Fullscreen")
-        fullscreen.connect('clicked', self._on_toolbar_button_clicked, "View: Fullscreen")
+        fullscreen.connect(
+            "clicked", self._on_toolbar_button_clicked, "View: Fullscreen"
+        )
         toolbar.append(fullscreen)
 
         self._toolbox.add_toolbar("View", toolbar)
@@ -177,7 +196,7 @@ class ToolboxExampleActivity(SimpleActivity):
 
         # Tool selection
         tools_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=3)
-        tools_box.add_css_class('linked')
+        tools_box.add_css_class("linked")
 
         tools = [
             ("Pointer", "tool-pointer"),
@@ -188,11 +207,13 @@ class ToolboxExampleActivity(SimpleActivity):
 
         for i, (name, icon_name) in enumerate(tools):
             tool_button = Gtk.ToggleButton()
-            tool_button.set_child(Icon(icon_name=icon_name, pixel_size=style.STANDARD_ICON_SIZE))
+            tool_button.set_child(
+                Icon(icon_name=icon_name, pixel_size=style.STANDARD_ICON_SIZE)
+            )
             tool_button.set_tooltip_text(name)
             if i == 0:  # Select first tool by default
                 tool_button.set_active(True)
-            tool_button.connect('toggled', self._on_tool_selected, name)
+            tool_button.connect("toggled", self._on_tool_selected, name)
             tools_box.append(tool_button)
 
         toolbar.append(tools_box)
@@ -233,15 +254,21 @@ class ToolboxExampleActivity(SimpleActivity):
 
         # Help buttons
         help_button = Gtk.Button()
-        help_button.set_child(Icon(icon_name="help-contents", pixel_size=style.STANDARD_ICON_SIZE))
+        help_button.set_child(
+            Icon(icon_name="help-contents", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         help_button.set_tooltip_text("Help Contents")
-        help_button.connect('clicked', self._on_toolbar_button_clicked, "Help: Contents")
+        help_button.connect(
+            "clicked", self._on_toolbar_button_clicked, "Help: Contents"
+        )
         toolbar.append(help_button)
 
         about_button = Gtk.Button()
-        about_button.set_child(Icon(icon_name="help-about", pixel_size=style.STANDARD_ICON_SIZE))
+        about_button.set_child(
+            Icon(icon_name="help-about", pixel_size=style.STANDARD_ICON_SIZE)
+        )
         about_button.set_tooltip_text("About")
-        about_button.connect('clicked', self._on_toolbar_button_clicked, "Help: About")
+        about_button.connect("clicked", self._on_toolbar_button_clicked, "Help: About")
         toolbar.append(about_button)
 
         # Spacer
@@ -252,11 +279,13 @@ class ToolboxExampleActivity(SimpleActivity):
         # Info display
         info_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=2)
         info_title = Gtk.Label(label="Toolbox Info")
-        info_title.add_css_class('heading')
+        info_title.add_css_class("heading")
         info_box.append(info_title)
 
-        self._info_label = Gtk.Label(label=f"Total toolbars: {self._toolbox.get_toolbar_count()}")
-        self._info_label.add_css_class('dim-label')
+        self._info_label = Gtk.Label(
+            label=f"Total toolbars: {self._toolbox.get_toolbar_count()}"
+        )
+        self._info_label.add_css_class("dim-label")
         info_box.append(self._info_label)
 
         toolbar.append(info_box)
@@ -273,7 +302,9 @@ class ToolboxExampleActivity(SimpleActivity):
         content_frame.set_margin_top(style.DEFAULT_PADDING)
         content_frame.set_margin_bottom(style.DEFAULT_PADDING)
 
-        content_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        content_box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         content_box.set_margin_start(style.DEFAULT_PADDING * 2)
         content_box.set_margin_end(style.DEFAULT_PADDING * 2)
         content_box.set_margin_top(style.DEFAULT_PADDING * 2)
@@ -284,7 +315,8 @@ class ToolboxExampleActivity(SimpleActivity):
         content_box.append(title)
 
         description = Gtk.Label()
-        description.set_markup("""
+        description.set_markup(
+            """
 <i>This demonstrates the Sugar Toolbox component:</i>
 
 • <b>Multiple Toolbars:</b> Switch between Edit, View, Tools, and Help
@@ -294,7 +326,8 @@ class ToolboxExampleActivity(SimpleActivity):
 • <b>Signal Handling:</b> Responds to toolbar changes
 
 <i>Click the buttons in the toolbars above to see actions.</i>
-        """)
+        """
+        )
         description.set_halign(Gtk.Align.START)
         content_box.append(description)
 
@@ -323,7 +356,7 @@ class ToolboxExampleActivity(SimpleActivity):
         self._log_action(f"Switched to {toolbar_name} toolbar")
 
         # Update info in help toolbar
-        if hasattr(self, '_info_label'):
+        if hasattr(self, "_info_label"):
             self._info_label.set_text(
                 f"Total toolbars: {self._toolbox.get_toolbar_count()}, "
                 f"Current: {page_num + 1} ({toolbar_name})"
@@ -349,6 +382,7 @@ class ToolboxExampleActivity(SimpleActivity):
 
         # Add timestamp and action
         import datetime
+
         timestamp = datetime.datetime.now().strftime("%H:%M:%S")
         text = f"[{timestamp}] {action}\n"
 
@@ -363,14 +397,14 @@ class ToolboxExampleActivity(SimpleActivity):
 
 def main():
     """Run the Toolbox example activity."""
-    app = Gtk.Application(application_id='org.sugarlabs.ToolboxExample')
+    app = Gtk.Application(application_id="org.sugarlabs.ToolboxExample")
 
     def on_activate(app):
         activity = ToolboxExampleActivity()
         app.add_window(activity)
         activity.present()
 
-    app.connect('activate', on_activate)
+    app.connect("activate", on_activate)
     return app.run()
 
 

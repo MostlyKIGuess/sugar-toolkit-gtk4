@@ -13,8 +13,8 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.graphics.toggletoolbutton import ToggleToolButton
-from sugar.graphics.palette import Palette
+from sugar4.graphics.toggletoolbutton import ToggleToolButton
+from sugar4.graphics.palette import Palette
 
 
 class ToggleToolButtonExample(Gtk.ApplicationWindow):

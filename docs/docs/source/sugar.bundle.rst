@@ -1,45 +1,45 @@
-sugar.bundle package
+sugar4.bundle package
 ====================
 
 Submodules
 ----------
 
-sugar.bundle.activitybundle module
+sugar4.bundle.activitybundle module
 ----------------------------------
 
-.. automodule:: sugar.bundle.activitybundle
+.. automodule:: sugar4.bundle.activitybundle
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.bundle.bundle module
+sugar4.bundle.bundle module
 --------------------------
 
-.. automodule:: sugar.bundle.bundle
+.. automodule:: sugar4.bundle.bundle
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.bundle.bundleversion module
+sugar4.bundle.bundleversion module
 ---------------------------------
 
-.. automodule:: sugar.bundle.bundleversion
+.. automodule:: sugar4.bundle.bundleversion
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.bundle.contentbundle module
+sugar4.bundle.contentbundle module
 ---------------------------------
 
-.. automodule:: sugar.bundle.contentbundle
+.. automodule:: sugar4.bundle.contentbundle
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.bundle.helpers module
+sugar4.bundle.helpers module
 ---------------------------
 
-.. automodule:: sugar.bundle.helpers
+.. automodule:: sugar4.bundle.helpers
    :members:
    :show-inheritance:
    :undoc-members:
@@ -47,7 +47,7 @@ sugar.bundle.helpers module
 Module contents
 ---------------
 
-.. automodule:: sugar.bundle
+.. automodule:: sugar4.bundle
    :members:
    :show-inheritance:
    :undoc-

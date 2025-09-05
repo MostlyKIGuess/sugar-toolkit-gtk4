@@ -21,23 +21,23 @@ from datetime import datetime
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 # Set up mock environment if not running in Sugar
-if 'SUGAR_BUNDLE_ID' not in os.environ:
-    os.environ['SUGAR_BUNDLE_ID'] = 'org.sugarlabs.CreativeStudio'
-    os.environ['SUGAR_BUNDLE_NAME'] = 'Creative Studio'
-    os.environ['SUGAR_BUNDLE_PATH'] = os.path.dirname(__file__)
-    os.environ['SUGAR_ACTIVITY_ROOT'] = '/tmp/creative_studio'
+if "SUGAR_BUNDLE_ID" not in os.environ:
+    os.environ["SUGAR_BUNDLE_ID"] = "org.sugarlabs.CreativeStudio"
+    os.environ["SUGAR_BUNDLE_NAME"] = "Creative Studio"
+    os.environ["SUGAR_BUNDLE_PATH"] = os.path.dirname(__file__)
+    os.environ["SUGAR_ACTIVITY_ROOT"] = "/tmp/creative_studio"
 
 import gi
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("Gdk", "4.0")
 
-from gi.repository import Gtk,  Gio, Gdk
+from gi.repository import Gtk, Gio, Gdk
 
-from sugar.activity.activity import Activity
-from sugar.activity.activityhandle import ActivityHandle
-from sugar.graphics.toolbarbox import ToolbarBox
-from sugar.activity.widgets import ActivityToolbarButton, StopButton
+from sugar4.activity.activity import Activity
+from sugar4.activity.activityhandle import ActivityHandle
+from sugar4.graphics.toolbarbox import ToolbarBox
+from sugar4.activity.widgets import ActivityToolbarButton, StopButton
 
 
 class CreativeCanvas(Gtk.DrawingArea):
@@ -51,14 +51,14 @@ class CreativeCanvas(Gtk.DrawingArea):
 
         # Set up gesture for drawing
         self._gesture = Gtk.GestureDrag()
-        self._gesture.connect('drag-begin', self._drag_begin_cb)
-        self._gesture.connect('drag-update', self._drag_update_cb)
-        self._gesture.connect('drag-end', self._drag_end_cb)
+        self._gesture.connect("drag-begin", self._drag_begin_cb)
+        self._gesture.connect("drag-update", self._drag_update_cb)
+        self._gesture.connect("drag-end", self._drag_end_cb)
         self.add_controller(self._gesture)
 
         # Set up key controller for keyboard shortcuts
         self._key_controller = Gtk.EventControllerKey()
-        self._key_controller.connect('key-pressed', self._key_pressed_cb)
+        self._key_controller.connect("key-pressed", self._key_pressed_cb)
         self.add_controller(self._key_controller)
 
         # Make sure canvas can receive focus for keyboard events
@@ -101,7 +101,7 @@ class CreativeCanvas(Gtk.DrawingArea):
                 return True
             elif keyval == Gdk.KEY_s or keyval == Gdk.KEY_S:
                 # Trigger save through callback
-                if hasattr(self, '_save_callback') and self._save_callback:
+                if hasattr(self, "_save_callback") and self._save_callback:
                     self._save_callback()
                     print("Save triggered by keyboard")
                 return True
@@ -124,22 +124,22 @@ class CreativeCanvas(Gtk.DrawingArea):
             self._draw_current_stroke(cr)
 
     def _draw_element(self, cr, element):
-        element_type = element.get('type', 'stroke')
-        color = element.get('color', (0, 0, 0))
-        size = element.get('size', 3)
-        points = element.get('points', [])
+        element_type = element.get("type", "stroke")
+        color = element.get("color", (0, 0, 0))
+        size = element.get("size", 3)
+        points = element.get("points", [])
 
         cr.set_source_rgb(*color)
         cr.set_line_width(size)
 
-        if element_type == 'brush':
+        if element_type == "brush":
             if len(points) > 1:
                 cr.move_to(points[0][0], points[0][1])
                 for point in points[1:]:
                     cr.line_to(point[0], point[1])
                 cr.stroke()
 
-        elif element_type == 'eraser':
+        elif element_type == "eraser":
             # Eraser removes content by painting white with a thicker line
             cr.set_source_rgb(1, 1, 1)  # White for eraser
             cr.set_line_width(size * 3)  # Make eraser more visible/effective
@@ -151,13 +151,13 @@ class CreativeCanvas(Gtk.DrawingArea):
                     cr.line_to(point[0], point[1])
                 cr.stroke()
 
-        elif element_type == 'line':
+        elif element_type == "line":
             if len(points) >= 2:
                 cr.move_to(points[0][0], points[0][1])
                 cr.line_to(points[-1][0], points[-1][1])
                 cr.stroke()
 
-        elif element_type == 'rectangle':
+        elif element_type == "rectangle":
             if len(points) >= 2:
                 x1, y1 = points[0]
                 x2, y2 = points[-1]
@@ -166,20 +166,20 @@ class CreativeCanvas(Gtk.DrawingArea):
                 x = min(x1, x2)
                 y = min(y1, y2)
 
-                if element.get('fill', False):
+                if element.get("fill", False):
                     cr.rectangle(x, y, width, height)
                     cr.fill()
                 else:
                     cr.rectangle(x, y, width, height)
                     cr.stroke()
 
-        elif element_type == 'circle':
+        elif element_type == "circle":
             if len(points) >= 2:
                 x1, y1 = points[0]
                 x2, y2 = points[-1]
-                radius = ((x2-x1)**2 + (y2-y1)**2)**0.5
+                radius = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
 
-                if element.get('fill', False):
+                if element.get("fill", False):
                     cr.arc(x1, y1, radius, 0, 2 * 3.14159)
                     cr.fill()
                 else:
@@ -191,22 +191,22 @@ class CreativeCanvas(Gtk.DrawingArea):
         cr.set_source_rgb(*self._current_color)
         cr.set_line_width(self._current_brush_size)
 
-        if self._current_tool == 'eraser':
+        if self._current_tool == "eraser":
             cr.set_source_rgb(1, 1, 1)
             cr.set_line_width(self._current_brush_size * 3)
             cr.set_line_cap(1)  # Round line caps
             cr.set_line_join(1)  # Round line joins
 
-        if self._current_tool in ['brush', 'eraser'] and len(self._current_stroke) > 1:
+        if self._current_tool in ["brush", "eraser"] and len(self._current_stroke) > 1:
             cr.move_to(self._current_stroke[0][0], self._current_stroke[0][1])
             for point in self._current_stroke[1:]:
                 cr.line_to(point[0], point[1])
             cr.stroke()
-        elif self._current_tool == 'line' and len(self._current_stroke) >= 2:
+        elif self._current_tool == "line" and len(self._current_stroke) >= 2:
             cr.move_to(self._current_stroke[0][0], self._current_stroke[0][1])
             cr.line_to(self._current_stroke[-1][0], self._current_stroke[-1][1])
             cr.stroke()
-        elif self._current_tool == 'rectangle' and len(self._current_stroke) >= 2:
+        elif self._current_tool == "rectangle" and len(self._current_stroke) >= 2:
             x1, y1 = self._current_stroke[0]
             x2, y2 = self._current_stroke[-1]
             width = abs(x2 - x1)
@@ -218,10 +218,10 @@ class CreativeCanvas(Gtk.DrawingArea):
                 cr.fill()
             else:
                 cr.stroke()
-        elif self._current_tool == 'circle' and len(self._current_stroke) >= 2:
+        elif self._current_tool == "circle" and len(self._current_stroke) >= 2:
             x1, y1 = self._current_stroke[0]
             x2, y2 = self._current_stroke[-1]
-            radius = ((x2-x1)**2 + (y2-y1)**2)**0.5
+            radius = ((x2 - x1) ** 2 + (y2 - y1) ** 2) ** 0.5
             cr.arc(x1, y1, radius, 0, 2 * 3.14159)
             if self._current_fill:
                 cr.fill()
@@ -241,7 +241,7 @@ class CreativeCanvas(Gtk.DrawingArea):
             if valid:
                 current_x = start_x + x
                 current_y = start_y + y
-                if self._current_tool in ['brush', 'eraser']:
+                if self._current_tool in ["brush", "eraser"]:
                     # For freehand tools, add all points
                     self._current_stroke.append((current_x, current_y))
                 else:
@@ -258,12 +258,12 @@ class CreativeCanvas(Gtk.DrawingArea):
             self._save_state()
 
             element_data = {
-                'type': self._current_tool,
-                'points': self._current_stroke[:],
-                'color': self._current_color,
-                'size': self._current_brush_size,
-                'fill': self._current_fill,
-                'timestamp': datetime.now().isoformat()
+                "type": self._current_tool,
+                "points": self._current_stroke[:],
+                "color": self._current_color,
+                "size": self._current_brush_size,
+                "fill": self._current_fill,
+                "timestamp": datetime.now().isoformat(),
             }
 
             self._elements.append(element_data)
@@ -339,14 +339,14 @@ class CreativeCanvas(Gtk.DrawingArea):
     def get_canvas_data(self):
         """Get all canvas data for saving."""
         return {
-            'elements': self._elements,
-            'canvas_size': (self.get_width(), self.get_height()),
-            'version': '2.0'
+            "elements": self._elements,
+            "canvas_size": (self.get_width(), self.get_height()),
+            "version": "2.0",
         }
 
     def set_canvas_data(self, data):
         """Set canvas data from saved file."""
-        self._elements = data.get('elements', [])
+        self._elements = data.get("elements", [])
         self._current_stroke = []
         self._undo_stack = []
         self._redo_stack = []
@@ -360,7 +360,7 @@ class CreativeStudioActivity(Activity):
         """Initialize the activity."""
         # Create handle if not provided (for testing)
         if handle is None:
-            handle = ActivityHandle('creative-studio-123')
+            handle = ActivityHandle("creative-studio-123")
 
         Activity.__init__(self, handle, application=application)
 
@@ -382,13 +382,13 @@ class CreativeStudioActivity(Activity):
     def _initialize_document_data(self):
         """Initialize document metadata."""
         self._document_data = {
-            'created': datetime.now().isoformat(),
-            'modified': datetime.now().isoformat(),
-            'version': '2.0',
-            'author': 'Creative User',
-            'title': 'Untitled Creation',
-            'element_count': 0,
-            'last_tool': 'brush'
+            "created": datetime.now().isoformat(),
+            "modified": datetime.now().isoformat(),
+            "version": "2.0",
+            "author": "Creative User",
+            "title": "Untitled Creation",
+            "element_count": 0,
+            "last_tool": "brush",
         }
 
     def _setup_ui(self):
@@ -417,35 +417,35 @@ class CreativeStudioActivity(Activity):
         brush_btn = Gtk.ToggleButton()
         brush_btn.set_label("Brush")
         brush_btn.set_active(True)
-        brush_btn.connect('toggled', lambda btn: self._tool_selected(btn, 'brush'))
+        brush_btn.connect("toggled", lambda btn: self._tool_selected(btn, "brush"))
         toolbar_box.toolbar.append(brush_btn)
         self._brush_btn = brush_btn
 
         # Eraser tool
         eraser_btn = Gtk.ToggleButton()
         eraser_btn.set_label("Eraser")
-        eraser_btn.connect('toggled', lambda btn: self._tool_selected(btn, 'eraser'))
+        eraser_btn.connect("toggled", lambda btn: self._tool_selected(btn, "eraser"))
         toolbar_box.toolbar.append(eraser_btn)
         self._eraser_btn = eraser_btn
 
         # Line tool
         line_btn = Gtk.ToggleButton()
         line_btn.set_label("Line")
-        line_btn.connect('toggled', lambda btn: self._tool_selected(btn, 'line'))
+        line_btn.connect("toggled", lambda btn: self._tool_selected(btn, "line"))
         toolbar_box.toolbar.append(line_btn)
         self._line_btn = line_btn
 
         # Rectangle tool
         rect_btn = Gtk.ToggleButton()
         rect_btn.set_label("Rectangle")
-        rect_btn.connect('toggled', lambda btn: self._tool_selected(btn, 'rectangle'))
+        rect_btn.connect("toggled", lambda btn: self._tool_selected(btn, "rectangle"))
         toolbar_box.toolbar.append(rect_btn)
         self._rect_btn = rect_btn
 
         # Circle tool
         circle_btn = Gtk.ToggleButton()
         circle_btn.set_label("Circle")
-        circle_btn.connect('toggled', lambda btn: self._tool_selected(btn, 'circle'))
+        circle_btn.connect("toggled", lambda btn: self._tool_selected(btn, "circle"))
         toolbar_box.toolbar.append(circle_btn)
         self._circle_btn = circle_btn
 
@@ -456,7 +456,7 @@ class CreativeStudioActivity(Activity):
         # Fill mode toggle
         fill_btn = Gtk.ToggleButton()
         fill_btn.set_label("Fill Mode")
-        fill_btn.connect('toggled', self._fill_mode_toggled)
+        fill_btn.connect("toggled", self._fill_mode_toggled)
         toolbar_box.toolbar.append(fill_btn)
         self._fill_btn = fill_btn
 
@@ -468,7 +468,7 @@ class CreativeStudioActivity(Activity):
         size_adjustment = Gtk.Adjustment(value=3, lower=1, upper=50, step_increment=1)
         size_spin = Gtk.SpinButton()
         size_spin.set_adjustment(size_adjustment)
-        size_spin.connect('value-changed', self._brush_size_changed)
+        size_spin.connect("value-changed", self._brush_size_changed)
         toolbar_box.toolbar.append(size_spin)
 
         # Separator
@@ -485,7 +485,7 @@ class CreativeStudioActivity(Activity):
             ("Blue", (0, 0, 1)),
             ("Green", (0, 0.8, 0)),
             ("Yellow", (1, 1, 0)),
-            ("Purple", (0.8, 0, 0.8))
+            ("Purple", (0.8, 0, 0.8)),
         ]
 
         for color_name, color_value in colors:
@@ -505,13 +505,15 @@ class CreativeStudioActivity(Activity):
                 cr.paint()
                 cr.set_source_rgb(0, 0, 0)
                 cr.set_line_width(1)
-                cr.rectangle(0.5, 0.5, width-1, height-1)
+                cr.rectangle(0.5, 0.5, width - 1, height - 1)
                 cr.stroke()
 
             color_area.set_draw_func(draw_color)
 
             color_label = Gtk.Label()
-            color_label.set_markup(f"<span color='black' size='small' weight='bold'>{color_name}</span>")
+            color_label.set_markup(
+                f"<span color='black' size='small' weight='bold'>{color_name}</span>"
+            )
 
             color_box.append(color_area)
             color_box.append(color_label)
@@ -520,9 +522,16 @@ class CreativeStudioActivity(Activity):
             css_provider = Gtk.CssProvider()
             css = "button { background-color: #2a2a2a; border: 1px solid #555; padding: 4px; }"
             css_provider.load_from_data(css.encode())
-            color_btn.get_style_context().add_provider(css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER)
+            color_btn.get_style_context().add_provider(
+                css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+            )
 
-            color_btn.connect('clicked', lambda btn, c=color_value, name=color_name: self._color_selected(c, name))
+            color_btn.connect(
+                "clicked",
+                lambda btn, c=color_value, name=color_name: self._color_selected(
+                    c, name
+                ),
+            )
             toolbar_box.toolbar.append(color_btn)
             self._color_buttons[color_value] = color_btn
 
@@ -538,19 +547,19 @@ class CreativeStudioActivity(Activity):
         # Undo
         undo_btn = Gtk.Button()
         undo_btn.set_label("Undo")
-        undo_btn.connect('clicked', lambda btn: self._undo_action())
+        undo_btn.connect("clicked", lambda btn: self._undo_action())
         toolbar_box.toolbar.append(undo_btn)
 
         # Redo
         redo_btn = Gtk.Button()
         redo_btn.set_label("Redo")
-        redo_btn.connect('clicked', lambda btn: self._redo_action())
+        redo_btn.connect("clicked", lambda btn: self._redo_action())
         toolbar_box.toolbar.append(redo_btn)
 
         # Clear
         clear_btn = Gtk.Button()
         clear_btn.set_label("Clear")
-        clear_btn.connect('clicked', lambda btn: self.clear_canvas())
+        clear_btn.connect("clicked", lambda btn: self.clear_canvas())
         toolbar_box.toolbar.append(clear_btn)
 
         # Separator
@@ -560,13 +569,13 @@ class CreativeStudioActivity(Activity):
         # Save
         save_btn = Gtk.Button()
         save_btn.set_label("Save")
-        save_btn.connect('clicked', lambda btn: self.save_creation())
+        save_btn.connect("clicked", lambda btn: self.save_creation())
         toolbar_box.toolbar.append(save_btn)
 
         # Preview
         preview_btn = Gtk.Button()
         preview_btn.set_label("Preview")
-        preview_btn.connect('clicked', lambda btn: self.show_preview())
+        preview_btn.connect("clicked", lambda btn: self.show_preview())
         toolbar_box.toolbar.append(preview_btn)
 
         # Spacer
@@ -592,8 +601,13 @@ class CreativeStudioActivity(Activity):
         """Handle tool selection."""
         if button.get_active():
             # Deactivate other tool buttons
-            tool_buttons = [self._brush_btn, self._eraser_btn, self._line_btn,
-                          self._rect_btn, self._circle_btn]
+            tool_buttons = [
+                self._brush_btn,
+                self._eraser_btn,
+                self._line_btn,
+                self._rect_btn,
+                self._circle_btn,
+            ]
             for btn in tool_buttons:
                 if btn != button:
                     btn.set_active(False)
@@ -628,7 +642,7 @@ class CreativeStudioActivity(Activity):
                 (0, 0, 1): "Blue",
                 (0, 0.8, 0): "Green",
                 (1, 1, 0): "Yellow",
-                (0.8, 0, 0.8): "Purple"
+                (0.8, 0, 0.8): "Purple",
             }
             color_name = color_names.get(color, "Custom")
 
@@ -676,7 +690,7 @@ class CreativeStudioActivity(Activity):
                     return True
             return False
 
-        key_controller.connect('key-pressed', on_key_pressed)
+        key_controller.connect("key-pressed", on_key_pressed)
         self.add_controller(key_controller)
 
     def _create_canvas(self):
@@ -689,13 +703,17 @@ class CreativeStudioActivity(Activity):
 
         # Title
         title_label = Gtk.Label()
-        title_label.set_markup("<span size='large' weight='bold'>Creative Studio</span>")
+        title_label.set_markup(
+            "<span size='large' weight='bold'>Creative Studio</span>"
+        )
         title_label.set_halign(Gtk.Align.CENTER)
         main_box.append(title_label)
 
         # Status area
         self._status_label = Gtk.Label()
-        self._status_label.set_text("Welcome to Creative Studio! Select a tool and start creating.")
+        self._status_label.set_text(
+            "Welcome to Creative Studio! Select a tool and start creating."
+        )
         self._status_label.set_halign(Gtk.Align.CENTER)
         self._status_label.set_wrap(True)
         main_box.append(self._status_label)
@@ -737,8 +755,12 @@ class CreativeStudioActivity(Activity):
 
     def _update_doc_info(self):
         """Update document info display."""
-        if hasattr(self, '_doc_info_label'):
-            element_count = len(self._creative_canvas._elements) if hasattr(self, '_creative_canvas') else 0
+        if hasattr(self, "_doc_info_label"):
+            element_count = (
+                len(self._creative_canvas._elements)
+                if hasattr(self, "_creative_canvas")
+                else 0
+            )
             save_status = "Unsaved changes" if self._has_unsaved_changes else "Saved"
 
             text = f"Created: {self._document_data['created'][:19]}\n"
@@ -751,16 +773,16 @@ class CreativeStudioActivity(Activity):
     def clear_canvas(self):
         """Clear the creative canvas."""
         self._creative_canvas.clear_canvas()
-        self._document_data['modified'] = datetime.now().isoformat()
+        self._document_data["modified"] = datetime.now().isoformat()
         self._update_doc_info()
         self._status_label.set_text("Canvas cleared")
 
     def save_creation(self):
         """Save the current creation."""
         try:
-            self._document_data['modified'] = datetime.now().isoformat()
-            self._document_data['element_count'] = len(self._creative_canvas._elements)
-            self._document_data['last_tool'] = self._current_tool
+            self._document_data["modified"] = datetime.now().isoformat()
+            self._document_data["element_count"] = len(self._creative_canvas._elements)
+            self._document_data["last_tool"] = self._current_tool
 
             # In a real Sugar activity, this would use the activity's write_file method
             # For demo purposes, we'll save to a temp location
@@ -768,14 +790,14 @@ class CreativeStudioActivity(Activity):
 
             canvas_data = self._creative_canvas.get_canvas_data()
             data = {
-                'document_data': self._document_data,
-                'canvas_data': canvas_data,
-                'current_tool': self._current_tool,
-                'current_color': self._current_color,
-                'saved_at': datetime.now().isoformat()
+                "document_data": self._document_data,
+                "canvas_data": canvas_data,
+                "current_tool": self._current_tool,
+                "current_color": self._current_color,
+                "saved_at": datetime.now().isoformat(),
             }
 
-            with open(save_path, 'w') as f:
+            with open(save_path, "w") as f:
                 json.dump(data, f, indent=2)
 
             self._has_unsaved_changes = False
@@ -793,7 +815,7 @@ class CreativeStudioActivity(Activity):
             if preview_data:
                 # Save preview to temp file
                 preview_path = "/tmp/creative_studio_preview.png"
-                with open(preview_path, 'wb') as f:
+                with open(preview_path, "wb") as f:
                     f.write(preview_data)
 
                 # Show preview dialog
@@ -835,7 +857,7 @@ class CreativeStudioActivity(Activity):
             def on_response(dialog, response_id):
                 dialog.destroy()
 
-            dialog.connect('response', on_response)
+            dialog.connect("response", on_response)
 
         except Exception as e:
             logging.error(f"Error loading preview image: {e}")
@@ -847,7 +869,9 @@ class CreativeStudioActivity(Activity):
             import cairo
 
             preview_width, preview_height = 1200, 800
-            surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, preview_width, preview_height)
+            surface = cairo.ImageSurface(
+                cairo.FORMAT_ARGB32, preview_width, preview_height
+            )
             cr = cairo.Context(surface)
 
             cr.set_source_rgb(1, 1, 1)
@@ -858,7 +882,7 @@ class CreativeStudioActivity(Activity):
             cr.rectangle(2, 2, preview_width - 4, preview_height - 4)
             cr.stroke()
 
-            if hasattr(self, '_creative_canvas') and self._creative_canvas._elements:
+            if hasattr(self, "_creative_canvas") and self._creative_canvas._elements:
                 # Scale the creation to fit the preview
                 canvas_width, canvas_height = 800, 600
                 scale_x = (preview_width - 20) / canvas_width
@@ -899,6 +923,7 @@ class CreativeStudioActivity(Activity):
 
             # Convert to PNG
             import io
+
             preview_str = io.BytesIO()
             surface.write_to_png(preview_str)
             return preview_str.getvalue()
@@ -910,15 +935,15 @@ class CreativeStudioActivity(Activity):
     def read_file(self, file_path):
         """Read creation data from file."""
         try:
-            with open(file_path, 'r') as f:
+            with open(file_path, "r") as f:
                 data = json.load(f)
 
-            self._document_data = data.get('document_data', self._document_data)
-            canvas_data = data.get('canvas_data', {})
+            self._document_data = data.get("document_data", self._document_data)
+            canvas_data = data.get("canvas_data", {})
             self._creative_canvas.set_canvas_data(canvas_data)
 
-            self._current_tool = data.get('current_tool', 'brush')
-            self._current_color = tuple(data.get('current_color', (0, 0, 0)))
+            self._current_tool = data.get("current_tool", "brush")
+            self._current_color = tuple(data.get("current_color", (0, 0, 0)))
 
             self._has_unsaved_changes = False
             self._update_doc_info()
@@ -931,21 +956,21 @@ class CreativeStudioActivity(Activity):
     def write_file(self, file_path):
         """Write creation data to file."""
         try:
-            self._document_data['modified'] = datetime.now().isoformat()
-            self._document_data['element_count'] = len(self._creative_canvas._elements)
+            self._document_data["modified"] = datetime.now().isoformat()
+            self._document_data["element_count"] = len(self._creative_canvas._elements)
 
             canvas_data = self._creative_canvas.get_canvas_data()
             data = {
-                'document_data': self._document_data,
-                'canvas_data': canvas_data,
-                'current_tool': self._current_tool,
-                'current_color': self._current_color,
-                'activity_id': self.get_id(),
-                'bundle_id': self.get_bundle_id(),
-                'saved_at': datetime.now().isoformat()
+                "document_data": self._document_data,
+                "canvas_data": canvas_data,
+                "current_tool": self._current_tool,
+                "current_color": self._current_color,
+                "activity_id": self.get_id(),
+                "bundle_id": self.get_bundle_id(),
+                "saved_at": datetime.now().isoformat(),
             }
 
-            with open(file_path, 'w') as f:
+            with open(file_path, "w") as f:
                 json.dump(data, f, indent=2)
 
             self._has_unsaved_changes = False
@@ -964,14 +989,16 @@ class CreativeStudioApplication(Gtk.Application):
     """Application wrapper for the creative studio activity."""
 
     def __init__(self):
-        super().__init__(application_id='org.sugarlabs.CreativeStudio',
-                         flags=Gio.ApplicationFlags.DEFAULT_FLAGS)
+        super().__init__(
+            application_id="org.sugarlabs.CreativeStudio",
+            flags=Gio.ApplicationFlags.DEFAULT_FLAGS,
+        )
         self.activity = None
 
     def do_activate(self):
         """Activate the application."""
         if not self.activity:
-            handle = ActivityHandle('creative-studio-123')
+            handle = ActivityHandle("creative-studio-123")
             self.activity = CreativeStudioActivity(handle, application=self)
             self.activity.present()
 

@@ -16,7 +16,7 @@ try:
 except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
-from sugar.graphics.objectchooser import (
+from sugar4.graphics.objectchooser import (
     ObjectChooser,
     get_preview_pixbuf,
     FILTER_TYPE_GENERIC_MIME,
@@ -121,7 +121,7 @@ class TestObjectChooser(unittest.TestCase):
             self.assertEqual(chooser._filter_type, filter_type)
 
     @patch("dbus.SessionBus")
-    @patch("sugar.datastore.datastore.get")
+    @patch("sugar4.datastore.datastore.get")
     def test_get_selected_object_none(self, mock_datastore_get, mock_bus):
         """Test get_selected_object when no object is selected."""
         chooser = ObjectChooser()
@@ -130,7 +130,7 @@ class TestObjectChooser(unittest.TestCase):
         mock_datastore_get.assert_not_called()
 
     @patch("dbus.SessionBus")
-    @patch("sugar.datastore.datastore.get")
+    @patch("sugar4.datastore.datastore.get")
     def test_get_selected_object_with_id(self, mock_datastore_get, mock_bus):
         """Test get_selected_object when object is selected."""
         mock_object = Mock()

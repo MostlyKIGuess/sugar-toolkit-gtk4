@@ -1,4 +1,5 @@
 import gi
+
 gi.require_version("Gtk", "4.0")
 import sys
 import os
@@ -7,7 +8,8 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 from gi.repository import Gtk, GLib, Gdk
 
-from sugar.graphics.window import Window
+from sugar4.graphics.window import Window
+
 
 class ExampleApp(Gtk.Application):
     def __init__(self):
@@ -38,10 +40,12 @@ class ExampleApp(Gtk.Application):
 
         win.set_toolbar_box(toolbar)
 
-        label = Gtk.Label(label="Hello, Sugar GTK4 Window!\n\n"
-                                "Try:\n"
-                                " - Clicking 'Fullscreen' (Escape to exit)\n"
-                                " - Clicking 'Show Alert'\n")
+        label = Gtk.Label(
+            label="Hello, Sugar GTK4 Window!\n\n"
+            "Try:\n"
+            " - Clicking 'Fullscreen' (Escape to exit)\n"
+            " - Clicking 'Show Alert'\n"
+        )
         label.set_margin_top(24)
         win.set_canvas(label)
 
@@ -59,21 +63,27 @@ class ExampleApp(Gtk.Application):
         alert_box.set_vexpand(False)
         alert_box.get_style_context().add_class("alert")
 
-        alert_label = Gtk.Label(label="This is an alert overlay! Click Dismiss to remove.")
+        alert_label = Gtk.Label(
+            label="This is an alert overlay! Click Dismiss to remove."
+        )
         alert_label.set_hexpand(True)
         alert_box.append(alert_label)
 
         dismiss_btn = Gtk.Button(label="Dismiss")
+
         def on_dismiss(_btn):
             win.remove_alert(alert_box)
+
         dismiss_btn.connect("clicked", on_dismiss)
         alert_box.append(dismiss_btn)
 
         win.add_alert(alert_box)
 
+
 def main():
     app = ExampleApp()
     app.run(None)
+
 
 if __name__ == "__main__":
     main()

@@ -6,17 +6,22 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.radiotoolbutton import RadioToolButton
-from sugar.graphics.toolbutton import ToolButton
-from sugar.graphics import style
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.radiotoolbutton import RadioToolButton
+from sugar4.graphics.toolbutton import ToolButton
+from sugar4.graphics import style
 
 PROJECT_ROOT = os.path.join(os.path.dirname(__file__), "..")
-SUGAR_ICONS_PATH = os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "actions")
-CURSOR_ICONS_PATH = os.path.join(PROJECT_ROOT, "sugar-artwork", "cursor", "sugar", "pngs")
+SUGAR_ICONS_PATH = os.path.join(
+    PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "actions"
+)
+CURSOR_ICONS_PATH = os.path.join(
+    PROJECT_ROOT, "sugar-artwork", "cursor", "sugar", "pngs"
+)
 
 
 def get_valid_icon(icon_path, fallback="document-generic.svg"):
@@ -24,7 +29,9 @@ def get_valid_icon(icon_path, fallback="document-generic.svg"):
         return icon_path
     else:
         # Try fallback in mimetypes directory
-        fallback_path = os.path.join(PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "mimetypes", fallback)
+        fallback_path = os.path.join(
+            PROJECT_ROOT, "sugar-artwork", "icons", "scalable", "mimetypes", fallback
+        )
         if os.path.exists(fallback_path):
             return fallback_path
         # Fallback to actions directory if mimetypes fallback missing
@@ -41,7 +48,9 @@ class RadioToolButtonExampleActivity(SimpleActivity):
 
     def _create_content(self):
         """Create the main content showing radio tool button features."""
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        main_box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         main_box.set_margin_start(style.DEFAULT_PADDING * 2)
         main_box.set_margin_end(style.DEFAULT_PADDING * 2)
         main_box.set_margin_top(style.DEFAULT_PADDING * 2)
@@ -49,7 +58,9 @@ class RadioToolButtonExampleActivity(SimpleActivity):
 
         css_provider = Gtk.CssProvider()
         css_provider.load_from_data(b".background { background-color: #e0e0e0; }")
-        main_box.get_style_context().add_provider(css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+        main_box.get_style_context().add_provider(
+            css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+        )
         main_box.get_style_context().add_class("background")
 
         # Title
@@ -60,14 +71,16 @@ class RadioToolButtonExampleActivity(SimpleActivity):
 
         # Description
         desc = Gtk.Label()
-        desc.set_markup("Radio buttons work in groups - only one can be selected at a time.")
+        desc.set_markup(
+            "Radio buttons work in groups - only one can be selected at a time."
+        )
         desc.set_margin_bottom(style.DEFAULT_SPACING)
         main_box.append(desc)
 
         # Drawing tools section
         self._create_tools_section(main_box)
 
-        # View modes section  
+        # View modes section
         self._create_modes_section(main_box)
 
         # Status label
@@ -98,7 +111,10 @@ class RadioToolButtonExampleActivity(SimpleActivity):
             ("Brush", os.path.join(CURSOR_ICONS_PATH, "paintbrush.png")),
             ("Pencil", os.path.join(CURSOR_ICONS_PATH, "pencil.png")),
             ("Eraser", os.path.join(CURSOR_ICONS_PATH, "eraser.png")),
-            ("Text", get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "format-text-bold.svg"))),
+            (
+                "Text",
+                get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "format-text-bold.svg")),
+            ),
         ]
 
         first_tool = None
@@ -109,9 +125,9 @@ class RadioToolButtonExampleActivity(SimpleActivity):
                 tool_button.set_active(True)
             else:
                 tool_button = RadioToolButton(icon_name=icon_path, group=first_tool)
-            
+
             tool_button.set_tooltip(name)
-            tool_button.connect('toggled', self._on_tool_toggled, name)
+            tool_button.connect("toggled", self._on_tool_toggled, name)
             toolbar.append(tool_button)
 
         vbox.append(toolbar)
@@ -136,7 +152,10 @@ class RadioToolButtonExampleActivity(SimpleActivity):
         modes = [
             ("List", get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-list.svg"))),
             ("Grid", get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-box.svg"))),
-            ("Details", get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-details.svg"))),
+            (
+                "Details",
+                get_valid_icon(os.path.join(SUGAR_ICONS_PATH, "view-details.svg")),
+            ),
         ]
 
         first_mode = None
@@ -147,9 +166,9 @@ class RadioToolButtonExampleActivity(SimpleActivity):
                 mode_button.set_active(True)
             else:
                 mode_button = RadioToolButton(icon_name=icon_path, group=first_mode)
-            
+
             mode_button.set_tooltip(f"{name} View")
-            mode_button.connect('toggled', self._on_mode_toggled, name)
+            mode_button.connect("toggled", self._on_mode_toggled, name)
             toolbar.append(mode_button)
 
         vbox.append(toolbar)
@@ -169,14 +188,14 @@ class RadioToolButtonExampleActivity(SimpleActivity):
 
 def main():
     """Run the RadioToolButton example activity."""
-    app = Gtk.Application(application_id='org.sugarlabs.RadioToolButtonExample')
+    app = Gtk.Application(application_id="org.sugarlabs.RadioToolButtonExample")
 
     def on_activate(app):
         activity = RadioToolButtonExampleActivity()
         app.add_window(activity)
         activity.present()
 
-    app.connect('activate', on_activate)
+    app.connect("activate", on_activate)
     return app.run(sys.argv)
 
 

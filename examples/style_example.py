@@ -6,11 +6,12 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.activity import SimpleActivity
-from sugar.graphics import style
+from sugar4.activity import SimpleActivity
+from sugar4.graphics import style
 
 
 class StyleExampleActivity(SimpleActivity):
@@ -23,7 +24,9 @@ class StyleExampleActivity(SimpleActivity):
 
     def _create_content(self):
         """Create the main content showing all style features."""
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        main_box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         main_box.set_margin_start(style.DEFAULT_PADDING * 2)
         main_box.set_margin_end(style.DEFAULT_PADDING * 2)
         main_box.set_margin_top(style.DEFAULT_PADDING * 2)
@@ -57,14 +60,18 @@ class StyleExampleActivity(SimpleActivity):
         """Add color examples."""
         frame = Gtk.Frame(label="Color System")
         frame.set_hexpand(True)
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        vbox = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         vbox.set_margin_start(style.DEFAULT_PADDING)
         vbox.set_margin_end(style.DEFAULT_PADDING)
         vbox.set_margin_top(style.DEFAULT_PADDING)
         vbox.set_margin_bottom(style.DEFAULT_PADDING)
 
         # Standard colors
-        colors_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING)
+        colors_box = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING
+        )
         colors_box.set_halign(Gtk.Align.CENTER)
 
         colors = [
@@ -116,7 +123,9 @@ class StyleExampleActivity(SimpleActivity):
         """Add font examples."""
         frame = Gtk.Frame(label="Font System")
         frame.set_hexpand(True)
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        vbox = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         vbox.set_margin_start(style.DEFAULT_PADDING)
         vbox.set_margin_end(style.DEFAULT_PADDING)
         vbox.set_margin_top(style.DEFAULT_PADDING)
@@ -129,7 +138,9 @@ class StyleExampleActivity(SimpleActivity):
         ]
 
         for name, font in fonts:
-            font_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING)
+            font_box = Gtk.Box(
+                orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING
+            )
 
             label = Gtk.Label(label=f"{name}:")
             label.set_size_request(120, -1)
@@ -161,14 +172,18 @@ class StyleExampleActivity(SimpleActivity):
         """Add sizing and spacing examples."""
         frame = Gtk.Frame(label="Sizing and Spacing")
         frame.set_hexpand(True)
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        vbox = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         vbox.set_margin_start(style.DEFAULT_PADDING)
         vbox.set_margin_end(style.DEFAULT_PADDING)
         vbox.set_margin_top(style.DEFAULT_PADDING)
         vbox.set_margin_bottom(style.DEFAULT_PADDING)
 
         # Icon sizes
-        icon_sizes_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING)
+        icon_sizes_box = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING
+        )
         icon_sizes_box.set_halign(Gtk.Align.CENTER)
 
         sizes = [
@@ -217,21 +232,37 @@ class StyleExampleActivity(SimpleActivity):
         """Add CSS integration examples."""
         frame = Gtk.Frame(label="GTK4 CSS Integration")
         frame.set_hexpand(True)
-        vbox = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        vbox = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         vbox.set_margin_start(style.DEFAULT_PADDING)
         vbox.set_margin_end(style.DEFAULT_PADDING)
         vbox.set_margin_top(style.DEFAULT_PADDING)
         vbox.set_margin_bottom(style.DEFAULT_PADDING)
 
         # CSS styled buttons
-        buttons_box = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING)
+        buttons_box = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL, spacing=style.DEFAULT_SPACING
+        )
         buttons_box.set_halign(Gtk.Align.CENTER)
 
         button_styles = [
-            ("Primary", f"background-color: {style.COLOR_PRIMARY.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;"),
-            ("Success", f"background-color: {style.COLOR_SUCCESS.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;"),
-            ("Warning", f"background-color: {style.COLOR_WARNING.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;"),
-            ("Error", f"background-color: {style.COLOR_ERROR.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;"),
+            (
+                "Primary",
+                f"background-color: {style.COLOR_PRIMARY.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;",
+            ),
+            (
+                "Success",
+                f"background-color: {style.COLOR_SUCCESS.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;",
+            ),
+            (
+                "Warning",
+                f"background-color: {style.COLOR_WARNING.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;",
+            ),
+            (
+                "Error",
+                f"background-color: {style.COLOR_ERROR.get_css_rgba()}; color: white; border-radius: {style.BORDER_RADIUS}px;",
+            ),
         ]
 
         for name, css_style in button_styles:
@@ -287,14 +318,14 @@ class StyleExampleActivity(SimpleActivity):
 
 def main():
     """Run the style example activity."""
-    app = Gtk.Application(application_id='org.sugarlabs.StyleExample')
+    app = Gtk.Application(application_id="org.sugarlabs.StyleExample")
 
     def on_activate(app):
         activity = StyleExampleActivity()
         app.add_window(activity)
         activity.present()
 
-    app.connect('activate', on_activate)
+    app.connect("activate", on_activate)
     return app.run()
 
 

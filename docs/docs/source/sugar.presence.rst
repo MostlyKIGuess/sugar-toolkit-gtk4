@@ -1,53 +1,53 @@
-sugar.presence package
+sugar4.presence package
 ======================
 
 Submodules
 ----------
 
-sugar.presence.activity module
+sugar4.presence.activity module
 ------------------------------
 
-.. automodule:: sugar.presence.activity
+.. automodule:: sugar4.presence.activity
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.presence.buddy module
+sugar4.presence.buddy module
 ---------------------------
 
-.. automodule:: sugar.presence.buddy
+.. automodule:: sugar4.presence.buddy
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.presence.connectionmanager module
+sugar4.presence.connectionmanager module
 ---------------------------------------
 
-.. automodule:: sugar.presence.connectionmanager
+.. automodule:: sugar4.presence.connectionmanager
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.presence.presenceservice module
+sugar4.presence.presenceservice module
 -------------------------------------
 
-.. automodule:: sugar.presence.presenceservice
+.. automodule:: sugar4.presence.presenceservice
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.presence.sugartubeconn module
+sugar4.presence.sugartubeconn module
 -----------------------------------
 
-.. automodule:: sugar.presence.sugartubeconn
+.. automodule:: sugar4.presence.sugartubeconn
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.presence.tubeconn module
+sugar4.presence.tubeconn module
 ------------------------------
 
-.. automodule:: sugar.presence.tubeconn
+.. automodule:: sugar4.presence.tubeconn
    :members:
    :show-inheritance:
    :undoc-members:
@@ -55,7 +55,7 @@ sugar.presence.tubeconn module
 Module contents
 ---------------
 
-.. automodule:: sugar.presence
+.. automodule:: sugar4.presence
    :members:
    :show-inheritance:
    :undoc-members:

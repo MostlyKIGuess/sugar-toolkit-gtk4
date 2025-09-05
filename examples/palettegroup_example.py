@@ -3,16 +3,17 @@ Simple PaletteGroup Example
 """
 
 import gi
-gi.require_version('Gtk', '4.0')
+
+gi.require_version("Gtk", "4.0")
 
 from gi.repository import Gtk, GObject
 import sys
 import os
 
 # Add src to path
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from sugar.graphics.palettegroup import get_group, popdown_all
+from sugar4.graphics.palettegroup import get_group, popdown_all
 
 
 class MockPalette(Gtk.Box):
@@ -34,20 +35,20 @@ class MockPalette(Gtk.Box):
     def popdown(self, immediate=False):
         if self._is_up:
             self._is_up = False
-            self.emit('popdown')
+            self.emit("popdown")
             print(f"{self.name} popped down")
 
     def popup(self):
         if not self._is_up:
             self._is_up = True
-            self.emit('popup')
+            self.emit("popup")
             print(f"{self.name} popped up")
 
 
 # Register signals for MockPalette
 GObject.type_register(MockPalette)
-GObject.signal_new('popup', MockPalette, GObject.SignalFlags.RUN_FIRST, None, ())
-GObject.signal_new('popdown', MockPalette, GObject.SignalFlags.RUN_FIRST, None, ())
+GObject.signal_new("popup", MockPalette, GObject.SignalFlags.RUN_FIRST, None, ())
+GObject.signal_new("popdown", MockPalette, GObject.SignalFlags.RUN_FIRST, None, ())
 
 
 class PaletteGroupExample(Gtk.ApplicationWindow):
@@ -63,14 +64,14 @@ class PaletteGroupExample(Gtk.ApplicationWindow):
         self.palette3 = MockPalette("Palette 3")
 
         # Add to group
-        group = get_group('test_group')
+        group = get_group("test_group")
         group.add(self.palette1)
         group.add(self.palette2)
         group.add(self.palette3)
 
         # Connect to group signals
-        group.connect('popup', self._on_group_popup)
-        group.connect('popdown', self._on_group_popdown)
+        group.connect("popup", self._on_group_popup)
+        group.connect("popdown", self._on_group_popdown)
 
         self._setup_ui()
 
@@ -83,17 +84,17 @@ class PaletteGroupExample(Gtk.ApplicationWindow):
 
         # Buttons to show palettes
         btn1 = Gtk.Button(label="Show Palette 1")
-        btn1.connect('clicked', lambda b: self.palette1.popup())
+        btn1.connect("clicked", lambda b: self.palette1.popup())
 
         btn2 = Gtk.Button(label="Show Palette 2")
-        btn2.connect('clicked', lambda b: self.palette2.popup())
+        btn2.connect("clicked", lambda b: self.palette2.popup())
 
         btn3 = Gtk.Button(label="Show Palette 3")
-        btn3.connect('clicked', lambda b: self.palette3.popup())
+        btn3.connect("clicked", lambda b: self.palette3.popup())
 
         # Control button
         popdown_btn = Gtk.Button(label="Pop Down All")
-        popdown_btn.connect('clicked', lambda b: popdown_all())
+        popdown_btn.connect("clicked", lambda b: popdown_all())
 
         box.append(btn1)
         box.append(btn2)
@@ -112,7 +113,7 @@ class PaletteGroupExample(Gtk.ApplicationWindow):
 class PaletteGroupApp(Gtk.Application):
 
     def __init__(self):
-        super().__init__(application_id='org.sugarlabs.PaletteGroupExample')
+        super().__init__(application_id="org.sugarlabs.PaletteGroupExample")
 
     def do_activate(self):
         window = PaletteGroupExample(self)

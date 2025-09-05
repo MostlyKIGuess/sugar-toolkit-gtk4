@@ -17,9 +17,9 @@ except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
 if GTK_AVAILABLE:
-    from sugar.graphics.toolcombobox import ToolComboBox
-    from sugar.graphics.combobox import ComboBox
-    from sugar.graphics import style
+    from sugar4.graphics.toolcombobox import ToolComboBox
+    from sugar4.graphics.combobox import ComboBox
+    from sugar4.graphics import style
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -149,6 +149,7 @@ class TestToolComboBox(unittest.TestCase):
     def test_do_set_property_invalid(self):
         """Test do_set_property with invalid property."""
         try:
+
             class MockPSpec:
                 def __init__(self, name):
                     self.name = name
@@ -301,7 +302,7 @@ class TestToolComboBoxEdgeCases(unittest.TestCase):
             "Café ñoño",
             "🌟 Star ⭐",
             "اللغة العربية",
-            "Русский язык"
+            "Русский язык",
         ]
 
         for label_text in unicode_labels:
@@ -333,7 +334,7 @@ class TestToolComboBoxEdgeCases(unittest.TestCase):
             ["list", "item"],
             ("tuple", "item"),
             42,
-            3.14
+            3.14,
         ]
 
         for i, value in enumerate(complex_values):

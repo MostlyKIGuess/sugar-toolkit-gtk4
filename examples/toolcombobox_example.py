@@ -10,14 +10,15 @@ import sys
 import os
 
 # Add src to path to import sugar modules
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
-gi.require_version('Gtk', '4.0')
+
+gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, GObject
 
-from sugar.graphics.toolcombobox import ToolComboBox
-from sugar.graphics.combobox import ComboBox
+from sugar4.graphics.toolcombobox import ToolComboBox
+from sugar4.graphics.combobox import ComboBox
 
 
 class ToolComboBoxExample(Gtk.ApplicationWindow):
@@ -43,7 +44,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         self.create_custom_combo_example(vbox)
         self.create_dynamic_toolbar_example(vbox)
 
-        self.status_label = Gtk.Label(label="Select items from the combo boxes to see their values")
+        self.status_label = Gtk.Label(
+            label="Select items from the combo boxes to see their values"
+        )
         self.status_label.set_selectable(True)
         self.status_label.set_wrap(True)
         vbox.append(self.status_label)
@@ -83,7 +86,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         icon_combo = ComboBox()
         try:
             icon_combo.append_item("high", "High Quality", icon_name="video-display")
-            icon_combo.append_item("medium", "Medium Quality", icon_name="audio-volume-medium")
+            icon_combo.append_item(
+                "medium", "Medium Quality", icon_name="audio-volume-medium"
+            )
             icon_combo.append_item("low", "Low Quality", icon_name="audio-volume-low")
         except ValueError:
             # Fallback if icons don't exist
@@ -123,7 +128,14 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
 
         # Font family combo
         font_combo = ComboBox()
-        fonts = ["Arial", "Times New Roman", "Helvetica", "Georgia", "Verdana", "Courier New"]
+        fonts = [
+            "Arial",
+            "Times New Roman",
+            "Helvetica",
+            "Georgia",
+            "Verdana",
+            "Courier New",
+        ]
         for font in fonts:
             font_combo.append_item(font, font)
 
@@ -149,7 +161,7 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
             ("blue", "Blue"),
             ("green", "Green"),
             ("purple", "Purple"),
-            ("orange", "Orange")
+            ("orange", "Orange"),
         ]
         for color_value, color_name in colors:
             color_combo.append_item(color_value, color_name)
@@ -159,7 +171,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         toolbar.append(self.color_tool_combo)
 
         # Description
-        desc = Gtk.Label(label="Text formatting controls using multiple ToolComboBox widgets")
+        desc = Gtk.Label(
+            label="Text formatting controls using multiple ToolComboBox widgets"
+        )
         desc.set_wrap(True)
         vbox_inner.append(desc)
 
@@ -190,7 +204,7 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         file_ops = [
             {"action": "new", "label": "New Document", "icon": "document-new"},
             {"action": "open", "label": "Open Document", "icon": "document-open"},
-            {"action": "save", "label": "Save Document", "icon": "document-save"}
+            {"action": "save", "label": "Save Document", "icon": "document-save"},
         ]
 
         for op in file_ops:
@@ -204,7 +218,7 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         edit_ops = [
             {"action": "copy", "label": "Copy", "icon": "edit-copy"},
             {"action": "paste", "label": "Paste", "icon": "edit-paste"},
-            {"action": "undo", "label": "Undo", "icon": "edit-undo"}
+            {"action": "undo", "label": "Undo", "icon": "edit-undo"},
         ]
 
         for op in edit_ops:
@@ -232,7 +246,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         toolbar.append(self.template_tool_combo)
 
         # Description
-        desc = Gtk.Label(label="Custom combo with separators, complex values, and no-label combo")
+        desc = Gtk.Label(
+            label="Custom combo with separators, complex values, and no-label combo"
+        )
         desc.set_wrap(True)
         vbox_inner.append(desc)
 
@@ -251,7 +267,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         frame.set_child(vbox_inner)
 
         # Create horizontal box as toolbar replacement (GTK4 doesn't have Toolbar)
-        self.dynamic_toolbar = Gtk.Box(orientation=Gtk.Orientation.HORIZONTAL, spacing=10)
+        self.dynamic_toolbar = Gtk.Box(
+            orientation=Gtk.Orientation.HORIZONTAL, spacing=10
+        )
         self.dynamic_toolbar.set_margin_top(5)
         self.dynamic_toolbar.set_margin_bottom(5)
         self.dynamic_toolbar.set_margin_start(5)
@@ -264,7 +282,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         for category in categories:
             category_combo.append_item(category.lower(), category)
 
-        self.category_tool_combo = ToolComboBox(combo=category_combo, label_text="Category:")
+        self.category_tool_combo = ToolComboBox(
+            combo=category_combo, label_text="Category:"
+        )
         self.category_tool_combo.combo.connect("changed", self.on_category_changed)
         self.dynamic_toolbar.append(self.category_tool_combo)
 
@@ -288,7 +308,9 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
         control_box.append(change_label_btn)
 
         # Description
-        desc = Gtk.Label(label="Dynamic toolbar that changes content based on category selection")
+        desc = Gtk.Label(
+            label="Dynamic toolbar that changes content based on category selection"
+        )
         desc.set_wrap(True)
         vbox_inner.append(desc)
 
@@ -357,18 +379,22 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
             "animals": ["Dog", "Cat", "Bird", "Fish", "Rabbit"],
             "colors": ["Red", "Blue", "Green", "Yellow", "Purple"],
             "countries": ["USA", "Canada", "Mexico", "Brazil", "Argentina"],
-            "foods": ["Pizza", "Burger", "Salad", "Pasta", "Soup"]
+            "foods": ["Pizza", "Burger", "Salad", "Pasta", "Soup"],
         }
 
         items = items_map.get(category, [])
         for item in items:
             dynamic_combo.append_item(item.lower(), item)
 
-        self.dynamic_tool_combo = ToolComboBox(combo=dynamic_combo, label_text=f"{category.title()}:")
+        self.dynamic_tool_combo = ToolComboBox(
+            combo=dynamic_combo, label_text=f"{category.title()}:"
+        )
         self.dynamic_tool_combo.combo.connect("changed", self.on_dynamic_changed)
         self.dynamic_toolbar.append(self.dynamic_tool_combo)
 
-        self.status_label.set_text(f"Category changed to: {category} - new combo created")
+        self.status_label.set_text(
+            f"Category changed to: {category} - new combo created"
+        )
 
     def on_dynamic_changed(self, combo):
         """Handle dynamic combo selection change."""
@@ -382,6 +408,7 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
             return
 
         import random
+
         items = ["Item A", "Item B", "Item C", "Item D", "Item E"]
         selected_items = random.sample(items, random.randint(1, 3))
 
@@ -404,6 +431,7 @@ class ToolComboBoxExample(Gtk.ApplicationWindow):
             return
 
         import random
+
         labels = ["Selection:", "Choose:", "Pick:", "Option:", "Item:"]
         new_label = random.choice(labels)
 

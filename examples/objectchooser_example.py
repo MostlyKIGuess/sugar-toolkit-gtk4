@@ -2,23 +2,26 @@
 
 import dbus
 import gi
-gi.require_version('Gtk', '4.0')
+
+gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
 import sys
 import os
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
 
-from sugar.graphics.objectchooser import ObjectChooser, FILTER_TYPE_GENERIC_MIME
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
+
+from sugar4.graphics.objectchooser import ObjectChooser, FILTER_TYPE_GENERIC_MIME
 
 
 def is_journal_service_available():
     bus = dbus.SessionBus()
     try:
-        bus.get_object('org.laptop.Journal', '/org/laptop/Journal')
+        bus.get_object("org.laptop.Journal", "/org/laptop/Journal")
         return True
     except dbus.exceptions.DBusException:
         return False
+
 
 class ObjectChooserExample(Gtk.ApplicationWindow):
     def __init__(self, app):
@@ -33,7 +36,9 @@ class ObjectChooserExample(Gtk.ApplicationWindow):
         self.set_child(vbox)
 
         # Instructions
-        label = Gtk.Label(label="Click buttons to open ObjectChooser with different filters")
+        label = Gtk.Label(
+            label="Click buttons to open ObjectChooser with different filters"
+        )
         label.set_wrap(True)
         vbox.append(label)
 
@@ -67,7 +72,7 @@ class ObjectChooserExample(Gtk.ApplicationWindow):
                 parent=self,
                 what_filter=what_filter,
                 filter_type=filter_type,
-                show_preview=True
+                show_preview=True,
             )
 
             result = chooser.run()
@@ -75,8 +80,8 @@ class ObjectChooserExample(Gtk.ApplicationWindow):
             if result == Gtk.ResponseType.ACCEPT:
                 obj = chooser.get_selected_object()
                 if obj:
-                    title = obj.metadata.get('title', 'Unknown')
-                    mime_type = obj.metadata.get('mime_type', 'Unknown')
+                    title = obj.metadata.get("title", "Unknown")
+                    mime_type = obj.metadata.get("mime_type", "Unknown")
                     self.result_label.set_text(f"Selected: {title} ({mime_type})")
                     obj.destroy()
                 else:
@@ -89,10 +94,12 @@ class ObjectChooserExample(Gtk.ApplicationWindow):
         except Exception as e:
             self.result_label.set_text(f"Error: {e}")
 
+
 class ObjectChooserApp(Gtk.Application):
     def do_activate(self):
         window = ObjectChooserExample(self)
         window.present()
+
 
 if __name__ == "__main__":
     app = ObjectChooserApp()

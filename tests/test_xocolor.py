@@ -8,7 +8,7 @@ import os
 # src directory to Python path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from sugar.graphics.xocolor import XoColor
+from sugar4.graphics.xocolor import XoColor
 
 
 class TestXoColor(unittest.TestCase):

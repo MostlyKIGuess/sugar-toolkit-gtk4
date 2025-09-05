@@ -8,13 +8,15 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 try:
     import gi
+
     gi.require_version("Gtk", "4.0")
     from gi.repository import Gtk
+
     GTK_AVAILABLE = True
 except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
-from sugar.graphics.toolbox import Toolbox
+from sugar4.graphics.toolbox import Toolbox
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -132,7 +134,7 @@ class TestToolbox(unittest.TestCase):
         def on_toolbar_changed(toolbox, page_num):
             signal_data.append(page_num)
 
-        self.toolbox.connect('current-toolbar-changed', on_toolbar_changed)
+        self.toolbox.connect("current-toolbar-changed", on_toolbar_changed)
 
         # Change toolbar
         self.toolbox.set_current_toolbar(1)
@@ -219,8 +221,8 @@ class TestToolbox(unittest.TestCase):
         notebook = self.toolbox._notebook
         separator = self.toolbox._separator
 
-        self.assertTrue(notebook.has_css_class('toolbox'))
-        self.assertTrue(separator.has_css_class('toolbox-separator'))
+        self.assertTrue(notebook.has_css_class("toolbox"))
+        self.assertTrue(separator.has_css_class("toolbox-separator"))
 
 
 class TestToolboxWithoutGTK(unittest.TestCase):
@@ -228,8 +230,9 @@ class TestToolboxWithoutGTK(unittest.TestCase):
 
     def test_toolbox_import(self):
         """Test that Toolbox can be imported."""
-        from sugar.graphics.toolbox import Toolbox
-        self.assertTrue(hasattr(Toolbox, '__init__'))
+        from sugar4.graphics.toolbox import Toolbox
+
+        self.assertTrue(hasattr(Toolbox, "__init__"))
 
 
 if __name__ == "__main__":

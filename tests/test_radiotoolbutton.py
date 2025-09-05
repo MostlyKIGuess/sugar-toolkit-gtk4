@@ -17,8 +17,8 @@ except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
 if GTK_AVAILABLE:
-    from sugar.graphics.radiotoolbutton import RadioToolButton
-    from sugar.graphics.toolbutton import ToolButton
+    from sugar4.graphics.radiotoolbutton import RadioToolButton
+    from sugar4.graphics.toolbutton import ToolButton
 
 
 @unittest.skipUnless(GTK_AVAILABLE, "GTK4 not available")
@@ -178,11 +178,10 @@ class TestRadioToolButtonWithoutGTK(unittest.TestCase):
 
     def test_radio_tool_button_import(self):
         """Test that RadioToolButton can be imported."""
-        from sugar.graphics.radiotoolbutton import RadioToolButton
+        from sugar4.graphics.radiotoolbutton import RadioToolButton
 
         self.assertTrue(hasattr(RadioToolButton, "__init__"))
 
 
 if __name__ == "__main__":
     unittest.main()
-

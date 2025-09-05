@@ -7,9 +7,9 @@ from unittest.mock import Mock
 import sys
 import os
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'src'))
+sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from sugar.graphics.palettegroup import get_group, popdown_all, Group
+from sugar4.graphics.palettegroup import get_group, popdown_all, Group
 
 
 class MockPalette:
@@ -41,25 +41,26 @@ class MockPalette:
     def popdown(self, immediate=False):
         if self._is_up:
             self._is_up = False
-            self.emit('popdown')
+            self.emit("popdown")
 
     def popup(self):
         if not self._is_up:
             self._is_up = True
-            self.emit('popup')
+            self.emit("popup")
 
 
 class TestPaletteGroup(unittest.TestCase):
 
     def setUp(self):
-        import sugar.graphics.palettegroup as pg
+        import sugar4.graphics.palettegroup as pg
+
         pg._groups.clear()
 
     def test_get_group(self):
         """Test getting/creating groups."""
-        group1 = get_group('test1')
-        group2 = get_group('test1')  # Should return same group
-        group3 = get_group('test2')  # Should create new group
+        group1 = get_group("test1")
+        group2 = get_group("test1")  # Should return same group
+        group3 = get_group("test2")  # Should create new group
 
         self.assertIs(group1, group2)
         self.assertIsNot(group1, group3)
@@ -121,8 +122,8 @@ class TestPaletteGroup(unittest.TestCase):
             nonlocal popdown_called
             popdown_called = True
 
-        group.connect('popup', on_popup)
-        group.connect('popdown', on_popdown)
+        group.connect("popup", on_popup)
+        group.connect("popdown", on_popdown)
 
         palette.popup()
         self.assertTrue(popup_called)
@@ -146,8 +147,8 @@ class TestPaletteGroup(unittest.TestCase):
 
     def test_popdown_all(self):
         """Test popdown_all function."""
-        group1 = get_group('group1')
-        group2 = get_group('group2')
+        group1 = get_group("group1")
+        group2 = get_group("group2")
 
         palette1 = MockPalette("p1")
         palette2 = MockPalette("p2")
@@ -167,5 +168,5 @@ class TestPaletteGroup(unittest.TestCase):
         self.assertFalse(palette2.is_up())
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

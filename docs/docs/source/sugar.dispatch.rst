@@ -1,21 +1,21 @@
-sugar.dispatch package
+sugar4.dispatch package
 ======================
 
 Submodules
 ----------
 
-sugar.dispatch.dispatcher module
+sugar4.dispatch.dispatcher module
 --------------------------------
 
-.. automodule:: sugar.dispatch.dispatcher
+.. automodule:: sugar4.dispatch.dispatcher
    :members:
    :show-inheritance:
    :undoc-members:
 
-sugar.dispatch.saferef module
+sugar4.dispatch.saferef module
 -----------------------------
 
-.. automodule:: sugar.dispatch.saferef
+.. automodule:: sugar4.dispatch.saferef
    :members:
    :show-inheritance:
    :undoc-members:
@@ -23,7 +23,7 @@ sugar.dispatch.saferef module
 Module contents
 ---------------
 
-.. automodule:: sugar.dispatch
+.. automodule:: sugar4.dispatch
    :members:
    :show-inheritance:
    :undoc-members:

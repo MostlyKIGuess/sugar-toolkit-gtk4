@@ -8,13 +8,15 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 try:
     import gi
+
     gi.require_version("Gtk", "4.0")
     from gi.repository import Gtk, Gdk
+
     GTK_AVAILABLE = True
 except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
-from sugar.graphics import style
+from sugar4.graphics import style
 
 
 class TestColor(unittest.TestCase):
@@ -243,20 +245,21 @@ class TestStyleWithoutGTK(unittest.TestCase):
 
     def test_zoom_factor_environment(self):
         """Test zoom factor with environment variable."""
-        original_scaling = os.environ.get('SUGAR_SCALING')
+        original_scaling = os.environ.get("SUGAR_SCALING")
 
         try:
-            os.environ['SUGAR_SCALING'] = '150'
+            os.environ["SUGAR_SCALING"] = "150"
             # Need to reload the module to test environment variable
             import importlib
+
             importlib.reload(style)
             # This is approximate since ZOOM_FACTOR is calculated at import
 
         finally:
             if original_scaling is not None:
-                os.environ['SUGAR_SCALING'] = original_scaling
-            elif 'SUGAR_SCALING' in os.environ:
-                del os.environ['SUGAR_SCALING']
+                os.environ["SUGAR_SCALING"] = original_scaling
+            elif "SUGAR_SCALING" in os.environ:
+                del os.environ["SUGAR_SCALING"]
 
     def test_color_edge_cases(self):
         """Test Color edge cases."""

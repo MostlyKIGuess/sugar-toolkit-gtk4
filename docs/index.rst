@@ -15,12 +15,12 @@ Getting Started
 
 The Sugar Toolkit GTK4 is organized into several main modules:
 
-* **sugar.activity** - Core activity framework and widgets
-* **sugar.graphics** - UI components and styling
-* **sugar.bundle** - Activity packaging and metadata
-* **sugar.datastore** - Data persistence and sharing
-* **sugar.presence** - Collaboration and networking
-* **sugar.dispatch** - Event handling and signals
+* **sugar4.activity** - Core activity framework and widgets
+* **sugar4.graphics** - UI components and styling
+* **sugar4.bundle** - Activity packaging and metadata
+* **sugar4.datastore** - Data persistence and sharing
+* **sugar4.presence** - Collaboration and networking
+* **sugar4.dispatch** - Event handling and signals
 
 API Documentation
 =================
@@ -29,37 +29,37 @@ API Documentation
    :maxdepth: 2
    :caption: Activity Framework
 
-   docs/source/sugar.activity
+   docs/source/sugar4.activity
 
 .. toctree::
    :maxdepth: 2
    :caption: Graphics & UI
 
-   docs/source/sugar.graphics
+   docs/source/sugar4.graphics
 
 .. toctree::
    :maxdepth: 2
    :caption: Data & Storage
 
-   docs/source/sugar.datastore
+   docs/source/sugar4.datastore
 
 .. toctree::
    :maxdepth: 2
    :caption: Bundle Management
 
-   docs/source/sugar.bundle
+   docs/source/sugar4.bundle
 
 .. toctree::
    :maxdepth: 2
    :caption: Collaboration
 
-   docs/source/sugar.presence
+   docs/source/sugar4.presence
 
 .. toctree::
    :maxdepth: 2
    :caption: Event System
 
-   docs/source/sugar.dispatch
+   docs/source/sugar4.dispatch
 
 .. toctree::
    :maxdepth: 2

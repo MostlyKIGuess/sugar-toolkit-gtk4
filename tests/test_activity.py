@@ -21,15 +21,21 @@ except (ImportError, ValueError):
     GTK_AVAILABLE = False
 
 # Mock environment variables before importing sugar modules
-os.environ.setdefault('SUGAR_BUNDLE_ID', 'org.sugarlabs.TestActivity')
-os.environ.setdefault('SUGAR_BUNDLE_NAME', 'Test Activity')
-os.environ.setdefault('SUGAR_BUNDLE_PATH', '/tmp/test_bundle')
-os.environ.setdefault('SUGAR_ACTIVITY_ROOT', '/tmp/test_activity')
+os.environ.setdefault("SUGAR_BUNDLE_ID", "org.sugarlabs.TestActivity")
+os.environ.setdefault("SUGAR_BUNDLE_NAME", "Test Activity")
+os.environ.setdefault("SUGAR_BUNDLE_PATH", "/tmp/test_bundle")
+os.environ.setdefault("SUGAR_ACTIVITY_ROOT", "/tmp/test_activity")
 
 if GTK_AVAILABLE:
-    from sugar.activity.activity import Activity, SimpleActivity, get_bundle_name, get_bundle_path, get_activity_root
-    from sugar.activity.activityhandle import ActivityHandle
-    from sugar.datastore.datastore import DSMetadata
+    from sugar4.activity.activity import (
+        Activity,
+        SimpleActivity,
+        get_bundle_name,
+        get_bundle_path,
+        get_activity_root,
+    )
+    from sugar4.activity.activityhandle import ActivityHandle
+    from sugar4.datastore.datastore import DSMetadata
 
 
 class MockMetadata(DSMetadata):
@@ -37,15 +43,15 @@ class MockMetadata(DSMetadata):
 
     def __init__(self):
         properties = {
-            'title': 'Test Activity',
-            'activity': 'org.sugarlabs.TestActivity',
-            'activity_id': 'test-activity-123',
-            'keep': '0',
-            'preview': '',
-            'share-scope': 'private',
-            'icon-color': '#FF0000,#00FF00',
-            'launch-times': '1234567890',
-            'spent-times': '0'
+            "title": "Test Activity",
+            "activity": "org.sugarlabs.TestActivity",
+            "activity_id": "test-activity-123",
+            "keep": "0",
+            "preview": "",
+            "share-scope": "private",
+            "icon-color": "#FF0000,#00FF00",
+            "launch-times": "1234567890",
+            "spent-times": "0",
         }
         super().__init__(properties)
 
@@ -55,8 +61,8 @@ class MockJobject:
 
     def __init__(self):
         self.metadata = MockMetadata()
-        self.file_path = ''
-        self.object_id = 'test-object-123'
+        self.file_path = ""
+        self.object_id = "test-object-123"
         self._destroyed = False
 
     def destroy(self):
@@ -77,7 +83,9 @@ class MockDatastore:
         return jobject
 
     @staticmethod
-    def write(jobject, transfer_ownership=False, reply_handler=None, error_handler=None):
+    def write(
+        jobject, transfer_ownership=False, reply_handler=None, error_handler=None
+    ):
         if reply_handler:
             GLib.idle_add(reply_handler)
 
@@ -104,35 +112,37 @@ class TestActivity(unittest.TestCase):
 
         # Create temporary directories
         self.temp_dir = tempfile.mkdtemp()
-        self.activity_root = os.path.join(self.temp_dir, 'activity_root')
+        self.activity_root = os.path.join(self.temp_dir, "activity_root")
         os.makedirs(self.activity_root, exist_ok=True)
 
         # Mock environment
-        os.environ['SUGAR_ACTIVITY_ROOT'] = self.activity_root
+        os.environ["SUGAR_ACTIVITY_ROOT"] = self.activity_root
 
-        self.handle = ActivityHandle('test-activity-123')
+        self.handle = ActivityHandle("test-activity-123")
         self.handle.object_id = None
         self.handle.invited = False
 
         # Patch datastore
-        self.datastore_patcher = patch('sugar.activity.activity.datastore', MockDatastore())
+        self.datastore_patcher = patch(
+            "sugar4.activity.activity.datastore", MockDatastore()
+        )
         self.datastore_patcher.start()
 
         # Patch other dependencies
-        self.bundle_patcher = patch('sugar.activity.activity.get_bundle_instance')
+        self.bundle_patcher = patch("sugar4.activity.activity.get_bundle_instance")
         self.mock_bundle = self.bundle_patcher.start()
         mock_bundle_instance = Mock()
-        mock_bundle_instance.get_icon.return_value = 'activity-icon'
+        mock_bundle_instance.get_icon.return_value = "activity-icon"
         mock_bundle_instance.get_max_participants.return_value = 4
         self.mock_bundle.return_value = mock_bundle_instance
 
-        self.color_patcher = patch('sugar.activity.activity.get_color')
+        self.color_patcher = patch("sugar4.activity.activity.get_color")
         self.mock_color = self.color_patcher.start()
         mock_color_instance = Mock()
-        mock_color_instance.to_string.return_value = '#FF0000,#00FF00'
+        mock_color_instance.to_string.return_value = "#FF0000,#00FF00"
         self.mock_color.return_value = mock_color_instance
 
-        self.save_as_patcher = patch('sugar.activity.activity.get_save_as')
+        self.save_as_patcher = patch("sugar4.activity.activity.get_save_as")
         self.mock_save_as = self.save_as_patcher.start()
         self.mock_save_as.return_value = False
 
@@ -152,7 +162,7 @@ class TestActivity(unittest.TestCase):
         activity = Activity(self.handle)
         self.assertIsNotNone(activity.get_id())
         self.assertIsInstance(activity.get_id(), str)
-        self.assertEqual(activity.get_id(), 'test-activity-123')
+        self.assertEqual(activity.get_id(), "test-activity-123")
         self.assertIsInstance(activity.get_title(), str)
         self.assertFalse(activity.get_active())  # Default is False
 
@@ -162,8 +172,8 @@ class TestActivity(unittest.TestCase):
         metadata = activity.get_metadata()
         # The get_metadata() method returns the DSMetadata object, not a dict
         # We need to check if it has dict-like behavior instead
-        self.assertTrue(hasattr(metadata, '__getitem__'))
-        self.assertTrue(hasattr(metadata, '__setitem__'))
+        self.assertTrue(hasattr(metadata, "__getitem__"))
+        self.assertTrue(hasattr(metadata, "__setitem__"))
         self.assertIn("title", metadata)
         self.assertIn("activity", metadata)
 
@@ -231,7 +241,7 @@ class TestActivity(unittest.TestCase):
     def test_bundle_methods(self):
         """Test bundle-related methods."""
         activity = Activity(self.handle)
-        self.assertEqual(activity.get_bundle_id(), 'org.sugarlabs.TestActivity')
+        self.assertEqual(activity.get_bundle_id(), "org.sugarlabs.TestActivity")
 
     def test_activity_root(self):
         """Test activity root directory."""
@@ -283,10 +293,10 @@ class TestActivity(unittest.TestCase):
         activity = Activity(self.handle)
 
         with self.assertRaises(NotImplementedError):
-            activity.read_file('/tmp/test.txt')
+            activity.read_file("/tmp/test.txt")
 
         with self.assertRaises(NotImplementedError):
-            activity.write_file('/tmp/test.txt')
+            activity.write_file("/tmp/test.txt")
 
     def test_handle_view_source_not_implemented(self):
         """Test that handle_view_source raises NotImplementedError."""
@@ -307,7 +317,7 @@ class TestActivity(unittest.TestCase):
         activity = Activity(self.handle)
         activity.share = Mock()
 
-        activity.invite('account_path', 'contact_id')
+        activity.invite("account_path", "contact_id")
 
         # Should add to invites queue and call share
         self.assertEqual(len(activity._invites_queue), 1)
@@ -327,7 +337,7 @@ class TestActivity(unittest.TestCase):
 
     def test_preview_generation_without_cairo(self):
         """Test preview generation when Cairo is not available."""
-        with patch('sugar.activity.activity.HAS_CAIRO', False):
+        with patch("sugar4.activity.activity.HAS_CAIRO", False):
             activity = Activity(self.handle)
             preview = activity.get_preview()
             self.assertIsNone(preview)
@@ -348,7 +358,7 @@ class TestActivity(unittest.TestCase):
 
     def test_resumed_activity(self):
         """Test resuming an activity from journal object."""
-        self.handle.object_id = 'test-object-123'
+        self.handle.object_id = "test-object-123"
 
         activity = Activity(self.handle)
 
@@ -369,8 +379,8 @@ class TestActivityWithoutGTK(unittest.TestCase):
     def test_utility_functions(self):
         """Test utility functions."""
         # These should return strings from environment
-        self.assertEqual(get_bundle_name(), 'Test Activity')
-        self.assertEqual(get_bundle_path(), '/tmp/test_bundle')
+        self.assertEqual(get_bundle_name(), "Test Activity")
+        self.assertEqual(get_bundle_path(), "/tmp/test_bundle")
 
         # Activity root should be created if it doesn't exist
         root = get_activity_root()
@@ -378,13 +388,13 @@ class TestActivityWithoutGTK(unittest.TestCase):
         self.assertTrue(os.path.exists(root))
 
 
-
 class TestActivitySession(unittest.TestCase):
     """Test activity session management."""
 
     def setUp(self):
         """Set up test fixtures."""
-        from sugar.activity.activity import _ActivitySession
+        from sugar4.activity.activity import _ActivitySession
+
         self.session = _ActivitySession()
 
     def test_session_creation(self):

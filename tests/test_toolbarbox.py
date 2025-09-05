@@ -1,5 +1,5 @@
 """
-Unit tests for sugar.graphics.toolbarbox module.
+Unit tests for sugar4.graphics.toolbarbox module.
 """
 
 import unittest
@@ -13,8 +13,8 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk
 
-from sugar.graphics.toolbarbox import ToolbarBox, ToolbarButton
-from sugar.graphics.toolbutton import ToolButton
+from sugar4.graphics.toolbarbox import ToolbarBox, ToolbarButton
+from sugar4.graphics.toolbutton import ToolButton
 
 
 class TestToolbarBox(unittest.TestCase):

@@ -64,5 +64,5 @@ This produces a portable `.flatpak` file that can be installed on any Flatpak-en
 - `main.py` must start with `#!/usr/bin/env python3` and be executable (`chmod +x main.py`).
 - The manifest installs `main.py` as `/app/bin/org.sugarlabs.Gtk4BundleTest` and sets that as the Flatpak command.
 - The manifest includes finish-args for GUI support (Wayland/X11, DRI, network, host fs).
-- This example assumes you have the sugar-toolkit-gtk4-py source available two directories up from this example folder.
+- This example assumes you have the sugar-toolkit-gtk4source available two directories up from this example folder.
 - You can adapt the manifest for your own app/bundle as needed.

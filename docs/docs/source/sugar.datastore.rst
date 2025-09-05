@@ -1,13 +1,13 @@
-sugar.datastore package
+sugar4.datastore package
 =======================
 
 Submodules
 ----------
 
-sugar.datastore.datastore module
+sugar4.datastore.datastore module
 --------------------------------
 
-.. automodule:: sugar.datastore.datastore
+.. automodule:: sugar4.datastore.datastore
    :members:
    :show-inheritance:
    :undoc-members:
@@ -15,7 +15,7 @@ sugar.datastore.datastore module
 Module contents
 ---------------
 
-.. automodule:: sugar.datastore
+.. automodule:: sugar4.datastore
    :members:
    :show-inheritance:
    :undoc-members:

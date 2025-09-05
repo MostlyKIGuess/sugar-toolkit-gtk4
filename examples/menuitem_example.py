@@ -6,13 +6,14 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 import gi
+
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, Gio
 
-from sugar.activity import SimpleActivity
-from sugar.graphics.menuitem import MenuItem, MenuSeparator
-from sugar.graphics import style
-from sugar.graphics.xocolor import XoColor
+from sugar4.activity import SimpleActivity
+from sugar4.graphics.menuitem import MenuItem, MenuSeparator
+from sugar4.graphics import style
+from sugar4.graphics.xocolor import XoColor
 
 
 class MenuItemExampleActivity(SimpleActivity):
@@ -25,7 +26,9 @@ class MenuItemExampleActivity(SimpleActivity):
 
     def _create_content(self):
         """Create the main content with menu examples."""
-        main_box = Gtk.Box(orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING)
+        main_box = Gtk.Box(
+            orientation=Gtk.Orientation.VERTICAL, spacing=style.DEFAULT_SPACING
+        )
         main_box.set_margin_start(style.DEFAULT_PADDING * 2)
         main_box.set_margin_end(style.DEFAULT_PADDING * 2)
         main_box.set_margin_top(style.DEFAULT_PADDING * 2)
@@ -86,7 +89,7 @@ button.menuitem:focus label, button.menuitem:active label, button.menuitem:hover
         colored_item = MenuItem(
             text_label="Colored Icon Item",
             icon_name="emblem-favorite",
-            xo_color=xo_color
+            xo_color=xo_color,
         )
         colored_item.connect("clicked", self._on_menu_item_clicked, "Colored Icon")
         vbox.append(colored_item)
@@ -98,7 +101,7 @@ button.menuitem:focus label, button.menuitem:active label, button.menuitem:hover
         long_item = MenuItem(
             text_label="This is a very long menu item text that should be ellipsized",
             icon_name="dialog-information",
-            text_maxlen=30
+            text_maxlen=30,
         )
         long_item.connect("clicked", self._on_menu_item_clicked, "Long Text Item")
         vbox.append(long_item)
@@ -208,14 +211,14 @@ button.menuitem:focus label, button.menuitem:active label, button.menuitem:hover
 def main():
     """Run the MenuItem example activity."""
     # Create application with proper ID
-    app = Gtk.Application(application_id='org.sugarlabs.MenuItemExample')
+    app = Gtk.Application(application_id="org.sugarlabs.MenuItemExample")
 
     def on_activate(app):
         activity = MenuItemExampleActivity()
         app.add_window(activity)
         activity.present()
 
-    app.connect('activate', on_activate)
+    app.connect("activate", on_activate)
     return app.run()
 
 

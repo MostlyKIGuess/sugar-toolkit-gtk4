@@ -15,8 +15,8 @@ import gi
 gi.require_version("Gtk", "4.0")
 from gi.repository import Gtk, Gdk, GLib
 
-from sugar.graphics.tray import HTray, VTray, TrayButton, TrayIcon
-from sugar.graphics.xocolor import XoColor
+from sugar4.graphics.tray import HTray, VTray, TrayButton, TrayIcon
+from sugar4.graphics.xocolor import XoColor
 
 
 class TrayWindow(Gtk.ApplicationWindow):
@@ -34,7 +34,9 @@ class TrayWindow(Gtk.ApplicationWindow):
         self.set_child(outer)
 
         label = Gtk.Label()
-        label.set_markup("<b>Tray Example</b>\nClick icons or buttons. Use Add/Remove controls.")
+        label.set_markup(
+            "<b>Tray Example</b>\nClick icons or buttons. Use Add/Remove controls."
+        )
         label.set_halign(Gtk.Align.START)
         label.set_valign(Gtk.Align.START)
         outer.append(label)
@@ -115,7 +117,9 @@ class TrayWindow(Gtk.ApplicationWindow):
             if os.path.exists(path):
                 icon = TrayIcon(icon_name=path, xo_color=XoColor.get_random_color())
             else:
-                icon = TrayIcon(icon_name="document-open", xo_color=XoColor.get_random_color())
+                icon = TrayIcon(
+                    icon_name="document-open", xo_color=XoColor.get_random_color()
+                )
             icon.connect("clicked", self._on_tray_icon_clicked, f"H-Icon-{i}")
             self.htray.add_item(icon)
 
@@ -138,7 +142,9 @@ class TrayWindow(Gtk.ApplicationWindow):
         provider.load_from_data(css.encode())
         display = Gdk.Display.get_default()
         if display:
-            Gtk.StyleContext.add_provider_for_display(display, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
+            Gtk.StyleContext.add_provider_for_display(
+                display, provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
+            )
 
     def _on_tray_icon_clicked(self, widget, info):
         print(f"Horizontal tray icon clicked: {info}")
