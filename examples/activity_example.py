@@ -29,12 +29,12 @@ gi.require_version("GLib", "2.0")
 
 from gi.repository import Gtk, GLib, Gio
 
-from sugar4.activity.activity import Activity
-from sugar4.activity.activityhandle import ActivityHandle
-from sugar4.graphics.toolbarbox import ToolbarBox
-from sugar4.activity.widgets import ActivityToolbarButton, StopButton
-from sugar4.graphics.alert import Alert
-from sugar4.graphics.icon import Icon
+from sugar.activity.activity import Activity
+from sugar.activity.activityhandle import ActivityHandle
+from sugar.graphics.toolbarbox import ToolbarBox
+from sugar.activity.widgets import ActivityToolbarButton, StopButton
+from sugar.graphics.alert import Alert
+from sugar.graphics.icon import Icon
 import json
 
 
@@ -362,14 +362,23 @@ class BasicExampleActivity(Activity):
     def write_file(self, file_path):
         """Write activity data to file."""
         try:
+            if not hasattr(self, "_text_content"):
+                logging.warning(
+                    "_text_content attribute missing; setting to empty string."
+                )
+                self._text_content = ""
+            import datetime
+
             data = {
                 "text_content": self._text_content,
                 "counter": self._counter,
                 "activity_id": self.get_id(),
                 "bundle_id": self.get_bundle_id(),
-                "saved_at": GLib.DateTime.new_now_local().format_iso8601(),
+                "saved_at": datetime.datetime.now().isoformat(),
             }
 
+            parent_dir = os.path.dirname(file_path)
+            os.makedirs(parent_dir, exist_ok=True)
             with open(file_path, "w") as f:
                 json.dump(data, f, indent=2)
 
