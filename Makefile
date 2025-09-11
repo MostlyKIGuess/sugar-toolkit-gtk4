@@ -53,7 +53,7 @@ example:  ## Run the basic example activity
 	cd examples && python basic_activity.py
 
 test-toolkit:  ## Run sugar module as a script
-	python -m sugar
+	python -m sugar4
 
 dev-test: clean test format-check  ## Run all development checks
 	@echo "All development checks passed!"

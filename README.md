@@ -6,30 +6,6 @@ A modern GTK4 port of the Sugar Toolkit for Python activities.
 
 This project is a ground-up reimplementation of the Sugar Toolkit using GTK4 and modern Python practices. We're maintaining compatibility with Sugar's core concepts while leveraging GTK4's improved APIs.
 
-## Component Status
-
-| Component | Status | Module | Description |
-|-----------|--------|---------|-------------|
-| **XoColor** | Done | `sugar4.graphics` | Color handling with Sugar's standard palette |
-| **Activity** | Done | `sugar4.activity` | Base activity class with GTK4 window & lifecycle integration |
-| **SimpleActivity** | Done | `sugar4.activity` | Quick-start activity template |
-| **Alert** | Done | `sugar4.graphics` | Dialog system for user notifications (in-window alerts) |
-| **Icon** | Done | `sugar4.graphics` | Sugar-style icon handling |
-| **Style** | Done | `sugar4.graphics` | Sugar visual styling constants |
-| **Window** | Done | `sugar4.graphics` | Enhanced window management for GTK4 |
-| **Palette** | Done | `sugar4.graphics` | Full Palette system (popups, groups, menus, invokers) |
-| **ToolbarBox** | Done | `sugar4.graphics` | Activity toolbar container |
-| **ToggleToolButton** | Done | `sugar4.graphics` | Toggle toolbar Button |
-| **ComboBox** | Done | `sugar4.graphics` |  Combo box container |
-| **ToolComboBox** | Done | `sugar4.graphics` |  Tool Combo box container |
-| **ToolButton** | Done | `sugar4.graphics` | GTK4 ToolButton and RadioToolButton implementations |
-| **Tray** | Done | `sugar4.graphics` | Tray widgets and integration helpers |
-| **Datastore** | Done | `sugar4.datastore` | Journal/datastore helpers: create/read/write/find activity objects |
-| **Presence** | Done | `sugar4.presence` | Telepathy/Presence integration (sharing, buddies, activity discovery) |
-| **Bundle** | Done | `sugar4.bundle` | Activity bundle helpers and metadata (bundle path, icon, manifest helpers) |
-
-- More to be Added!
-
 ## Installation
 
 ### From Source

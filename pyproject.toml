@@ -29,6 +29,10 @@ classifiers = [
 ]
 requires-python = ">=3.8"
 
+dependencies = [
+    "PyGObject>=3.42.0",
+]
+
 [project.optional-dependencies]
 dev = ["pytest>=6.0", "pytest-cov", "black", "flake8", "mypy", "build", "twine"]
 test = ["pytest>=6.0", "pytest-cov"]

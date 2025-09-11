@@ -65,7 +65,7 @@ API Documentation
    :maxdepth: 2
    :caption: Core Utilities
 
-   docs/source/sugar
+   docs/source/sugar4
 
 Examples
 ========
