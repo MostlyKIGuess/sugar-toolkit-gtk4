@@ -133,7 +133,7 @@ class IconExampleActivity(SimpleActivity):
             os.path.dirname(__file__),
             "..",
             "src",
-            "sugar",
+            "sugar4",
             "graphics",
             "icons",
             "test.svg",

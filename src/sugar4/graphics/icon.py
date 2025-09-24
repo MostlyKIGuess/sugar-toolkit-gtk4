@@ -308,6 +308,8 @@ class _IconBuffer:
             return
 
         badge_file_name = badge_file.get_path()
+        if not badge_file_name:
+            return
 
         if badge_file_name.endswith(".svg"):
             handle = self._load_svg(badge_file_name)
