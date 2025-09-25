@@ -19,10 +19,10 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 """
-Window - GTK4 Port
-==================
+Window Management
+=================
 
-Window management for Sugar GTK4 activities.
+Window management for Sugar activities.
 
 Provides window classes for managing Sugar activity windows with
 fullscreen support, toolbar management, and tray integration.
@@ -46,10 +46,10 @@ _UNFULLSCREEN_BUTTON_VISIBILITY_TIMEOUT = 2
 
 class UnfullscreenButton(Gtk.Window):
     """
-    A ready-made "Unfullscreen" button for GTK4.
+    A ready-made "Unfullscreen" button.
 
     Used by :class:`~sugar4.graphics.window.Window` to exit fullscreen
-    mode. Ported to use GTK4 APIs.
+    mode using modern window management.
     """
 
     __gtype_name__ = "SugarUnfullscreenButton"
@@ -119,7 +119,7 @@ class UnfullscreenButton(Gtk.Window):
 
 class Window(Gtk.ApplicationWindow):
     """
-    A Sugar activity window for GTK4.
+    A Sugar activity window.
 
     Used as a container to display things that happen in an activity.
     A window contains a canvas widget, and may contain toolbar and tray widgets.
@@ -187,7 +187,7 @@ class Window(Gtk.ApplicationWindow):
         self._content_box.append(self._overlay)
 
     def _setup_event_handling(self):
-        """Set up GTK4 event handling."""
+        """Set up modern event handling with gesture controllers."""
         # Key events
         key_controller = Gtk.EventControllerKey()
         key_controller.connect("key-pressed", self._on_key_pressed)

@@ -309,7 +309,7 @@ class _TimeoutIcon(Gtk.Widget):
         self._text = ""
 
     def do_snapshot(self, snapshot):
-        """GTK4 drawing method using snapshots"""
+        """Render the loading indicator using snapshot-based drawing."""
         width = self.get_width()
         height = self.get_height()
 

@@ -18,13 +18,13 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 """
-XoColor - GTK4 Port
-===================
+XoColor
+=======
 
 This class represents all of the colors that the XO can take on.
 Each pair of colors represents the fill color and the stroke color.
 
-Ported to GTK4 from sugar3.graphics.xocolor
+Modern implementation with improved color handling and CSS support.
 """
 
 import random
@@ -385,7 +385,7 @@ class XoColor:
 
     def to_rgba_tuple(self, alpha=1.0):
         """
-        Convert colors to RGBA tuples for use with Cairo/GTK4.
+        Convert colors to RGBA tuples for use with Cairo and modern graphics.
 
         Args:
             alpha (float): Alpha value (0.0 - 1.0)

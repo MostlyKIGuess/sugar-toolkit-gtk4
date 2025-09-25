@@ -2,7 +2,7 @@
 Activity Module
 ===============
 
-Core activity classes and functionality for Sugar GTK4 activities.
+Core activity classes and functionality for Sugar activities.
 """
 
 # Set GTK version requirements before any GTK imports

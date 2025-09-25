@@ -19,17 +19,20 @@
 # SPDX-License-Identifier: LGPL-2.1-or-later
 
 """
-Icons - GTK4
-=================
+Icons
+=====
 
 Icons are small pictures that are used to decorate components. In Sugar, icons
 are SVG files that are re-coloured with a fill and a stroke colour. Typically,
 icons representing the system use a greyscale color palette, whereas icons
 representing people take on their selected XoColors.
 
+This module provides modern icon widgets using native gesture handling
+and snapshot-based rendering for improved performance and accessibility.
+
 Classes:
     Icon: Basic icon widget for displaying themed icons
-    EventIcon: Icon with mouse event handling (GTK4 GestureClick)
+    EventIcon: Icon with mouse event handling using gesture controllers
     CanvasIcon: EventIcon with active/prelight states and styleable background
     CellRendererIcon: Icon renderer for use in tree/list views
     get_icon_file_name: Utility function to resolve icon paths
@@ -239,7 +242,7 @@ class _IconBuffer:
         elif icon_name:
             icon_theme = Gtk.IconTheme.get_for_display(Gdk.Display.get_default())
 
-            # GTK4 uses lookup_icon with size and scale
+            # Use IconTheme.lookup_icon for themed icon resolution
             icon_paintable = icon_theme.lookup_icon(
                 icon_name,
                 None,
@@ -553,9 +556,10 @@ class _IconBuffer:
 
 class Icon(Gtk.Widget):
     """
-    Basic Sugar icon widget for GTK4.
+    Basic Sugar icon widget.
 
     Displays themed icons with Sugar's color customization features.
+    Uses modern snapshot-based rendering for improved performance.
 
     Properties:
         icon_name (str): Icon name from theme
@@ -591,7 +595,7 @@ class Icon(Gtk.Widget):
         self.set_size_request(pixel_size, pixel_size)
 
     def do_snapshot(self, snapshot: Gtk.Snapshot):
-        """GTK4 drawing method."""
+        """Render icon using snapshot-based drawing."""
         surface = self._buffer.get_surface(self.get_sensitive())
         if surface:
             width = self.get_width()
@@ -621,7 +625,7 @@ class Icon(Gtk.Widget):
     def do_measure(
         self, orientation: Gtk.Orientation, for_size: int
     ) -> Tuple[int, int, int, int]:
-        """GTK4 size request method."""
+        """Calculate widget size requirements."""
         size = max(self._buffer.width, self._buffer.height)
         return size, size, -1, -1
 
@@ -771,7 +775,10 @@ class Icon(Gtk.Widget):
 
 class EventIcon(Icon):
     """
-    Icon widget with mouse event handling using GTK4 gestures.
+    Icon widget with mouse event handling using gesture controllers.
+
+    Provides click, press, and release events through modern gesture handling
+    for better touch and accessibility support.
 
     Signals:
         clicked: Emitted when icon is clicked
@@ -796,7 +803,7 @@ class EventIcon(Icon):
         self._setup_gestures()
 
     def _setup_gestures(self):
-        """Set up GTK4 gesture controllers."""
+        """Set up gesture controllers for event handling."""
         # Click gesture
         click_gesture = Gtk.GestureClick()
         click_gesture.connect("pressed", self._on_pressed)
@@ -930,13 +937,15 @@ class CanvasIcon(EventIcon):
         super().do_snapshot(snapshot)
 
 
-# Cell renderer for GTK4 (simplified - GTK4 uses different approach)
+# Simplified cell renderer for list/tree view compatibility
 class CellRendererIcon:
     """
     Icon renderer for use in list/tree views.
 
-    Note: GTK4 uses a different approach for cell rendering.
-    This is provided for compatibility but may need adaptation.
+    Modern implementations use different approaches for cell rendering.
+    This provides compatibility for legacy code that may need adaptation.
+
+    Note: Consider using modern list/tree widget patterns instead.
     """
 
     def __init__(self):
@@ -977,7 +986,10 @@ class CellRendererIcon:
 # Utility functions
 def get_icon_file_name(icon_name: str) -> Optional[str]:
     """
-    Resolve icon name to file path using GTK4 icon theme.
+    Resolve icon name to file path using icon theme.
+
+    Uses the system icon theme to find the appropriate icon file
+    for the given icon name.
 
     Args:
         icon_name: Name of icon to resolve
@@ -1064,7 +1076,7 @@ def get_surface(
     return buffer.get_surface()
 
 
-# Import Graphene for GTK4 snapshot operations
+# Import Graphene for snapshot-based rendering operations
 try:
     gi.require_version("Graphene", "1.0")
     from gi.repository import Graphene

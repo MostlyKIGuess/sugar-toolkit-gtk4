@@ -116,8 +116,8 @@ class ToolButton(Gtk.Button):
     """
     The ToolButton class manages a Gtk.Button styled as a toolbar button for sugar4.
 
-    In GTK4, this replaces Gtk.ToolButton which was deprecated. The button is styled
-    to look and behave like a traditional toolbar button.
+    This replaces deprecated ToolButton with a modern Button implementation
+    styled to look and behave like a traditional toolbar button.
 
     Args:
         icon_name (str, optional): name of themed icon.
@@ -419,7 +419,7 @@ class ToolButton(Gtk.Button):
     )
 
     def do_snapshot(self, snapshot):
-        """GTK4 drawing implementation."""
+        """Render tool button using snapshot-based drawing."""
         # Call parent implementation first
         Gtk.Widget.do_snapshot(self, snapshot)
 

@@ -25,7 +25,7 @@ RadioPalette
 Radio palette provides a way to create radio button groups within palettes,
 allowing users to select one option from multiple choices.
 
-This GTK4 port modernizes the radio palette system while maintaining
+This implementation modernizes the radio palette system while maintaining
 compatibility with Sugar's palette interface patterns.
 
 Example:

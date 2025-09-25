@@ -55,9 +55,9 @@ assert TreeViewInvoker
 
 
 class _HeaderItem(Gtk.Widget):
-    """A custom widget for palette headers in GTK4.
+    """A custom widget for palette headers.
 
-    Replaces GTK3's MenuItem with a widget.
+    Replaces deprecated MenuItem with a modern widget implementation.
     """
 
     __gtype_name__ = "SugarPaletteHeader"

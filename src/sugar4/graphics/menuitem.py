@@ -23,7 +23,7 @@ MenuItem
 ===================
 
 Sugar-style menu items with icon and accelerator support.
-This GTK4 port replaces deprecated ImageMenuItem with modern equivalents.
+This implementation replaces deprecated ImageMenuItem with modern equivalents.
 """
 
 import logging
@@ -42,7 +42,7 @@ class MenuItem(Gtk.Button):
     """
     A Sugar-style menu item with icon and text support.
 
-    In GTK4, this replaces the deprecated ImageMenuItem with a Button
+    This replaces the deprecated ImageMenuItem with a Button
     that can be used in menus and popover menus.
 
     Args:

@@ -49,7 +49,7 @@ if not hasattr(GObject.ParamFlags, "READWRITE"):
 
 class _TrayViewport(Gtk.ScrolledWindow):
     """
-    GTK4 port using ScrolledWindow instead.
+    Scrollable viewport implementation using ScrolledWindow.
     """
 
     __gproperties__ = {
@@ -288,8 +288,7 @@ ALIGN_TO_END = 1
 
 class HTray(Gtk.Widget):
     """
-    Horizontal tray widget for GTK4.
-    Widget as base class with custom layout management.
+    Horizontal tray widget with custom layout management.
     """
 
     __gtype_name__ = "SugarHTray"
@@ -409,9 +408,7 @@ class HTray(Gtk.Widget):
 
 class VTray(Gtk.Widget):
     """
-    Vertical tray widget for GTK4.
-
-    Widget as base class with custom layout management.
+    Vertical tray widget with custom layout management.
     """
 
     __gtype_name__ = "SugarVTray"
@@ -464,11 +461,11 @@ class VTray(Gtk.Widget):
         super().do_dispose()
 
     def do_measure(self, orientation, for_size):
-        """GTK4 size measurement."""
+        """Calculate size requirements."""
         return self._box.measure(orientation, for_size)
 
     def do_size_allocate(self, width, height, baseline):
-        """GTK4 size allocation."""
+        """Allocate size to child widgets."""
         self._box.allocate(width, height, baseline, None)
 
     def do_set_property(self, pspec, value):
@@ -547,7 +544,7 @@ class TrayButton(ToolButton):
 
 
 class _IconWidget(Gtk.Widget):
-    """Widget for displaying tray icons with GTK4."""
+    """Widget for displaying tray icons."""
 
     __gtype_name__ = "SugarTrayIconWidget"
 
@@ -601,7 +598,7 @@ class _IconWidget(Gtk.Widget):
         self._box.allocate(width, height, baseline, None)
 
     def do_snapshot(self, snapshot):
-        """GTK4 drawing with snapshot."""
+        """Render widget using snapshot-based drawing."""
         palette = (
             self.get_parent().palette if hasattr(self.get_parent(), "palette") else None
         )
@@ -610,7 +607,7 @@ class _IconWidget(Gtk.Widget):
             width = self.get_width()
             height = self.get_height()
 
-            # GTK4 snapshot API
+            # Use snapshot API for drawing background
             color = Gdk.RGBA()
             color.parse("#000000")
             snapshot.append_color(color, Graphene.Rect().init(0, 0, width, height))

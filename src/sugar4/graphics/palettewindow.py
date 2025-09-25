@@ -278,7 +278,7 @@ class _PaletteMenuWidget(Gtk.Popover):
 
 
 class _PaletteWindowWidget(Gtk.Window):
-    """GTK4 palette window widget."""
+    """Palette window widget with modern event handling."""
 
     __gtype_name__ = "SugarPaletteWindowWidget"
 
@@ -318,7 +318,7 @@ class _PaletteWindowWidget(Gtk.Window):
         return (0, 0)
 
     def do_measure(self, orientation, for_size):
-        """GTK4 measure implementation."""
+        """Calculate size requirements for the palette window."""
         min_size, nat_size, min_baseline, nat_baseline = Gtk.Window.do_measure(
             self, orientation, for_size
         )
@@ -336,7 +336,7 @@ class _PaletteWindowWidget(Gtk.Window):
         return min_size, nat_size, min_baseline, nat_baseline
 
     def do_size_allocate(self, width, height, baseline):
-        """GTK4 size allocate implementation."""
+        """Allocate size to the palette window and its children."""
         Gtk.Window.do_size_allocate(self, width, height, baseline)
 
         allocation = Gdk.Rectangle()
@@ -1227,7 +1227,7 @@ class WidgetInvoker(Invoker):
         self.attach(parent)
 
     def _setup_controllers(self):
-        """Set up GTK4 event controllers."""
+        """Set up event controllers for palette interaction."""
         if not self._widget:
             return
 

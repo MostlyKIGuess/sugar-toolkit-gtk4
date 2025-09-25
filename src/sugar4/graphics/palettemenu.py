@@ -21,10 +21,10 @@
 PaletteMenu
 =======================
 
-The palettemenu module is the main port of call for making palettes in GTK4.
+The palettemenu module is the main port of call for making palettes.
 It covers creating menu items, separators and placing them in a box.
 
-This GTK4 port modernizes the palette menu system while maintaining
+This implementation modernizes the palette menu system while maintaining
 compatibility with Sugar's palette interface patterns.
 
 Example:
@@ -208,7 +208,7 @@ class PaletteMenuItem(Gtk.Button):
     The `activate` signal is usually emitted when the item is clicked. It has
     no arguments. When a menu item is activated, the palette is also closed.
 
-    This GTK4 port replaces EventBox with Button for better accessibility
+    This implementation replaces EventBox with Button for better accessibility
     and modern interaction patterns.
 
     Args:

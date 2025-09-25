@@ -435,7 +435,7 @@ class _Box(Gtk.Box):
         self._toolbar_button = toolbar_button
 
     def do_snapshot(self, snapshot):
-        """GTK4 drawing implementation."""
+        """Render palette using snapshot drawing."""
         Gtk.Widget.do_snapshot(self, snapshot)
 
         button_alloc = self._toolbar_button.get_allocation()

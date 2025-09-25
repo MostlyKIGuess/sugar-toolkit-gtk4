@@ -222,9 +222,9 @@ Size of a preview image for journal object metadata.
 
 class _ActivitySession(GObject.GObject):
     """
-    Manages activity session lifecycle for GTK4.
+    Manages activity session lifecycle.
 
-    This replaces the X session management
+    This replaces the legacy X session management with modern application lifecycle handling.
     """
 
     __gsignals__ = {
@@ -484,14 +484,14 @@ class Activity(Window):
         """
         Run the main loop for the activity.
 
-        Note: In GTK4, this is typically handled by the application,
-        but we keep this for compatibility.
+        Note: In modern applications, this is typically handled by the application framework,
+        but we keep this for compatibility with legacy code.
         """
         if self._iconify:
             self.minimize()
         self._in_main = True
 
-        # For GTK4, we don't use Gtk.main() anymore
+        # Use GLib main loop instead of deprecated Gtk.main()
         main_loop = GLib.MainLoop()
         self._session.set_main_loop(main_loop)
         main_loop.run()
@@ -730,7 +730,7 @@ class Activity(Window):
         """
         Adapt window to screen size.
 
-        GTK4 version - uses different approach than GTK3.
+        Uses modern display management APIs to determine optimal sizing.
         """
         display = Gdk.Display.get_default()
         if display:

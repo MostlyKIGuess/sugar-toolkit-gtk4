@@ -22,7 +22,7 @@
 Animator
 ====================
 
-The animator module provides a simple framework to create animations in GTK4.
+The animator module provides a simple framework to create animations.
 
 Example:
     Animate the size of a window::
@@ -196,7 +196,7 @@ class Animator(GObject.GObject):
             self.emit("completed")
 
     def _tick_cb(self, widget, frame_clock, user_data):
-        """GTK4 frame clock callback."""
+        """Frame clock callback for smooth animation timing."""
         if self._start_time is None:
             self._start_time = time.time()
 

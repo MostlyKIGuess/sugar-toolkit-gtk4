@@ -2,7 +2,7 @@
 Graphics Module
 ===============
 
-Visual components, styling, and UI widgets for Sugar GTK4 activities.
+Visual components, styling, and UI widgets for Sugar activities.
 """
 
 # Set GTK version requirements before any GTK imports
