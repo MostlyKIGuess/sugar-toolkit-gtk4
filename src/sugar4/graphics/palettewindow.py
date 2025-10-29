@@ -22,7 +22,6 @@
 
 
 import logging
-import os
 
 import gi
 
@@ -35,10 +34,14 @@ from sugar4.graphics import palettegroup
 from sugar4.graphics import animator
 from sugar4.graphics import style
 from sugar4.graphics.icon import CellRendererIcon
+from sugar4.debug import debug_print
 
 
 _pointer = None
-SUGAR_DEBUG = os.environ.get("SUGAR_DEBUG", "0") == "1"
+
+# Route all palette debug output through the centralized helper so that it
+# honours the DEBUG_SUGAR flag without sprinkling conditionals everywhere.
+print = debug_print
 
 
 def _get_pointer_position(widget):
@@ -735,9 +738,8 @@ class PaletteWindow(GObject.GObject):
 
     def popdown(self, immediate=False):
         """Hide the palette."""
-        if SUGAR_DEBUG:
-            print(f"PaletteWindow.popdown called with immediate={immediate}")
-            print(f"PaletteWindow.popdown: is_up={self._up}, widget={self._widget}")
+        print(f"PaletteWindow.popdown called with immediate={immediate}")
+        print(f"PaletteWindow.popdown: is_up={self._up}, widget={self._widget}")
         self._popup_anim.stop()
         self._mouse_detector.stop()
 
@@ -747,12 +749,10 @@ class PaletteWindow(GObject.GObject):
             self._popdown_anim.stop()
             if self._widget is not None:
                 if hasattr(self._widget, "popdown"):
-                    if SUGAR_DEBUG:
-                        print("PaletteWindow.popdown: calling widget.popdown()")
+                    print("PaletteWindow.popdown: calling widget.popdown()")
                     self._widget.popdown()
                 else:
-                    if SUGAR_DEBUG:
-                        print("PaletteWindow.popdown: setting widget invisible")
+                    print("PaletteWindow.popdown: setting widget invisible")
                     self._widget.set_visible(False)
 
     def on_invoker_enter(self):

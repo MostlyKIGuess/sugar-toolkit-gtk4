@@ -27,13 +27,17 @@ Each pair of colors represents the fill color and the stroke color.
 Modern implementation with improved color handling and CSS support.
 """
 
-import random
 import logging
+import random
 
 import gi
 
 gi.require_version("Gio", "2.0")
 from gi.repository import Gio
+from sugar4.debug import debug_print
+
+
+print = debug_print
 
 # Standard Sugar XO Colors palette
 colors = [

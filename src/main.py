@@ -1,3 +1,6 @@
+from sugar4.debug import debug_print
+
+
 def main(argv):
     """This statement prints Hello, World to your console"""
-    print("Hello, World")
+    debug_print("Hello, World")

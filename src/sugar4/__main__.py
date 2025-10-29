@@ -2,6 +2,11 @@
 
 import sys
 
+from sugar4.debug import debug_print
+
+
+print = debug_print
+
 
 def main():
     # NOTE: Following is subject to change in future versions

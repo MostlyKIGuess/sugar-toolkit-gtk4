@@ -29,12 +29,12 @@ gi.require_version("GLib", "2.0")
 
 from gi.repository import Gtk, GLib, Gio
 
-from sugar.activity.activity import Activity
-from sugar.activity.activityhandle import ActivityHandle
-from sugar.graphics.toolbarbox import ToolbarBox
-from sugar.activity.widgets import ActivityToolbarButton, StopButton
-from sugar.graphics.alert import Alert
-from sugar.graphics.icon import Icon
+from sugar4.activity.activity import Activity
+from sugar4.activity.activityhandle import ActivityHandle
+from sugar4.graphics.toolbarbox import ToolbarBox
+from sugar4.activity.widgets import ActivityToolbarButton, StopButton
+from sugar4.graphics.alert import Alert
+from sugar4.graphics.icon import Icon
 import json
 
 

@@ -9,6 +9,8 @@ import six
 import weakref
 import traceback
 
+from sugar4.debug import debug_print
+
 
 def safeRef(target, onDelete=None):
     """Return a *safe* weak reference to a callable target
@@ -21,23 +23,22 @@ def safeRef(target, onDelete=None):
         goes out of scope with the reference object, (either a
         weakref or a BoundMethodWeakref) as argument.
     """
-    if hasattr(target, 'im_self') or hasattr(target, '__self__'):
+    if hasattr(target, "im_self") or hasattr(target, "__self__"):
         if im_self(target) is not None:
             # Turn a bound method into a BoundMethodWeakref instance.
             # Keep track of these instances for lookup by disconnect().
             if six.PY2:
-                assert hasattr(target, 'im_func'), \
-                    "safeRef target %r has im_self, but no im_func, " \
+                assert hasattr(target, "im_func"), (
+                    "safeRef target %r has im_self, but no im_func, "
                     "don't know how to create reference" % (target,)
+                )
             else:
-                assert hasattr(target, '__func__'), \
-                    "safeRef target %r has __self__, but no __func__, " \
+                assert hasattr(target, "__func__"), (
+                    "safeRef target %r has __self__, but no __func__, "
                     "don't know how to create reference" % (target,)
+                )
 
-            reference = get_bound_method_weakref(
-                target=target,
-                onDelete=onDelete
-            )
+            reference = get_bound_method_weakref(target=target, onDelete=onDelete)
             return reference
     if callable(onDelete):
         return weakref.ref(target, onDelete)
@@ -118,6 +119,7 @@ class BoundMethodWeakref(object):
             collected).  Should take a single argument,
             which will be passed a pointer to this object.
         """
+
         def remove(weak, self=self):
             """Set self.isDead to true when method or instance is destroyed"""
             methods = self.deletionMethods[:]
@@ -134,8 +136,11 @@ class BoundMethodWeakref(object):
                     try:
                         traceback.print_exc()
                     except AttributeError:
-                        print("Exception during saferef %s cleanup "
-                              "function %s: %s" % (self, function, e))
+                        debug_print(
+                            "Exception during saferef %s cleanup function %s: %s"
+                            % (self, function, e)
+                        )
+
         self.deletionMethods = [onDelete]
         self.key = self.calculateKey(target)
         self.weakSelf = weakref.ref(im_self(target), remove)
@@ -150,6 +155,7 @@ class BoundMethodWeakref(object):
         target object and the target function respectively.
         """
         return (id(im_self(target)), id(im_func(target)))
+
     calculateKey = classmethod(calculateKey)
 
     def __str__(self):
@@ -173,9 +179,8 @@ class BoundMethodWeakref(object):
     def __cmp__(self, other):
         """Compare with another reference"""
         if not isinstance(other, self.__class__):
-            return ((self.__class__ > type(other)) -
-                    (self.__class__ < type(other)))
-        return ((self.key > other.key) - (self.key < other.key))
+            return (self.__class__ > type(other)) - (self.__class__ < type(other))
+        return (self.key > other.key) - (self.key < other.key)
 
     def __call__(self):
         """Return a strong reference to the bound method
@@ -228,9 +233,13 @@ class BoundNonDescriptorMethodWeakref(BoundMethodWeakref):
             collected).  Should take a single argument,
             which will be passed a pointer to this object.
         """
-        assert getattr(im_self(target), target.__name__) == target, \
-            ("method %s isn't available as the attribute %s of %s" %
-                (target, target.__name__, im_self(target)))
+        assert (
+            getattr(im_self(target), target.__name__) == target
+        ), "method %s isn't available as the attribute %s of %s" % (
+            target,
+            target.__name__,
+            im_self(target),
+        )
         super(BoundNonDescriptorMethodWeakref, self).__init__(target, onDelete)
 
     def __call__(self):
@@ -261,13 +270,12 @@ class BoundNonDescriptorMethodWeakref(BoundMethodWeakref):
 def get_bound_method_weakref(target, onDelete):
     """Instantiates the appropiate BoundMethodWeakRef, depending on the
     details of the underlying class method implementation"""
-    if hasattr(target, '__get__'):
+    if hasattr(target, "__get__"):
         # target method is a descriptor, so the default implementation works:
         return BoundMethodWeakref(target=target, onDelete=onDelete)
     else:
         # no luck, use the alternative implementation:
-        return BoundNonDescriptorMethodWeakref(target=target,
-                                               onDelete=onDelete)
+        return BoundNonDescriptorMethodWeakref(target=target, onDelete=onDelete)
 
 
 def im_self(func):

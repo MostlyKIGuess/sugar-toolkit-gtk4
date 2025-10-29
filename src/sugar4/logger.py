@@ -20,7 +20,6 @@
 STABLE.
 """
 
-import six
 import array
 import collections
 import errno
@@ -30,8 +29,11 @@ import os
 import decorator
 import time
 
+import six
+
 from six.moves import reprlib as repr_
 from sugar4 import env
+from sugar4.debug import debug_print
 
 # Let's keep this module self contained so that it can be easily
 # pasted in external sugar service like the datastore.
@@ -106,7 +108,7 @@ def cleanup():
                 os.remove(os.path.join(root, f))
             os.rmdir(root)
         except OSError as e:
-            print("Could not remove old logs files %s" % e)
+            debug_print("Could not remove old logs files %s" % e)
 
     if len(backup_logs) > 0:
         name = str(int(time.time()))

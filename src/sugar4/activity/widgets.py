@@ -22,6 +22,8 @@ from gi.repository import Gtk
 from gi.repository import GObject
 import gettext
 
+from sugar4.debug import debug_print
+
 from sugar4.graphics.toolbutton import ToolButton
 from sugar4.graphics.toolbarbox import ToolbarButton
 from sugar4.graphics.radiopalette import RadioPalette, RadioMenuButton
@@ -31,6 +33,8 @@ from sugar4.graphics.icon import Icon
 from sugar4.graphics import style
 from sugar4.graphics.palettemenu import PaletteMenuBox
 from sugar4 import profile
+
+print = debug_print
 
 
 def _(msg):

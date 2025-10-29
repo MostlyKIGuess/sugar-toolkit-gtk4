@@ -24,6 +24,8 @@ STABLE.
 import logging
 import os
 
+from sugar4.debug import debug_print
+
 
 # DEPRECATED
 def is_emulator():
@@ -39,7 +41,7 @@ def get_profile_path(path=None):
         try:
             os.makedirs(base, 0o770)
         except OSError:
-            print("Could not create user directory.")
+            debug_print("Could not create user directory.")
 
     if path is not None:
         return os.path.join(base, path)

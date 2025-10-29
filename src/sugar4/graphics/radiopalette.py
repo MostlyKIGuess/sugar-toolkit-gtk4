@@ -58,7 +58,6 @@ Example:
 """
 
 import gi
-import os
 
 gi.require_version("Gtk", "4.0")
 gi.require_version("GObject", "2.0")
@@ -68,11 +67,12 @@ import logging
 
 from sugar4.graphics.toolbutton import ToolButton
 from sugar4.graphics.palette import Palette
+from sugar4.debug import debug_print
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-SUGAR_DEBUG = os.environ.get("SUGAR_DEBUG", "0") == "1"
+print = debug_print
 
 
 class RadioMenuButton(ToolButton):
@@ -270,20 +270,16 @@ class RadioPalette(Palette):
                 print(f"Set selected button to: {button}")
 
     def popdown(self, immediate=True):
-        if SUGAR_DEBUG:
-            print(f"RadioPalette.popdown called with immediate={immediate}")
+        print(f"RadioPalette.popdown called with immediate={immediate}")
         # Call the parent class's popdown method
         super().popdown(immediate=immediate)
-        if SUGAR_DEBUG:
-            print(f"RadioPalette.popdown: is_up={self.is_up()}, widget={self._widget}")
+        print(f"RadioPalette.popdown: is_up={self.is_up()}, widget={self._widget}")
 
     def popup(self, immediate=True):
-        if SUGAR_DEBUG:
-            print(f"RadioPalette.popup called with immediate={immediate}")
+        print(f"RadioPalette.popup called with immediate={immediate}")
         # Call the parent class's popup method
         super().popup(immediate=immediate)
-        if SUGAR_DEBUG:
-            print(f"RadioPalette.popup: is_up={self.is_up()}, widget={self._widget}")
+        print(f"RadioPalette.popup: is_up={self.is_up()}, widget={self._widget}")
 
     def get_buttons(self):
         buttons = []
