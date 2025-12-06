@@ -1,4 +1,4 @@
-"""Small helpers for gating debug output on ``DEBUG_SUGAR``."""
+"""Small helpers for gating debug output on ``SUGAR_DEBUG``."""
 
 import builtins
 import os
@@ -11,9 +11,7 @@ _BUILTIN_PRINT = builtins.print
 def _raw_debug_value() -> Optional[str]:
     """Return the raw environment value for the debug flag."""
 
-    value = os.environ.get("DEBUG_SUGAR")
-    if value is None:
-        value = os.environ.get("SUGAR_DEBUG")
+    value = os.environ.get("SUGAR_DEBUG")
     return value
 
 

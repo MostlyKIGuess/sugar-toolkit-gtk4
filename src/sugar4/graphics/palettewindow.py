@@ -40,7 +40,7 @@ from sugar4.debug import debug_print
 _pointer = None
 
 # Route all palette debug output through the centralized helper so that it
-# honours the DEBUG_SUGAR flag without sprinkling conditionals everywhere.
+# honours the SUGAR_DEBUG flag without sprinkling conditionals everywhere.
 print = debug_print
 
 
