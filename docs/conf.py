@@ -176,7 +176,7 @@ html_show_copyright = True
 html_context = {
     "display_github": True,
     "github_user": "sugarlabs",
-    "github_repo": "sugar-toolkit-gtk4-py",
+    "github_repo": "sugar-toolkit-gtk4",
     "github_version": "main",
     "conf_py_path": "/docs/",
     "source_suffix": ".rst",
