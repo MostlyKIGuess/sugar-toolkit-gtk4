@@ -45,14 +45,14 @@
           ];
         };
 
-        pythonEnv = pkgs.python311.buildEnv.override {
-          extraLibs = with pkgs.python311Packages; [
-            pygobject3 dbus-python pytest pytest-cov
-            black flake8 mypy
-            sphinx sphinx-rtd-theme sphinx-autoapi
-            six decorator build twine setuptools wheel
-          ];
-        };
+        pythonEnv = pkgs.python311.withPackages (ps: with ps; [
+          pygobject3
+          dbus-python
+          pytest pytest-cov
+          black flake8 mypy
+          sphinx sphinx-rtd-theme sphinx-autoapi
+          six decorator build twine setuptools wheel
+        ]);
         gtkDeps = with pkgs; [
           gtk4 gobject-introspection gtk4.dev
           glib glib.dev gdk-pixbuf librsvg
@@ -66,7 +66,6 @@
         devShells.default = pkgs.mkShell {
           buildInputs = [
             sugar-artwork     
-            pkgs.python3
             pythonEnv
           ] ++ gtkDeps ++ (with pkgs; [
             git gnumake pkg-config cairo pango atk
@@ -94,7 +93,7 @@
           ];
 
           GIO_EXTRA_MODULES = "${pkgs.dconf.lib}/lib/gio/modules";
-          PYTHONPATH = "${pythonEnv}/${pythonEnv.sitePackages}";
+          PYTHONPATH = "${toString ./.}/src";
           DBUS_SESSION_BUS_ADDRESS = "unix:path=/run/user/$UID/bus";
 
           CFLAGS = "-I${pkgs.gtk4.dev}/include/gtk-4.0 -I${pkgs.glib.dev}/include";
