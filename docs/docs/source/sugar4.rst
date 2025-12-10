@@ -68,7 +68,7 @@ sugar4.util module
 Module contents
 ---------------
 
-.. automodule:: sugar
+.. automodule:: sugar4
    :members:
    :show-inheritance:
    :undoc-members:

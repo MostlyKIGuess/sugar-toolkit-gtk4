@@ -37,7 +37,26 @@ extensions = [
     "sphinx.ext.coverage",
     "sphinx.ext.doctest",
     "sphinx.ext.todo",
+    "autoapi.extension",
 ]
+
+# AutoAPI Configuration - parses source files statically without importing
+autoapi_type = "python"
+autoapi_dirs = ["../src/sugar4"]
+autoapi_root = "autoapi"
+autoapi_ignore = ["*/__pycache__/*", "*/_version.py", "*/test_*.py", "*/*_test.py"]
+autoapi_options = [
+    "members",
+    "undoc-members",
+    "show-inheritance",
+    "show-module-summary",
+    "special-members",
+    "imported-members",
+]
+autoapi_python_class_content = "both"
+autoapi_member_order = "bysource"
+autoapi_keep_files = True
+autoapi_add_toctree_entry = False  # We'll add it manually in index.rst
 
 # Autodoc configuration
 autodoc_default_options = {
@@ -58,6 +77,7 @@ suppress_warnings = [
     "ref.func",
     "autodoc.import_object",
     "docutils",
+    "autoapi",
 ]
 
 # Autodoc ignore certain patterns

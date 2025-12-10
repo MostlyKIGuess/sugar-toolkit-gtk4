@@ -26,46 +26,46 @@ API Documentation
 =================
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Activity Framework
 
-   docs/source/sugar4.activity
+   autoapi/sugar4/activity/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Graphics & UI
 
-   docs/source/sugar4.graphics
+   autoapi/sugar4/graphics/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Data & Storage
 
-   docs/source/sugar4.datastore
+   autoapi/sugar4/datastore/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Bundle Management
 
-   docs/source/sugar4.bundle
+   autoapi/sugar4/bundle/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Collaboration
 
-   docs/source/sugar4.presence
+   autoapi/sugar4/presence/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Event System
 
-   docs/source/sugar4.dispatch
+   autoapi/sugar4/dispatch/index
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Core Utilities
 
-   docs/source/sugar4
+   autoapi/sugar4/index
 
 Examples
 ========
