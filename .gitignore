@@ -147,3 +147,5 @@ locale/
 hello-world
 
 *.flatpak
+
+.direnv
