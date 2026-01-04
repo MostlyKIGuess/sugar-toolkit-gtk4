@@ -65,7 +65,7 @@
       {
         devShells.default = pkgs.mkShell {
           buildInputs = [
-            sugar-artwork     
+            sugar-artwork
             pythonEnv
           ] ++ gtkDeps ++ (with pkgs; [
             git gnumake pkg-config cairo pango atk
@@ -108,7 +108,7 @@
 
         packages.default = pkgs.python311Packages.buildPythonPackage {
           pname = "sugar-toolkit-gtk4";
-          version = "1.1.3";
+          version = "1.1.4";
           src = ./.;
 
           buildInputs = gtkDeps;
