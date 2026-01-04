@@ -57,13 +57,12 @@ from typing import Optional
 import gi
 
 gi.require_version("Gtk", "4.0")
-from gi.repository import Gtk, GObject, Gdk, Gio, Gsk, Graphene
+from gi.repository import Gdk, Gio, GObject, Graphene, Gsk, Gtk, Pango
 
-
+from sugar4.debug import debug_print
+from sugar4.graphics import style
 from sugar4.graphics.icon import Icon
 from sugar4.graphics.palette import Palette, ToolInvoker
-from gi.repository import Pango
-from sugar4.debug import debug_print
 
 print = debug_print
 
@@ -191,9 +190,7 @@ class ToolButton(Gtk.Button):
         try:
             css_provider = Gtk.CssProvider()
             css_provider.load_from_string(css)
-            self.get_style_context().add_provider(
-                css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-            )
+            self.get_style_context().add_provider(css_provider, 600)
         except Exception as e:
             logging.warning(f"Could not apply toolbar button CSS: {e}")
 
@@ -317,10 +314,14 @@ class ToolButton(Gtk.Button):
                 print(
                     f"[ToolButton] Icon file exists: {os.path.exists(icon_name)} at {icon_name}"
                 )
-                self._icon_widget = Gtk.Image.new_from_file(icon_name)
+                self._icon_widget = Icon(
+                    file_name=icon_name, pixel_size=style.STANDARD_ICON_SIZE
+                )
             else:
                 print(f"[ToolButton] Using icon name: {icon_name}")
-                self._icon_widget = Gtk.Image.new_from_icon_name(icon_name)
+                self._icon_widget = Icon(
+                    icon_name=icon_name, pixel_size=style.STANDARD_ICON_SIZE
+                )
             self._content_box.prepend(self._icon_widget)
 
     def get_icon_name(self) -> Optional[str]:
@@ -329,8 +330,8 @@ class ToolButton(Gtk.Button):
         Returns:
             The icon name or None if no icon is set.
         """
-        if self._icon_widget and isinstance(self._icon_widget, Gtk.Image):
-            return self._icon_widget.get_icon_name()
+        if self._icon_widget and isinstance(self._icon_widget, Icon):
+            return self._icon_widget.props.icon_name
         return None
 
     icon_name = GObject.Property(
@@ -488,9 +489,7 @@ def _apply_module_css():
 
         display = Gdk.Display.get_default()
         if display:
-            Gtk.StyleContext.add_provider_for_display(
-                display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION
-            )
+            Gtk.StyleContext.add_provider_for_display(display, css_provider, 600)
     except Exception as e:
         logging.warning(f"Could not apply module CSS: {e}")
 
