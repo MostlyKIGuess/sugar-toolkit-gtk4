@@ -21,5 +21,6 @@ except ImportError:
     pass
 
 from .activity import Activity, SimpleActivity
+from . import bundlebuilder
 
-__all__ = ["Activity", "SimpleActivity"]
+__all__ = ["Activity", "SimpleActivity", "bundlebuilder"]

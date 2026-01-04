@@ -149,3 +149,4 @@ hello-world
 *.flatpak
 
 .direnv
+bin/
