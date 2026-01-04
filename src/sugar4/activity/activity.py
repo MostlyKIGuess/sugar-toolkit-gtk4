@@ -157,14 +157,14 @@ You may copy it and use it as a template.
 """
 
 import gettext
+import io
+import json
 import logging
 import os
 import signal
 import time
-from hashlib import sha1
-import json
-import io
 from errno import EEXIST
+from hashlib import sha1
 
 import gi
 
@@ -174,7 +174,7 @@ gi.require_version("GLib", "2.0")
 gi.require_version("GObject", "2.0")
 gi.require_version("Gio", "2.0")
 
-from gi.repository import GLib, GObject, Gdk, Gtk, Gio
+from gi.repository import Gdk, Gio, GLib, GObject, Gtk
 
 try:
     import cairo
@@ -184,18 +184,17 @@ except ImportError:
     HAS_CAIRO = False
     logging.warning("Cairo not available, preview generation disabled")
 
-from sugar4 import util
-from sugar4.profile import get_color, get_save_as
-from sugar4.graphics import style
-from sugar4.graphics.window import Window
-from sugar4.graphics.alert import Alert
-from sugar4.graphics.icon import Icon
-from sugar4.bundle.activitybundle import get_bundle_instance
-from sugar4.datastore import datastore
-from sugar4 import env
 import dbus
+
+from sugar4 import env, util
 from sugar4.bundle.activitybundle import get_bundle_instance
 from sugar4.bundle.helpers import bundle_from_dir
+from sugar4.datastore import datastore
+from sugar4.graphics import style
+from sugar4.graphics.alert import Alert
+from sugar4.graphics.icon import Icon
+from sugar4.graphics.window import Window
+from sugar4.profile import get_color, get_save_as
 
 
 def _(msg):
@@ -479,6 +478,15 @@ class Activity(Window):
             self._iconify = True  # i.e. do after Window.show()
         else:
             self.minimize()
+
+    def show(self):
+        """
+        Show the activity window.
+
+        In GTK4, ApplicationWindow uses present() instead of show().
+        This method provides compatibility with the activityinstance API.
+        """
+        self.present()
 
     def run_main_loop(self):
         """
@@ -1574,8 +1582,8 @@ class SimpleActivity(Activity):
 
     def _create_toolbar(self):
         """Create the toolbar."""
-        from sugar4.graphics.toolbarbox import ToolbarBox
         from sugar4.activity.widgets import ActivityToolbarButton, StopButton
+        from sugar4.graphics.toolbarbox import ToolbarBox
 
         toolbar_box = ToolbarBox()
 

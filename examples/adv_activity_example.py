@@ -522,8 +522,9 @@ class CreativeStudioActivity(Activity):
             css_provider = Gtk.CssProvider()
             css = "button { background-color: #2a2a2a; border: 1px solid #555; padding: 4px; }"
             css_provider.load_from_data(css.encode())
+            # GTK4: STYLE_PROVIDER_PRIORITY_USER removed, use integer priority (800)
             color_btn.get_style_context().add_provider(
-                css_provider, Gtk.STYLE_PROVIDER_PRIORITY_USER
+                css_provider, 800
             )
 
             color_btn.connect(
@@ -970,6 +971,8 @@ class CreativeStudioActivity(Activity):
                 "saved_at": datetime.now().isoformat(),
             }
 
+            # GTK4: Create directory if it doesn't exist
+            os.makedirs(os.path.dirname(file_path), exist_ok=True)
             with open(file_path, "w") as f:
                 json.dump(data, f, indent=2)
 
