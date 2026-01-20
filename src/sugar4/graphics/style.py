@@ -41,7 +41,7 @@ try:
 
     gi.require_version("Gtk", "4.0")
     gi.require_version("Gdk", "4.0")
-    from gi.repository import Gdk, Gio, Pango
+    from gi.repository import Gdk, Gio, Gtk, Pango
 
     GTK_AVAILABLE = True
 except (ImportError, ValueError):
@@ -287,7 +287,7 @@ def apply_css_to_widget(widget, css: str) -> None:
         css_provider.load_from_string(css)
 
         context = widget.get_style_context()
-        context.add_provider(css_provider, 600)
+        context.add_provider(css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
     except Exception as e:
         logging.warning(f"Failed to apply CSS: {e}")
 

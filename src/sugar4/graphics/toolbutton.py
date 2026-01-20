@@ -190,7 +190,7 @@ class ToolButton(Gtk.Button):
         try:
             css_provider = Gtk.CssProvider()
             css_provider.load_from_string(css)
-            self.get_style_context().add_provider(css_provider, 600)
+            self.get_style_context().add_provider(css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
         except Exception as e:
             logging.warning(f"Could not apply toolbar button CSS: {e}")
 
@@ -489,7 +489,7 @@ def _apply_module_css():
 
         display = Gdk.Display.get_default()
         if display:
-            Gtk.StyleContext.add_provider_for_display(display, css_provider, 600)
+            Gtk.StyleContext.add_provider_for_display(display, css_provider, Gtk.STYLE_PROVIDER_PRIORITY_APPLICATION)
     except Exception as e:
         logging.warning(f"Could not apply module CSS: {e}")
 
