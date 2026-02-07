@@ -118,7 +118,9 @@ class BasicExampleActivity(SimpleActivity):
         info_box.set_margin_top(10)
         info_box.set_margin_bottom(10)
 
-        info_box.append(Gtk.Label(label=f"Activity ID: {self.get_id()[:8]}..."))
+        activity_id = self.get_id()
+        info_box.append(Gtk.Label(label=f"Activity ID: {activity_id[:8] + '...' if activity_id else 'N/A (standalone)'}"))
+        info_box.append(Gtk.Label(label=f"Title: {self.get_title() or 'N/A'}"))
         info_box.append(Gtk.Label(label=f"Title: {self.get_title()}"))
         info_box.append(Gtk.Label(label=f"Active: {self.get_active()}"))
 
