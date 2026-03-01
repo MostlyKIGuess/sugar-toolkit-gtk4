@@ -1039,29 +1039,18 @@ class Activity(Window):
                 self._owns_file = True
                 self._jobject.file_path = file_path
 
-        # Check if we have a real datastore object or a mock
-        if hasattr(self._jobject, "object_id") and self._jobject.object_id is not None:
-            # Real journal object - try to write to datastore
-            try:
-                if self._jobject.object_id is None:
-                    datastore.write(self._jobject, transfer_ownership=True)
-                else:
-                    self._updating_jobject = True
-                    datastore.write(
-                        self._jobject,
-                        transfer_ownership=True,
-                        reply_handler=self.__save_cb,
-                        error_handler=self.__save_error_cb,
-                    )
-            except Exception as e:
-                logging.warning("Failed to save to datastore: %s", e)
-                logging.info(
-                    "Running in standalone mode - file saved to: %s", file_path
-                )
-                self._updating_jobject = False
+        # Cannot call datastore.write async for creates:
+        # https://dev.laptop.org/ticket/3071
+        if not isinstance(self._jobject, datastore.DSObject):
+            logging.info("Standalone mode: skipping datastore write")
+        elif self._jobject.object_id is None:
+            datastore.write(self._jobject, transfer_ownership=True)
         else:
-            # Mock journal object - just log that we saved the file
-            logging.info("Standalone mode: Activity data saved to %s", file_path)
+            self._updating_jobject = True
+            datastore.write(self._jobject,
+                            transfer_ownership=True,
+                            reply_handler=self.__save_cb,
+                            error_handler=self.__save_error_cb)
 
     def copy(self):
         """
