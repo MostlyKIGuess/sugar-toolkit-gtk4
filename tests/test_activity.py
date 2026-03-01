@@ -36,6 +36,7 @@ if GTK_AVAILABLE:
     )
     from sugar4.activity.activityhandle import ActivityHandle
     from sugar4.datastore.datastore import DSMetadata
+    from sugar4.datastore import datastore
 
 
 class MockMetadata(DSMetadata):
@@ -72,6 +73,7 @@ class MockJobject:
 class MockDatastore:
     """Mock datastore for testing."""
 
+    DSObject = datastore.DSObject
     @staticmethod
     def create():
         return MockJobject()
