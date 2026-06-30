@@ -67,10 +67,10 @@ class RadioToolButton(ToolButton):
             group: Another RadioToolButton to group with, or None for new group
             **kwargs: Additional arguments passed to ToolButton
         """
-        super().__init__(**kwargs)
-
         self._group = []
         self._active = False
+
+        super().__init__(**kwargs)
 
         # Set up radio group
         if group is not None:
@@ -90,13 +90,13 @@ class RadioToolButton(ToolButton):
             border-radius: 4px;
             margin: 1px;
         }
-        
+
         .radio-tool-button:checked,
         .radio-tool-button.active {
             background: alpha(@theme_selected_bg_color, 0.2);
             border: 1px solid @theme_selected_bg_color;
         }
-        
+
         .radio-tool-button:hover:not(.active) {
             background: alpha(@theme_fg_color, 0.05);
         }

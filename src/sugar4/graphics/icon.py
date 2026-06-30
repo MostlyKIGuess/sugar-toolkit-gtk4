@@ -802,6 +802,10 @@ class EventIcon(Icon):
         # Set up gesture handling
         self._setup_gestures()
 
+        from sugar4.graphics.palettewindow import CursorInvoker
+        self._palette_invoker = CursorInvoker()
+        self._palette_invoker.attach(self)
+
     def _setup_gestures(self):
         """Set up gesture controllers for event handling."""
         # Click gesture
@@ -854,6 +858,36 @@ class EventIcon(Icon):
         type=bool, default=True, getter=get_cache, setter=set_cache
     )
 
+    def create_palette(self):
+        """Return the palette to show, or None. Subclasses override this."""
+        return None
+
+    def get_palette(self):
+        return self._palette_invoker.palette
+
+    def set_palette(self, palette):
+        self._palette_invoker.palette = palette
+
+    palette = GObject.Property(
+        type=object, setter=set_palette, getter=get_palette
+    )
+
+    def get_palette_invoker(self):
+        return self._palette_invoker
+
+    def set_palette_invoker(self, palette_invoker):
+        self._palette_invoker.detach()
+        self._palette_invoker = palette_invoker
+
+    palette_invoker = GObject.Property(
+        type=object, setter=set_palette_invoker, getter=get_palette_invoker
+    )
+
+    def set_tooltip(self, text):
+        """Create a palette showing the tooltip text."""
+        from sugar4.graphics.palette import Palette
+        self.set_palette(Palette(text))
+
 
 class CanvasIcon(EventIcon):
     """
@@ -867,6 +901,7 @@ class CanvasIcon(EventIcon):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self._button_down = False
+        self._palette_up = False
 
         # Set up hover and focus controllers
         self._setup_state_controllers()
@@ -893,8 +928,11 @@ class CanvasIcon(EventIcon):
 
     def _on_leave(self, controller):
         """Handle mouse leave."""
-        # Don't change state if palette is up (would need palette integration)
-        self.unset_state_flags(Gtk.StateFlags.PRELIGHT | Gtk.StateFlags.ACTIVE)
+        if self._palette_up:
+            self.unset_state_flags(Gtk.StateFlags.ACTIVE)
+        else:
+            self.unset_state_flags(
+                Gtk.StateFlags.PRELIGHT | Gtk.StateFlags.ACTIVE)
 
     def _on_canvas_pressed(self, gesture, n_press, x, y):
         """Handle canvas press."""
@@ -914,6 +952,19 @@ class CanvasIcon(EventIcon):
             if 0 <= x <= width and 0 <= y <= height:
                 self.emit("clicked")
                 self.emit("activate")
+
+    def connect_to_palette_pop_events(self, palette):
+        """Hold the prelight state while the palette is shown."""
+        palette.connect("popup", self.__palette_popup_cb)
+        palette.connect("popdown", self.__palette_popdown_cb)
+
+    def __palette_popup_cb(self, palette):
+        self._palette_up = True
+        self.set_state_flags(Gtk.StateFlags.PRELIGHT, False)
+
+    def __palette_popdown_cb(self, palette):
+        self._palette_up = False
+        self.unset_state_flags(Gtk.StateFlags.PRELIGHT)
 
     def do_snapshot(self, snapshot):
         """Override to render background based on state."""
